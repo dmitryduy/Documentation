@@ -9,4 +9,9 @@ export const CodeTextStyled = styled.code`
   margin-bottom: 25px;
   font-size: 17px;
   color: ${props => props.theme.colors.paragraph};
+  @media (max-width: 500px) {
+    font-size: 15px;
+    margin-bottom: 10px;
+    line-height: 20px;
+  }
 `;

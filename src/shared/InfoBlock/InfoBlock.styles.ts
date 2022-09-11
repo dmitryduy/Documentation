@@ -4,6 +4,11 @@ export const InfoBlockStyled = styled.div`
   border-radius: 5px;
   padding: 20px;
   margin: 15px 0;
+
+  @media (max-width: 500px) {
+    padding: 10px;
+    margin: 5px 0;
+  }
   &.alert {
     background-color: ${props => props.theme.colors.alertBg};
     border-left: 6px solid ${props => props.theme.colors.alertBorder};
@@ -26,5 +31,11 @@ export const Header = styled.div`
     margin-left: 10px;
     font-weight: bold;
     color: ${props => props.theme.colors.paragraph};
+  }
+  
+  svg {
+    align-self: center;
+    width: 20px;
+    height: 20px;
   }
 `;

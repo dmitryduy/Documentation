@@ -28,10 +28,11 @@ export const useMarkdownComponents = ():
       if (!children) return null;
       return <SecondTitle id={typeof children[0] === 'string' ? children[0] : ''}>{children}</SecondTitle>;
     },
-    p({children}) {
+    p(data) {
+      const children = data.children;
+      console.log(data);
       if (typeof children[0] === 'string') {
         const match = children[0].match(/^(alert|tip|info)\[(.*)\]/);
-
         if (match) {
           const type = match[1] as InfoBlockType;
           const title = match[2];
@@ -45,6 +46,10 @@ export const useMarkdownComponents = ():
     },
     a({children, href}) {
       return <Link href={href || '#'}>{children}</Link>;
+    },
+    pre(data) {
+      console.log(data);
+      return <div></div>;
     },
     code({children, className}) {
       const match = /language-(\w+)/.exec(className || '');

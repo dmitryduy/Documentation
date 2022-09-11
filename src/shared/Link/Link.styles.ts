@@ -17,4 +17,10 @@ export const LinkStyled = styled.a`
     text-decoration: underline;
     text-decoration-color: ${props => props.theme.colors.link};
   }
+
+  @media (max-width: 500px) {
+    font-size: 15px;
+    margin-bottom: 10px;
+    line-height: 20px;
+  }
 `;

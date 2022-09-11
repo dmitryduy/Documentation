@@ -9,7 +9,7 @@ const ArticleButtons = () => {
   const nextArticle = useAppSelector(state => state.articles.nextPost);
   return (
     <ArticleButtonsStyled>
-      {nextArticle && <ButtonLink link={nextArticle.link} subtitle="Случайная статься" text={nextArticle.title}/>}
+      {nextArticle && <ButtonLink link={nextArticle.link} subtitle="Случайная статья" text={nextArticle.title}/>}
     </ArticleButtonsStyled>
   );
 };

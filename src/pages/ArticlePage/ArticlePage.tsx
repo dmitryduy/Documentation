@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useLayoutEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import cn from 'classnames';
 
 import { fetchRandomPost } from '../../api/fetchRandomPost';
 import { IPost } from '../../global.typings';
@@ -11,8 +12,11 @@ import { useAppDispatch } from '../../hooks/useAppSelector';
 import { setNextPost, setPostInfo } from '../../reducers/articlesReducer/articlesReducer';
 import { fetchNextPost } from '../../api/fetchNextPost';
 import Loader from '../../shared/Loader/Loader';
+import { useEmit } from '../../hooks/useEmit';
+import { EmitterNames } from '../../emitterNames';
+import { useToggle } from '../../hooks/useToggle';
 
-import { ArticlePageStyled, Menu, Content } from './ArticlePage.styles';
+import { ArticlePageStyled, Content, Menu } from './ArticlePage.styles';
 import { getArticleMenu } from './ArticlePage.utils/getArticleMenu';
 
 interface IArticlePageProps {
@@ -23,6 +27,9 @@ const ArticlePage: FC<IArticlePageProps> = ({main}) => {
   const {title} = useParams();
   const [post, setPost] = useState<IPost | null>(null);
   const dispatch = useAppDispatch();
+  const [activeRightSide, toggleActiveSide] = useToggle(false);
+
+  useEmit(EmitterNames.TOGGLE_RIGHT_SIDEBAR, () => toggleActiveSide());
 
   useEffect(() => {
     if (main) {
@@ -58,7 +65,7 @@ const ArticlePage: FC<IArticlePageProps> = ({main}) => {
           <ArticleButtons/>
         </Content>
         {post.menu.length ?
-          <Menu>
+          <Menu className={cn({active: activeRightSide})}>
             {getArticleMenu(post.menu)}
           </Menu> :
           null

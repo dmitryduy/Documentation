@@ -8,11 +8,20 @@ export const ArticlePageStyled = styled.div`
 export const Menu = styled.aside`
   position: fixed;
   right: 0;
-  width: 300px;
-  top: 70px;
+  width: 200px;
+  top: 50px;
   height: fit-content;
   border-left: 1px solid ${props => props.theme.colors.border};
   padding: 20px 0;
+  background-color: #fff;
+  @media (max-width: 1000px) {
+    transition: .3s;
+    font-size: 14px;
+    transform: translateX(100%);
+    &.active {
+      transform: translateX(0);
+    }
+  }
 
   ul {
     margin-left: 15px;
@@ -35,5 +44,8 @@ export const Menu = styled.aside`
 export const Content = styled.div`
   min-height: calc(100vh - 90px);
   width: 100%;
-  margin: 0 300px;
+  margin: 0 200px;
+  @media (max-width: 1000px) {
+   margin: 0;
+  }
 `;

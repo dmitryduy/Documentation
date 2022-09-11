@@ -21,7 +21,7 @@ function App() {
           <Tooltip/>
           <div className="wrapper">
             <Routes>
-              <Route path="/" element={<ArticlePage main/>}/>
+              <Route path="/Documentation" element={<ArticlePage main/>}/>
               <Route path="/create-post" element={<NewPostPage/>}/>
               <Route path="/post/:title" element={<ArticlePage/>}/>
             </Routes>
