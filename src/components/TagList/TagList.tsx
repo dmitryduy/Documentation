@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 
 import { ITagList } from '../../global.typings';
 import { useToggle } from '../../hooks/useToggle';
+import { EmitterNames } from '../../emitterNames';
 
-import { TagListStyled, Header } from './TagList.styles';
+import { Header, TagListStyled } from './TagList.styles';
 
 interface ITagListProps {
   tagInfo: ITagList;
@@ -22,6 +23,10 @@ const TagList: React.FC<ITagListProps> = ({tagInfo}) => {
     listRef.current.style.maxHeight = active ? `${listRef.current.scrollHeight}px` : '0';
   }, [active]);
 
+  const closeLeftSide = () => {
+    window.emitter.emit(EmitterNames.TOGGLE_LEFT_SIDEBAR);
+  };
+
   return (
     <TagListStyled>
       <Header className={cn({active})} onClick={toggleActive}>
@@ -33,7 +38,7 @@ const TagList: React.FC<ITagListProps> = ({tagInfo}) => {
       <ul ref={listRef} className={cn('article-list', {active})}>
         {tagInfo.articles.map(article =>
           <li className="article-title" key={article.title}>
-            <Link to={`/post/${article.link}`}>
+            <Link to={`/post/${article.link}`} onClick={closeLeftSide}>
               {article.title}
             </Link>
           </li>
