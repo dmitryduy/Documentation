@@ -72,4 +72,4 @@ app.post('/new-post-info', function (req, res) {
     var post = notViewedPosts.find(function (_, index) { return postId === index; });
     res.json({ title: post.title, link: post.link });
 });
-server.listen(5000, function () { return console.log('server start'); });
+server.listen(process.env.PORT || 5000, function () { return console.log('server start'); });

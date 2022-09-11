@@ -57,9 +57,12 @@ const ArticlePage: FC<IArticlePageProps> = ({main}) => {
           <Article markdown={post.markdown}/>
           <ArticleButtons/>
         </Content>
-        <Menu>
-          {getArticleMenu(post.menu)}
-        </Menu>
+        {post.menu.length ?
+          <Menu>
+            {getArticleMenu(post.menu)}
+          </Menu> :
+          null
+        }
       </ArticlePageStyled> :
       <Loader/>
   );

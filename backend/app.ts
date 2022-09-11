@@ -95,4 +95,4 @@ app.post('/new-post-info', (req: Request, res: Response) => {
 });
 
 
-server.listen(5000, () => console.log('server start'));
+server.listen(process.env.PORT || 5000, () => console.log('server start'));
