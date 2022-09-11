@@ -1,25 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+import Theme from './Theme';
+import NewPostPage from './pages/NewPostPage/NewPostPage';
+import Header from './components/Header/Header';
+import ArticlePage from './pages/ArticlePage/ArticlePage';
+import Tooltip from './shared/Tooltip/Tooltip';
+import windowExtends from './declare';
+import { store } from './store/store';
+
+windowExtends();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Theme>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Header/>
+          <Tooltip/>
+          <div className="wrapper">
+            <Routes>
+              <Route path="/" element={<ArticlePage main/>}/>
+              <Route path="/create-post" element={<NewPostPage/>}/>
+              <Route path="/post/:title" element={<ArticlePage/>}/>
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </Provider>
+    </Theme>
   );
 }
 

@@ -1,0 +1,47 @@
+[
+  {
+    "markdown": "\n# Getting Started with Redux Toolkit\n\n## Purpose\n\nThe **Redux Toolkit** package is intended to be the standard way to write Redux logic. It was originally created to help address three common concerns about Redux:\n* \"Configuring a Redux store is too complicated\"\n* \"I have to add a lot of packages to get Redux to do anything useful\"\n* \"Redux requires too much boilerplate code\"\n\nWe can't solve every use case, but in the spirit of [```create-react-app```](), we can try to provide some tools that abstract over the setup process and handle the most common use cases, as well as include some useful utilities that will let the user simplify their application code.\n\nRedux Toolkit also includes a powerful data fetching and caching capability that we've dubbed [\"RTK Query\"](). It's included in the package as a separate set of entry points. It's optional, but can eliminate the need to hand-write data fetching logic yourself.\n\n**These tools should be beneficial to all Redux users.** Whether you're a brand new Redux user setting up your first project, or an experienced user who wants to simplify an existing application, **Redux Toolkit** can help you make your Redux code better.\n\n## Installation\n\n### Using Create React App\n\nThe recommended way to start new apps with React and Redux is by using the [official Redux+JS template]() or [Redux+TS template]() for [Create React App](), which takes advantage of [Redux ]()Toolkit and React Redux's integration with React components.\n\n``` bash\n# Redux + Plain JS template\nnpx create-react-app my-app --template redux\n\n# Redux + TypeScript template\nnpx create-react-app my-app --template redux-typescript\n\n```\n\n### An Existing App\n\nRedux Toolkit is available as a package on NPM for use with a module bundler or in a Node application:\n```bash\n# NPM\nnpm install @reduxjs/toolkit\n```\nor\n```bash\n# Yarn\nyarn add @reduxjs/toolkit\n\n```\n\nIt is also available as a precompiled UMD package that defines a ```window.RTK``` global variable. The UMD package can be used as a [```<script>``` tag]() directly.\n\n## What's Included\n\nRedux Toolkit includes these APIs:\n\n* [```configureStore():```]() wraps ```createStore``` to provide simplified configuration options and good defaults. It can automatically combine your slice reducers, adds whatever Redux middleware you supply, includes ```redux-thunk``` by default, and enables use of the Redux DevTools Extension.\n* [```createReducer():```](): that lets you supply a lookup table of action types to case reducer functions, rather than writing switch statements. In addition, it automatically uses the[```immer``` library]() to let you write simpler immutable updates with normal mutative code, like ```state.todos[3].completed = true```.\n* [```createAction():```](): generates an action creator function for the given action type string. The function itself has ```toString()``` defined, so that it can be used in place of the type constant.\n*  [```createSlice():```](): accepts an object of reducer functions, a slice name, and an initial state value, and automatically generates a slice reducer with corresponding action creators and action types.\n*  [```createAsyncThunk():```](): accepts an action type string and a function that returns a promise, and generates a thunk that dispatches ```pending/fulfilled/rejected``` action types based on that promise\n*  [```createEntityAdapter():```](): generates a set of reusable reducers and selectors to manage normalized data in the store\n* The  [``` createSelector :``` utility]() utility from the [Reselect ]() library, re-exported for ease of use.",
+    "tags": [
+      "redux",
+      "js"
+    ],
+    "menu": [
+      "Purpose",
+      "Installation",
+      [
+        "Using Create React App",
+        "An Existing App"
+      ],
+      "What's Included"
+    ],
+    "title": "Getting Started with Redux Toolkit",
+    "link": "Getting-Started-with-Redux-Toolkit"
+  },
+  {
+    "markdown": "# Как пользоваться редактором \n\n## Общие понятия\n\nНа данном сайте реализован базовый синтаксис языка разметки [markdown](https://ru.wikipedia.org/wiki/Markdown).\n\nПосле каждого логического блока желательно оставлять пустую строку для читаемости. \n\n## Заголовок первого уровня\n\n Для того, чтобы создать заголовок нужно использовать следующий синтаксис: ```# Твой заголовок```.\n\ninfo[Важно]\nПробел между ```#``` и **любым** заголовком обязательно должен быть, иначе текст не будет воспринят как заголовок.\n\n**В каждой статье обязательно должен быть хотя бы 1 заголовок первого уровня**. Иначе статья не отправится на модерацию.\n\nСтарайтесь придумывать уникальный заголовок, в который занесен основной смысл статьи, ведь один из способов поиска статей именно через заголовок.\n\n## Подзаголовки\n\nВ данный момент поддерживается 3 типа заголовком\n\n - Заголовок страницы (указан выше)\n\n- Заголовок второго уровня\n\n- Заголовки третьего уровня\n\nЗаголовки второго и третьего уровня будут отображаться в правой части страницы статьи, по ним можно переходить к разделам. Поэтому старайтесь выделять заголовками самое важное, чтобы не было бесконечной навигации. \n\nЗаголовки второго и третьего уровня можно создать следующим образом соответственно:\n\n- ```## имя подзаголовка второго уровня```\n\n- ```### имя подзаголовка третьего уровня```\n\n## Параграф\n\nДля написание параграфов не требуются никакие специальные символы, можно просто писать текст. В параграфе можно выделять текст, делать ссылки.\n\n## Выделение текста\n\nКак говорилось выше, в параграфе можно украшать текст. Возможности:\n- Сделать текст жирным:\n  - ```Какой-то текст **жирный текст**```. Результат: Какой-то текст **жирный текст**\n- Выделить текст маркером:\n  - ```Какой-то текст  '''выделенный текст'''```. Результат: Какой-то текст ```выделенный текст```\n\n  - info[Важно] Вместо обычный кавычек нужно ставить ` (На раскладке перед единицей).\n- Вставлять ссылки: \n  - ```какой-то текст [текст ссылки](ссылка)```. Результат: какой-то текст [текст ссылки](ссылка).\n\n## Списки\nДля того, чтобы сделать список достаточно написать ```- элемент списка```(пробел обязательно)\n\n## Код\n\nЕсли нужно вставить блок кода, то достаточно прописать \n```bash\n'''\n[Один из поддерживаемых языков]\nСам код\n'''\n```\n info[Важно] Вместо обычный кавычек нужно ставить ` (На раскладке перед единицей).\n\nПоддерживаемые языки можно посмотреть [здесь](https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/HEAD/AVAILABLE_LANGUAGES_PRISM.MD)\n\n## Блоки информации\nНа текущий момент поддерживается три типа блоков с информацией:\n- Предупреждение\n- Информация\n- Подсказки\n\nЧтобы включить блок с информацией на ваш пост, достаточно просто в начале параграфа написать тип блока и его заголовок вот так ```тип[заголовок]```, где типом могут быть следующие строки ```alert```, ```info```, ```tip```. Все, что стоит после этого объявления будет находится в теле блока информации.\n\nПримеры \n\n- ```text\n  alert[предупреждение] Абсолютно любой текст, даже можно так **жирный**, и так [гугл](https://google.com)\n  ```\n\n- alert[предупреждение] Абсолютно любой текст, даже можно так **жирный**, и так [гугл](https://google.com)\n\n- ```text\n  info[информация] Абсолютно любой текст, даже можно так **жирный**, и так [гугл](https://google.com)\n  ```\n\n- info[информация] Абсолютно любой текст, даже можно так **жирный**, и так [гугл](https://google.com)\n\n- ```text\n  tip[Подсказка] Абсолютно любой текст, даже можно так **жирный**, и так [гугл](https://google.com)\n  ```\n\n- tip[Подсказка] Абсолютно любой текст, даже можно так **жирный**, и так [гугл](https://google.com)\n",
+    "tags": [],
+    "menu": [
+      "Общие понятия",
+      "Заголовок первого уровня",
+      "Подзаголовки",
+      "Параграф",
+      "Выделение текста",
+      "Списки",
+      "Код",
+      "Блоки информации"
+    ],
+    "title": "Как пользоваться редактором",
+    "link": "Как-пользоваться-редактором",
+    "date": 1662891760706,
+    "views": 0
+  },
+  {
+    "markdown": "# Упс. Данной статьи не существует\n",
+    "tags": [],
+    "menu": [],
+    "title": "Упс. Данной статьи не существует",
+    "date": 1662900714945,
+    "link": "Упс.-Данной-статьи-не-существует",
+    "views": 0
+  }
+]
