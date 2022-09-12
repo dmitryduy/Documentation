@@ -23,26 +23,25 @@ const Header = () => {
         <path stroke="currentColor" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="2"
           d="M4 7h22M4 15h22M4 23h22"/>
       </svg>}
-      {width > 600 && <nav>
+      <nav>
         <ul>
-          <li>
+          {width > 600 && <li>
             <NavLink className={({isActive}) => (isActive ? 'active' : '')} to="/Documentation">
               Главная
             </NavLink>
-          </li>
+          </li>}
           <li>
             <NavLink className={({isActive}) => (isActive ? 'active' : '')} to="/create-post">
               Добавить статью
             </NavLink>
           </li>
-          <li>
+          {width > 600 && <li>
             <NavLink to="post/Как-пользоваться-редактором">
               Как пользоваться редактором
             </NavLink>
-          </li>
+          </li>}
         </ul>
       </nav>
-      }
       {width < 1001 && <svg onClick={toggleRightSide} width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
         <path stroke="currentColor" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="2"
           d="M4 7h22M4 15h22M4 23h22"/>

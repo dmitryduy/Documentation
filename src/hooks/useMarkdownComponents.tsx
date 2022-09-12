@@ -2,7 +2,8 @@ import { NormalComponents } from 'react-markdown/lib/complex-types';
 import { SpecialComponents } from 'react-markdown/lib/ast-to-react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 import Title from '../shared/Title/Title';
 import Subtitle from '../shared/Subtitle/Subtitle';
@@ -13,6 +14,7 @@ import Paragraph from '../shared/Paragraph/Paragraph';
 import Link from '../shared/Link/Link';
 import CodeText from '../shared/CodeText/CodeText';
 import List from '../shared/List/List';
+
 
 export const useMarkdownComponents = ():
   Partial<Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents> => {
@@ -30,26 +32,16 @@ export const useMarkdownComponents = ():
     },
     p(data) {
       const children = data.children;
-      console.log(data);
       if (typeof children[0] === 'string') {
         const match = children[0].match(/^(alert|tip|info)\[(.*)\]/);
         if (match) {
-          const type = match[1] as InfoBlockType;
-          const title = match[2];
           children[0] = children[0].slice(match[0].length);
-          return <InfoBlock type={type} title={title}>{children}</InfoBlock>;
         }
-
       }
-
       return <Paragraph>{children}</Paragraph>;
     },
     a({children, href}) {
       return <Link href={href || '#'}>{children}</Link>;
-    },
-    pre(data) {
-      console.log(data);
-      return <div></div>;
     },
     code({children, className}) {
       const match = /language-(\w+)/.exec(className || '');
@@ -63,5 +55,20 @@ export const useMarkdownComponents = ():
     ul({children}) {
       return <List>{children}</List>;
     },
+    div({node, children}) {
+      const firstChild = node.children[0];
+      console.log(firstChild);
+      if (firstChild && 'tagName' in firstChild && firstChild.tagName === 'p') {
+        const match = (firstChild.children[0] && firstChild.children[0] as {value?: string})
+          ?.value?.match(/^(alert|tip|info)\[(.*)\]/);
+        if (match) {
+          const type = match[1] as InfoBlockType;
+          const title = match[2];
+          return <InfoBlock type={type} title={title}>{children}</InfoBlock>;
+        }
+
+      }
+      return <div>{children}</div>;
+    }
   }), []);
 };

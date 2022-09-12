@@ -5,7 +5,6 @@ export const ButtonStyled = styled.button`
   width: 100%;
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: 5px;
-  overflow: hidden;
   display: flex;
   padding: 10px;
 

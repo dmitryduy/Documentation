@@ -4,6 +4,7 @@ export const InfoBlockStyled = styled.div`
   border-radius: 5px;
   padding: 20px;
   margin: 15px 0;
+  word-wrap: break-word;
 
   @media (max-width: 500px) {
     padding: 10px;

@@ -22,6 +22,7 @@ export const lightTheme = {
     inputBorder: '#764abc',
     tagBorder: '#764abc',
     buttonSubtitle: '#525860',
+    contextMenuHover: '#e5e7e6',
   }
 };
 

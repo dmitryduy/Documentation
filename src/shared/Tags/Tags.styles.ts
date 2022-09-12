@@ -37,3 +37,16 @@ export const NewTags = styled.ul`
     }
   }
 `;
+
+
+export const InputWrapper = styled.div`
+display: flex;
+  align-items: center;
+  gap: 10px;
+  input {
+    flex: 1;
+  }
+  button {
+    flex: 0;
+  }
+`;

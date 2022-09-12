@@ -25,6 +25,9 @@ export const HeaderStyled = styled.header`
     width: 100%;
   }
 
+  li {
+    list-style-type: none;
+  }
   li:last-child {
     margin-left: auto;
   }

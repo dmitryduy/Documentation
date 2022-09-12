@@ -12,4 +12,8 @@ export const InputStyled = styled.input`
     background-color: transparent;
     outline: none;
   }
+  
+  @media (max-width: 1000px) {
+    font-size: 15px;
+  }
 `;
