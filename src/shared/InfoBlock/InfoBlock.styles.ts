@@ -32,6 +32,7 @@ export const Header = styled.div`
     margin-left: 10px;
     font-weight: bold;
     color: ${props => props.theme.colors.paragraph};
+    word-wrap: break-word;
   }
   
   svg {

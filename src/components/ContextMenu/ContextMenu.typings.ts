@@ -6,5 +6,8 @@ export type IContextMenuAction = {
   [key in Actions]: {
     template: string;
     insert: (str: string) => string;
+    startSelection: number;
+    endSelection: number;
+    multiselect?: boolean;
   };
 };

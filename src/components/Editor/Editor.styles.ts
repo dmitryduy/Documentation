@@ -2,19 +2,29 @@ import styled from 'styled-components';
 
 export const EditorStyled = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   width: 50%;
-  position: relative;
-  border: 1px solid ${props => props.theme.colors.border};
-
+  background-color: ${props => props.theme.colors.editorBg};
+  box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+  margin-top: 15px;
+  border-radius: 15px;
+  
+  @media (max-width: 1000px) {
+    width: 100%;
+    .buttons {
+      margin-right: 12vw;
+    }
+  }
+  
   &:before {
+    position: absolute;
     content: 'Редактор';
-    padding: 5px;
-    height: 20px;
+    transform: translateY(-120%);
+    font-size: 14px;
     font-weight: bold;
     text-align: center;
-    color: ${props => props.theme.colors.paragraph};
-    border-bottom: 1px solid ${props => props.theme.colors.border};
+    color: #7f7f7f;
   }
   .buttons {
     display: flex;
@@ -24,8 +34,11 @@ export const EditorStyled = styled.div`
   }
 
   textarea {
+    background-color: ${props => props.theme.colors.editorBg};
+    border: 1px solid ${props => props.theme.colors.border};
+    border-left: none;
+    border-right: none;
     resize: none;
-    border: none;
     outline: none;
     padding: 5px;
     font-family: 'Roboto', sans-serif;

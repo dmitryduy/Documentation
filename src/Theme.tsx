@@ -23,6 +23,8 @@ export const lightTheme = {
     tagBorder: '#764abc',
     buttonSubtitle: '#525860',
     contextMenuHover: '#e5e7e6',
+    newPostBg: '#e6e6e6',
+    editorBg: '#efefef'
   }
 };
 

@@ -2,19 +2,29 @@ import { Actions } from '../ContextMenu.typings';
 import { contextMenuActions } from '../ContextMenu.constants';
 
 interface Options {
-  startSelection: number;
-  endSelection: number;
-  type: Actions
+  selectionStart: number;
+  selectionEnd: number;
+  editType: Actions
 }
 
 
 export const getUpdatedMarkdown = (markdown: string, options: Options) => {
-  const {startSelection, endSelection, type} = options;
-  console.log(startSelection, endSelection, type);
-  if (startSelection === endSelection) {
-    return `${markdown.slice(0, startSelection)}${contextMenuActions[type].template}${markdown.slice(startSelection)}`;
+  const {selectionStart, selectionEnd, editType} = options;
+
+  const action = contextMenuActions[editType];
+
+  if (selectionStart === selectionEnd) {
+    return {
+      value: `${markdown.slice(0, selectionStart)}${action.template}${markdown.slice(selectionStart)}`,
+      posStart: selectionStart + action.startSelection,
+      posEnd: selectionStart + action.endSelection
+    };
   }
 
-  const insertString = contextMenuActions[type].insert(markdown.slice(startSelection, endSelection));
-  return `${markdown.slice(0, startSelection)}${insertString}${markdown.slice(endSelection)}`;
+  const insertString = action.insert(markdown.slice(selectionStart, selectionEnd));
+  return {
+    value: `${markdown.slice(0, selectionStart)}${insertString}${markdown.slice(selectionEnd)}`,
+    posStart: selectionStart + (action.multiselect ? action.startSelection : insertString.length),
+    posEnd: selectionStart + (action.multiselect ? action.endSelection : insertString.length)
+  };
 };

@@ -7,7 +7,7 @@ import Article from '../../components/Article/Article';
 import useMatchMedia from '../../hooks/useMatchMedia';
 import Editor from '../../components/Editor/Editor';
 
-import { NewPostPageStyled, Preview, PhoneButton } from './NewPostPage.styles';
+import { NewPostPageStyled, Preview, PreviewButton } from './NewPostPage.styles';
 import { isElementScrollToBottom } from './NewPostPage.utils/isElementScrollToBottom';
 import { MarkdownContext } from './MarkdownContext';
 
@@ -18,6 +18,7 @@ const NewPostPage = () => {
   const [tags, setTags] = useState<string[]>([]);
   const [showPreview, toggleShowPreview] = useToggle(false);
   const phone = useMatchMedia();
+  const [widePreview, setWidePreview] = useState(false);
 
   const updateMarkdown = (value: string) => {
     setMarkdown(value);
@@ -52,10 +53,10 @@ const NewPostPage = () => {
   return (
     <MarkdownContext.Provider value={{markdown, setMarkdown: updateMarkdown, tags}}>
       <Tags tags={tags} setTags={setTags}/>
-      {phone && <PhoneButton onClick={toggleShowPreview}>{showPreview ? 'Markdown' : 'Превью'}</PhoneButton>}
       <NewPostPageStyled className={cn({'show-preview': showPreview})}>
         <Editor/>
-        <Preview data-title="Превью">
+        <Preview className={cn({active: widePreview})} onClick={() => !widePreview && setWidePreview(true)}>
+          {phone && <PreviewButton onClick={() => setWidePreview(false)}>&times;</PreviewButton>}
           <div ref={previewRef} className="content">
             <Article markdown={markdown}/>
           </div>

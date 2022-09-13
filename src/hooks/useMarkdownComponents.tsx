@@ -32,6 +32,11 @@ export const useMarkdownComponents = ():
     },
     p(data) {
       const children = data.children;
+      for (let i = 0; i < children.length; i++) {
+        if (typeof children[i] === 'string') {
+          children[i] = (children[i] as string).replaceAll(':::', '');
+        }
+      }
       if (typeof children[0] === 'string') {
         const match = children[0].match(/^(alert|tip|info)\[(.*)\]/);
         if (match) {

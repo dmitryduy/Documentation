@@ -2,62 +2,79 @@ import styled from 'styled-components';
 
 export const NewPostPageStyled = styled.div`
   display: flex;
-  padding: 10px 20px 0;
+  padding: 10px 20px;
+  gap: 15px;
   width: 100vw;
-  height: calc(100vh - 50px - 20px);
+  height: calc(100vh - 50px);
   transition: .3s;
-  
-  @media (max-width: 1000px) {
-    width: 200%;
-    padding: 0 0 10px;
-    &>div {
-     border: none;
-    }
-    &.show-preview {
-      transform: translateX(-50%);
-    }
-    
-  }
-
-  &> * {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    position: relative;
-    border: 1px solid ${props => props.theme.colors.border};
-  }
-  & > *:before {
-    content: attr(data-title);
-    padding: 5px;
-    height: 20px;
-    font-weight: bold;
-    text-align: center;
-    color: ${props => props.theme.colors.paragraph};
-    border-bottom: 1px solid  ${props => props.theme.colors.border};
-  }
+  background-color: ${props => props.theme.colors.newPostBg};
 `;
 
 
 export const Preview = styled.div`
-  border-left: none;
-  height: 100%;
+  flex: 1;
+  position: relative;
+  width: 50%;
+  background-color: ${props => props.theme.colors.editorBg};
+  box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+  margin-top: 15px;
+  border-radius: 15px;
+  padding: 15px;
+  
+  @media (max-width: 1000px) {
+    position: fixed;
+    top: 60px;
+    height: calc(100vh - 50px - 35px);
+    transform-origin: bottom right;
+    transform: scale(.15);
+    width: calc(100% - 10px);
+    right: 0;
+    transition: .3s;
+    border: 1px solid #000;
+    
+    a {
+      pointer-events: none;
+    }
+    .content {
+      padding-top: 15px;
+    }
+    &.active {
+      border: none;
+      transform: scale(1);
+      left: 5px;
+    }
+    &.active a {
+      pointer-events: auto;
+    }
+  }
+
+  &:before {
+    position: absolute;
+    content: 'Превью';
+    transform: translateY(calc(-120% - 15px));
+    font-size: 14px;
+    font-weight: bold;
+    color: #7f7f7f;
+    background-color: ${props => props.theme.colors.newPostBg};
+    width: 100%;
+    text-align: start;
+  }
+
   .content {
+    height: 100%;
     overflow: auto;
-    padding: 15px;
   }
 `;
 
-export const PhoneButton = styled.button`
-  position: fixed;
-  right: 0;
-  height: 29px;
-  font-size: 16px;
-  top: 50px;
+export const PreviewButton = styled.button`
+  position: absolute;
+  top: 0;
+  outline: none;
   padding: 0 10px;
-  z-index: 5;
+  right: 0;
+  font-size: 30px;
   border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
+  color: ${props => props.theme.colors.svg};
+  background-color: transparent;
+  border-top-right-radius: 15px;
 `;

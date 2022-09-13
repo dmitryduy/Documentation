@@ -8,12 +8,15 @@ body {
     font-family: 'Roboto', sans-serif;
     overflow-x: hidden;
 }
+#root {
+    height: 100%;
+}
 
 .wrapper {
     position: relative;
     margin-top: 50px;
     width: 100vw;
-    min-height: 100vh;
+    min-height: calc(100% - 50px);
 }
 
 a {
