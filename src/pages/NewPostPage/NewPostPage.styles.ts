@@ -36,7 +36,7 @@ export const Preview = styled.div`
       pointer-events: none;
     }
     .content {
-      padding-top: 15px;
+      margin-top: 15px;
     }
     &.active {
       border: none;
