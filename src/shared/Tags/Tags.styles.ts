@@ -1,52 +1,44 @@
 import styled from 'styled-components';
 
 export const TagsStyled = styled.div`
-  position: fixed;
-  top: 50px;
-  z-index: 10;
-  padding: 10px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  align-items: flex-start;
   background-color: #fff;
   transition: .3s;
-  transform: translateY(-100%);
-  visibility: hidden;
+  box-sizing: border-box;
+  max-width: 500px;
 
-  &.visible {
-    transform: translateY(0);
-    visibility: visible;
+  .container {
+    margin: 10px;
+  }
+
+  input {
+    margin-bottom: 10px;
   }
 
 `;
 export const NewTags = styled.ul`
   display: flex;
-  margin-top: 10px;
   flex-wrap: wrap;
   gap: 5px;
+  list-style-type: none;
+  max-height: 100px;
+  overflow: auto;
+  margin-bottom: 10px;
+
   .tag {
-    position: relative;
+    display: flex;
+    align-items: center;
     border: 1px solid ${props => props.theme.colors.tagBorder};
     padding: 5px 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     transition: .3s;
-    &:hover {
-      border: 1px solid ${props => props.theme.colors.alertBg};
-      background-color:  ${props => props.theme.colors.alertBg};
+    overflow: auto;
+    word-break: break-word;
+
+    span {
+      margin-left: 5px;
     }
-  }
-`;
-
-
-export const InputWrapper = styled.div`
-display: flex;
-  align-items: center;
-  gap: 10px;
-  input {
-    flex: 1;
-  }
-  button {
-    flex: 0;
   }
 `;

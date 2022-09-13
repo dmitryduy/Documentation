@@ -44,42 +44,48 @@ export const contextMenuActions: IContextMenuAction = {
     endSelection: 11
   },
   'info': {
-    template: `:::info
+    template: `
+:::info
 info[заголовок]
 содержимое
 :::`,
-    insert: str => `:::info
+    insert: str => `
+:::info
 info[заголовок]
 ${str}
 :::`,
-    startSelection: 13,
-    endSelection: 22,
+    startSelection: 14,
+    endSelection: 23,
     multiselect: true
   },
   'alert': {
-    template: `:::alert
+    template: `
+:::alert
 alert[заголовок]
 содержимое
 :::`,
-    insert: str => `:::alert
+    insert: str => `
+:::alert
 alert[заголовок]
 ${str}
 :::`,
-    startSelection: 15,
-    endSelection: 24,
+    startSelection: 16,
+    endSelection: 25,
     multiselect: true
   },
   'tip': {
-    template: `:::tip
+    template: `
+:::tip
 tip[заголовок]
 содержимое
 :::`,
-    insert: str => `:::tip
+    insert: str => `
+:::tip
 tip[заголовок]
 ${str}
 :::`,
-    startSelection: 11,
-    endSelection: 20,
+    startSelection: 12,
+    endSelection: 21,
     multiselect: true
   },
   'code': {
@@ -98,5 +104,19 @@ ${str}
     insert: str => `- ${str}`,
     startSelection: 4,
     endSelection: 10
+  },
+  'ordered-list': {
+    template: `
+-1. элемент\n2. элемент\n3. элемент`,
+    insert: str => `1. ${str}`,
+    startSelection: 5,
+    endSelection: 12
+  },
+  'image': {
+    template: '![текст](ссылка)',
+    insert: str => `![текст](${str})`,
+    startSelection: 2,
+    endSelection: 7,
+    multiselect: true
   },
 };

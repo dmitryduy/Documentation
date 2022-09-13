@@ -6,7 +6,7 @@ export const ButtonStyled = styled.button`
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: 5px;
   display: flex;
-  padding: 10px;
+  padding: 5px 10px;
 
   &:first-child {
     align-items: flex-start;

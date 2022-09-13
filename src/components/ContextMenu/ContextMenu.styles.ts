@@ -5,9 +5,8 @@ export const ContextMenuStyled = styled.div`
   background-color: ${props => props.theme.colors.editorBg};
   top: 500px;
   justify-content: space-between;
-  border-radius: 5px;
   overflow-x: auto;
-  user-select: none;
+  border-bottom: 1px solid  ${props => props.theme.colors.border};
 
   &::-webkit-scrollbar {
     height: 0;
@@ -23,6 +22,7 @@ li {
   text-align: center;
   border-right: 1px solid ${props => props.theme.colors.border};
   flex: 1;
+  white-space: nowrap;
 
   &.strong {
     font-weight: bold;

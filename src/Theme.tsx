@@ -24,7 +24,8 @@ export const lightTheme = {
     buttonSubtitle: '#525860',
     contextMenuHover: '#e5e7e6',
     newPostBg: '#efefef',
-    editorBg: '#fff'
+    editorBg: '#fff',
+    selection: '#764abc'
   }
 };
 

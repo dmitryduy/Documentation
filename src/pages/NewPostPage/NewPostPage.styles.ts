@@ -8,6 +8,9 @@ export const NewPostPageStyled = styled.div`
   height: calc(100vh - 50px);
   transition: .3s;
   background-color: ${props => props.theme.colors.newPostBg};
+  @media (max-width: 1000px) {
+    padding: 10px 10px;
+  }
 `;
 
 
@@ -20,7 +23,7 @@ export const Preview = styled.div`
   margin-top: 15px;
   border-radius: 15px;
   padding: 15px;
-  
+
   @media (max-width: 1000px) {
     position: fixed;
     top: 60px;
@@ -31,18 +34,21 @@ export const Preview = styled.div`
     right: 0;
     transition: .3s;
     border: 1px solid #000;
-    
+
     a {
       pointer-events: none;
     }
+
     .content {
       margin-top: 15px;
     }
+
     &.active {
       border: none;
       transform: scale(1);
       left: 5px;
     }
+
     &.active a {
       pointer-events: auto;
     }

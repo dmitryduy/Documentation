@@ -9,6 +9,8 @@ export const EditorStyled = styled.div`
   box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
   margin-top: 15px;
   border-radius: 15px;
+  transition: .3s;
+  
   
   @media (max-width: 1000px) {
     width: 100%;
@@ -44,5 +46,6 @@ export const EditorStyled = styled.div`
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     flex: 1;
+    
   }
 `;

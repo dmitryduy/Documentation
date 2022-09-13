@@ -3,12 +3,13 @@ import React from 'react';
 import {ListStyled} from './List.styles';
 
 interface IListProps {
-    children: React.ReactNode
+    children: React.ReactNode;
+    as: 'ul' | 'ol';
 }
 
-const List: React.FC<IListProps> = ({children}) => {
+const List: React.FC<IListProps> = ({children, as}) => {
   return (
-    <ListStyled>
+    <ListStyled as={as}>
       {children}
     </ListStyled>
   );

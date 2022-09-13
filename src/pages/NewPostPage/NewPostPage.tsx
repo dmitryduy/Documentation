@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 
-import Tags from '../../shared/Tags/Tags';
-import { useToggle } from '../../hooks/useToggle';
 import Article from '../../components/Article/Article';
 import useMatchMedia from '../../hooks/useMatchMedia';
 import Editor from '../../components/Editor/Editor';
@@ -15,8 +13,6 @@ const NewPostPage = () => {
   const [markdown, setMarkdown] = useState('');
   const previewRef = useRef<HTMLDivElement>(null);
   const isScrollRef = useRef(true);
-  const [tags, setTags] = useState<string[]>([]);
-  const [showPreview, toggleShowPreview] = useToggle(false);
   const phone = useMatchMedia();
   const [widePreview, setWidePreview] = useState(false);
 
@@ -51,9 +47,8 @@ const NewPostPage = () => {
   }, []);
 
   return (
-    <MarkdownContext.Provider value={{markdown, setMarkdown: updateMarkdown, tags}}>
-      <Tags tags={tags} setTags={setTags}/>
-      <NewPostPageStyled className={cn({'show-preview': showPreview})}>
+    <MarkdownContext.Provider value={{markdown, setMarkdown: updateMarkdown}}>
+      <NewPostPageStyled>
         <Editor/>
         <Preview className={cn({active: widePreview})} onClick={() => !widePreview && setWidePreview(true)}>
           {phone && <PreviewButton onClick={() => setWidePreview(false)}>&times;</PreviewButton>}

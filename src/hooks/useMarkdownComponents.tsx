@@ -14,6 +14,7 @@ import Paragraph from '../shared/Paragraph/Paragraph';
 import Link from '../shared/Link/Link';
 import CodeText from '../shared/CodeText/CodeText';
 import List from '../shared/List/List';
+import Image from '../shared/Image/Image';
 
 
 export const useMarkdownComponents = ():
@@ -58,7 +59,13 @@ export const useMarkdownComponents = ():
       /> : <CodeText fontWeight="normal">{children}</CodeText>;
     },
     ul({children}) {
-      return <List>{children}</List>;
+      return <List as="ul">{children}</List>;
+    },
+    ol({children}) {
+      return <List as="ol">{children}</List>;
+    },
+    img({src, alt}) {
+      return <Image src={src || ''} alt={alt || ''}/>;
     },
     div({node, children}) {
       const firstChild = node.children[0];
