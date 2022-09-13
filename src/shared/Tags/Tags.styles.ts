@@ -7,6 +7,7 @@ export const TagsStyled = styled.div`
   transition: .3s;
   box-sizing: border-box;
   max-width: 500px;
+  max-height: 0;
 
   .container {
     margin: 10px;

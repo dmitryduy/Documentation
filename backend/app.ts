@@ -28,6 +28,7 @@ const writePostsToFile = () => {
 app.put('/create-post', (req: Request, res: Response) => {
   const {markdown, tags: articleTags, menu, title} = req.body;
 
+  const link = title.replaceAll(/\s/g, '-').replaceAll(/\//g, '') + Date.now();
   posts.push({
     markdown,
     tags: articleTags,
@@ -35,13 +36,30 @@ app.put('/create-post', (req: Request, res: Response) => {
     title,
     date: Date.now(),
     views: 1,
-    link: title.replaceAll(/\s/g, '-').replaceAll(/\//g, '') + Date.now()
+    link
   });
   for (const tag of articleTags) {
     if (!tags.includes(tag)) {
       tags.push(tag);
     }
   }
+  writePostsToFile();
+
+  res.status(200);
+  res.json({link});
+});
+
+app.put('/update-post', (req: Request, res: Response) => {
+  const {markdown, menu, link} = req.body;
+  const post = posts.find(post => post.link === link && post.link !== 'Упс.-Данной-статьи-не-существует');
+  if (!post) {
+    res.status(400);
+    res.send();
+    return;
+  }
+
+  post.menu = menu;
+  post.markdown = markdown;
   writePostsToFile();
 
   res.status(200);

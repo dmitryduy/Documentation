@@ -1,5 +1,5 @@
 export type Actions = 'heading-1' | 'heading-2' | 'heading-3' | 'strong' | 'italic' | 'marker' | 'link' | 'code' |
-  'info' | 'alert' | 'tip' | 'unordered-list' | 'ordered-list' | 'image';
+  'info' | 'alert' | 'tip' | 'unordered-list' | 'ordered-list' | 'image' | 'video';
 
 
 export type IContextMenuAction = {

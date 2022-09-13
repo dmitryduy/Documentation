@@ -16,6 +16,7 @@ export const TagListStyled = styled.div`
     margin-right: 10px;
     transition: .1s;
     border-radius: 5px;
+    list-style-type: none;
     cursor: pointer;
     @media (max-width: 1000px) {
       margin-left: 10px;

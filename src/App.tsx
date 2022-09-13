@@ -9,6 +9,7 @@ import ArticlePage from './pages/ArticlePage/ArticlePage';
 import Tooltip from './shared/Tooltip/Tooltip';
 import windowExtends from './declare';
 import { store } from './store/store';
+import EditPostPage from './pages/EditPostPage/EditPostPage';
 
 windowExtends();
 
@@ -23,6 +24,7 @@ function App() {
             <Routes>
               <Route path="/Documentation" element={<ArticlePage main/>}/>
               <Route path="/create-post" element={<NewPostPage/>}/>
+              <Route path="/edit-post/:title" element={<EditPostPage/>}/>
               <Route path="/post/:title" element={<ArticlePage/>}/>
             </Routes>
           </div>

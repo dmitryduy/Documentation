@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useLayoutEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import cn from 'classnames';
 
 import { fetchRandomPost } from '../../api/fetchRandomPost';
@@ -61,6 +61,7 @@ const ArticlePage: FC<IArticlePageProps> = ({main}) => {
       <ArticlePageStyled>
         <InfoAside/>
         <Content>
+          <Link className="edit" to={`/edit-post/${post.link}`}>Редактировать</Link>
           <Article markdown={post.markdown}/>
           <ArticleButtons/>
         </Content>

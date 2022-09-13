@@ -22,10 +22,11 @@ export const Preview = styled.div`
   box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
   margin-top: 15px;
   border-radius: 15px;
-  padding: 15px;
+  overflow: hidden;
 
   @media (max-width: 1000px) {
     position: fixed;
+    padding-bottom: 10px;
     top: 60px;
     height: calc(100vh - 50px - 35px);
     transform-origin: bottom right;
@@ -40,7 +41,7 @@ export const Preview = styled.div`
     }
 
     .content {
-      margin-top: 15px;
+      margin-top: 25px;
     }
 
     &.active {
@@ -57,8 +58,9 @@ export const Preview = styled.div`
   &:before {
     position: absolute;
     content: 'Превью';
-    transform: translateY(calc(-120% - 15px));
+    transform: translateY(-120%);
     font-size: 14px;
+    left: 0;
     font-weight: bold;
     color: #7f7f7f;
     background-color: ${props => props.theme.colors.newPostBg};
@@ -69,6 +71,7 @@ export const Preview = styled.div`
   .content {
     height: 100%;
     overflow: auto;
+    padding: 10px;
   }
 `;
 

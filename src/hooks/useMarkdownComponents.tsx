@@ -15,6 +15,7 @@ import Link from '../shared/Link/Link';
 import CodeText from '../shared/CodeText/CodeText';
 import List from '../shared/List/List';
 import Image from '../shared/Image/Image';
+import Video from '../shared/Video/Video';
 
 
 export const useMarkdownComponents = ():
@@ -65,11 +66,15 @@ export const useMarkdownComponents = ():
       return <List as="ol">{children}</List>;
     },
     img({src, alt}) {
-      return <Image src={src || ''} alt={alt || ''}/>;
+      if (!alt || !src) return null;
+
+      if (alt.startsWith('видео')) {
+        return <Video src={src}/>;
+      }
+      return <Image src={src} alt={alt}/>;
     },
     div({node, children}) {
       const firstChild = node.children[0];
-      console.log(firstChild);
       if (firstChild && 'tagName' in firstChild && firstChild.tagName === 'p') {
         const match = (firstChild.children[0] && firstChild.children[0] as {value?: string})
           ?.value?.match(/^(alert|tip|info)\[(.*)\]/);

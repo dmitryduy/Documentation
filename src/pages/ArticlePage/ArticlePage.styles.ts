@@ -3,6 +3,11 @@ import styled from 'styled-components';
 export const ArticlePageStyled = styled.div`
   display: flex;
   margin: 20px;
+  width: 100vw;
+  @media (max-width: 1000px) {
+  margin: 10px;
+    width: calc(100vw - 20px);
+  }
 `;
 
 export const Menu = styled.aside`
@@ -17,6 +22,8 @@ export const Menu = styled.aside`
   @media (max-width: 1000px) {
     transition: .3s;
     font-size: 14px;
+    height: calc(100vh - 50px);
+    top: 50px;
     transform: translateX(100%);
     &.active {
       transform: translateX(0);
@@ -28,6 +35,7 @@ export const Menu = styled.aside`
   }
 
   li {
+    list-style-type: none;
     padding: 5px 0;
     cursor: pointer;
 
@@ -42,10 +50,20 @@ export const Menu = styled.aside`
 `;
 
 export const Content = styled.div`
-  min-height: calc(100vh - 90px);
   width: 100%;
-  margin: 0 200px;
+  margin: 10px 230px 10px 200px;
+  display: flex;
+  flex-direction: column;
+  
+  .edit {
+    align-self: flex-end;
+    position: relative;
+    z-index: 2;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
   @media (max-width: 1000px) {
-   margin: 0;
+   margin: 10px 0;
   }
 `;

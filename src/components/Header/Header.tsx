@@ -25,11 +25,11 @@ const Header = () => {
       </svg>}
       <nav>
         <ul>
-          {width > 600 && <li>
+          <li>
             <NavLink className={({isActive}) => (isActive ? 'active' : '')} to="/Documentation">
               Главная
             </NavLink>
-          </li>}
+          </li>
           <li>
             <NavLink className={({isActive}) => (isActive ? 'active' : '')} to="/create-post">
               Добавить статью

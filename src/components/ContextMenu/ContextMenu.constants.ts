@@ -119,4 +119,10 @@ ${str}
     endSelection: 7,
     multiselect: true
   },
+  'video': {
+    template: '![видео](ссылка)',
+    insert: str => `![видео](${str})`,
+    startSelection: 9,
+    endSelection: 15
+  },
 };

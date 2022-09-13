@@ -20,6 +20,7 @@ var writePostsToFile = function () {
 };
 app.put('/create-post', function (req, res) {
     var _a = req.body, markdown = _a.markdown, articleTags = _a.tags, menu = _a.menu, title = _a.title;
+    var link = title.replaceAll(/\s/g, '-').replaceAll(/\//g, '') + Date.now();
     posts.push({
         markdown: markdown,
         tags: articleTags,
@@ -27,7 +28,7 @@ app.put('/create-post', function (req, res) {
         title: title,
         date: Date.now(),
         views: 1,
-        link: title.replaceAll(/\s/g, '-').replaceAll(/\//g, '') + Date.now()
+        link: link
     });
     for (var _i = 0, articleTags_1 = articleTags; _i < articleTags_1.length; _i++) {
         var tag = articleTags_1[_i];
@@ -35,6 +36,20 @@ app.put('/create-post', function (req, res) {
             tags.push(tag);
         }
     }
+    writePostsToFile();
+    res.status(200);
+    res.json({ link: link });
+});
+app.put('/update-post', function (req, res) {
+    var _a = req.body, markdown = _a.markdown, menu = _a.menu, link = _a.link;
+    var post = posts.find(function (post) { return post.link === link && post.link !== 'Упс.-Данной-статьи-не-существует'; });
+    if (!post) {
+        res.status(400);
+        res.send();
+        return;
+    }
+    post.menu = menu;
+    post.markdown = markdown;
     writePostsToFile();
     res.status(200);
     res.send();

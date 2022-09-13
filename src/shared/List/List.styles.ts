@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ListStyled = styled.ul`
   padding-left: 20px;
   @media (max-width: 500px) {
-    padding-left: 5px;
+    padding-left: 10px;
   }
   li {
     position: relative;

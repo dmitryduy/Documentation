@@ -32,6 +32,7 @@ const ContextMenu: React.FC<IContextMenuProps> = ({updateMarkdown}) => {
       <li data-action="italic" className="italic">i</li>
       <li className="marker" data-action="marker">маркер</li>
       <li data-action="image">изображение</li>
+      <li data-action="video">видео</li>
       <li className="code" data-action="code">код</li>
       <li className="link" data-action="link">ссылка</li>
       <li data-action="info">инфо</li>

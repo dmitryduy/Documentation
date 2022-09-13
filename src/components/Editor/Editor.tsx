@@ -9,14 +9,14 @@ import { Actions } from '../ContextMenu/ContextMenu.typings';
 import Tags from '../../shared/Tags/Tags';
 
 import { EditorStyled } from './Editor.styles';
-import { createPost } from './Editor.utils/createPost';
+import { useCreatePost } from './Editor.hook/useCreatePost';
 
 const Editor = () => {
-  const {markdown, setMarkdown} = useContext(MarkdownContext);
+  const {markdown, setMarkdown, onButtonClick, buttonValue} = useContext(MarkdownContext);
   const textareaRef = useFocusOnMount<HTMLTextAreaElement>();
   const caretPosition = useRef<null | [number, number]>(null);
   const [tags, setTags] = useState<string[]>([]);
-
+  const createPost = useCreatePost();
   const onInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
     const value = (e.target as HTMLTextAreaElement).value;
     setMarkdown(value);
@@ -32,14 +32,22 @@ const Editor = () => {
 
   useEffect(() => {
     if (textareaRef.current && caretPosition.current) {
-      textareaRef.current.focus();
       const [start, end] = caretPosition.current;
 
       textareaRef.current.selectionStart = start;
       textareaRef.current.selectionEnd = end;
+      textareaRef.current.focus();
       caretPosition.current = null;
     }
   }, [markdown]);
+
+  const onClick = () => {
+    if (onButtonClick) {
+      onButtonClick(markdown);
+      return;
+    }
+    createPost(markdown, tags);
+  };
 
 
   return (
@@ -48,7 +56,7 @@ const Editor = () => {
       <Tags tags={tags} setTags={setTags}/>
       <textarea ref={textareaRef} value={markdown} onInput={onInput}/>
       <div className="buttons">
-        <Button onClick={() => createPost(markdown, tags)} subtitle="Статья" text="Добавить статью"/>
+        <Button onClick={onClick} subtitle="Статья" text={buttonValue}/>
       </div>
     </EditorStyled>
   );

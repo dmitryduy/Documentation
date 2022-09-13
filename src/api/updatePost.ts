@@ -1,17 +1,16 @@
-import { getMenuFromMarkdown } from '../utils/getMenuFromMarkdown';
 import { BASE_URL } from '../global.constants';
+import { getMenuFromMarkdown } from '../utils/getMenuFromMarkdown';
 
-export const sendPost = (markdown: string, tags: string[], title: string) => {
-  return fetch(`${BASE_URL}/create-post`, {
+export const updatePostBackend = (markdown: string, link: string) => {
+  return fetch(`${BASE_URL}/update-post`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
       markdown,
-      tags,
       menu: getMenuFromMarkdown(markdown),
-      title
+      link
     })
   });
 };

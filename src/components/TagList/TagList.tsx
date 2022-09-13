@@ -37,7 +37,7 @@ const TagList: React.FC<ITagListProps> = ({tagInfo}) => {
       </Header>
       <ul ref={listRef} className={cn('article-list', {active})}>
         {tagInfo.articles.map(article =>
-          <li className="article-title" key={article.title}>
+          <li className="article-title" key={article.link}>
             <Link to={`/post/${article.link}`} onClick={closeLeftSide}>
               {article.title}
             </Link>
