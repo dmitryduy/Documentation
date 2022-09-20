@@ -9,10 +9,6 @@ export const ContextMenuStyled = styled.div`
   border-bottom: 1px solid ${props => props.theme.colors.border};
   border-radius: 15px 15px 0 0;
   user-select: none;
-
-  &::-webkit-scrollbar {
-    height: 0;
-  }
 }
 
 li {
@@ -26,6 +22,9 @@ li {
   flex: 1;
   white-space: nowrap;
 
+  &.delete {
+    text-decoration: line-through;
+  }
   &.strong {
     font-weight: bold;
   }

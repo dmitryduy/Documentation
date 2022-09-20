@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://safe-mountain-10143.herokuapp.com';
+export const BASE_URL = /*'https://safe-mountain-10143.herokuapp.com'*/'http://localhost:5000';

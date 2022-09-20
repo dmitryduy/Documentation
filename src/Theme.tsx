@@ -16,16 +16,19 @@ export const lightTheme = {
     alertBg: '#fff2f2',
     successBorder: '#00bf88',
     successBg: '#f1fdf9',
+    cautionBorder: '#e6a700',
+    cautionBg: '#fff8e6',
     infoBg: '#e5f3fe',
-    infoBorder: '#0085f2',
-    inputBg: '#ebedf0',
+    infoBorder: '#4cb3d4',
+    inputBg: '#eef9fd',
     inputBorder: '#764abc',
     tagBorder: '#764abc',
     buttonSubtitle: '#525860',
     contextMenuHover: '#e5e7e6',
     newPostBg: '#efefef',
     editorBg: '#fff',
-    selection: '#764abc'
+    selection: '#764abc',
+    tableEven: '#f5f6f7',
   }
 };
 

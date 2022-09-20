@@ -4,6 +4,7 @@ export const ArticlePageStyled = styled.div`
   display: flex;
   margin: 20px;
   width: 100vw;
+  padding: 0 2vw;
   @media (max-width: 1000px) {
   margin: 10px;
     width: calc(100vw - 20px);
@@ -14,21 +15,12 @@ export const Menu = styled.aside`
   position: fixed;
   right: 0;
   width: 200px;
-  top: 50px;
+  top: 70px;
   height: fit-content;
   border-left: 1px solid ${props => props.theme.colors.border};
   padding: 20px 0;
   background-color: #fff;
-  @media (max-width: 1000px) {
-    transition: .3s;
-    font-size: 14px;
-    height: calc(100vh - 50px);
-    top: 50px;
-    transform: translateX(100%);
-    &.active {
-      transform: translateX(0);
-    }
-  }
+  z-index: 10000;
 
   ul {
     margin-left: 15px;
@@ -54,6 +46,10 @@ export const Content = styled.div`
   margin: 10px 230px 10px 200px;
   display: flex;
   flex-direction: column;
+  transition: .3s;
+  &.transform {
+    transform: translateX(300px);
+  }
   
   .edit {
     align-self: flex-end;

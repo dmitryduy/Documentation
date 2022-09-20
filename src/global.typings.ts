@@ -21,4 +21,4 @@ export interface ITagList {
   }[]
 }
 
-export type InfoBlockType = 'alert' | 'info' | 'tip';
+export type InfoBlockType = 'alert' | 'info' | 'tip' | 'caution';

@@ -15,6 +15,7 @@ import Loader from '../../shared/Loader/Loader';
 import { useEmit } from '../../hooks/useEmit';
 import { EmitterNames } from '../../emitterNames';
 import { useToggle } from '../../hooks/useToggle';
+import { useResize } from '../../hooks/useResize';
 
 import { ArticlePageStyled, Content, Menu } from './ArticlePage.styles';
 import { getArticleMenu } from './ArticlePage.utils/getArticleMenu';
@@ -27,9 +28,8 @@ const ArticlePage: FC<IArticlePageProps> = ({main}) => {
   const {title} = useParams();
   const [post, setPost] = useState<IPost | null>(null);
   const dispatch = useAppDispatch();
-  const [activeRightSide, toggleActiveSide] = useToggle(false);
-
-  useEmit(EmitterNames.TOGGLE_RIGHT_SIDEBAR, () => toggleActiveSide());
+  const [content, toggleContent]  = useToggle(false);
+  const width = useResize();
 
   useEffect(() => {
     if (main) {
@@ -50,6 +50,7 @@ const ArticlePage: FC<IArticlePageProps> = ({main}) => {
         });
     }
   }, [post]);
+  useEmit(EmitterNames.TOGGLE_LEFT_SIDEBAR, () => toggleContent());
 
   useEffect(() => {
     post && dispatch(setPostInfo({title: post.title, link: post.link}));
@@ -60,13 +61,13 @@ const ArticlePage: FC<IArticlePageProps> = ({main}) => {
     post ?
       <ArticlePageStyled>
         <InfoAside/>
-        <Content>
+        <Content className={cn({transform: content})}>
           <Link className="edit" to={`/edit-post/${post.link}`}>Редактировать</Link>
           <Article markdown={post.markdown}/>
           <ArticleButtons/>
         </Content>
-        {post.menu.length ?
-          <Menu className={cn({active: activeRightSide})}>
+        {post.menu.length && width > 1000 ?
+          <Menu>
             {getArticleMenu(post.menu)}
           </Menu> :
           null

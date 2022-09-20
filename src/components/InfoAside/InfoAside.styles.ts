@@ -12,6 +12,7 @@ export const InfoAsideStyled = styled.aside`
   border-right: 1px solid ${props => props.theme.colors.border};
   @media (max-width: 1000px) {
     transition: .3s;
+    width: 300px;
     transform: translateX(-100%);
     &.active {
       transform: translateX(0);

@@ -22,10 +22,16 @@ export const InfoBlockStyled = styled.div`
     background-color: ${props => props.theme.colors.infoBg};
     border-left: 6px solid ${props => props.theme.colors.infoBorder};
   }
+  
+  &.caution {
+    background-color: ${props => props.theme.colors.cautionBg};
+    border-left: 6px solid ${props => props.theme.colors.cautionBorder};
+  }
 `;
 
 export const Header = styled.div`
   display: flex;
+  align-items: center;
   margin-bottom: 10px;
   .title {
     text-transform: uppercase;
@@ -36,7 +42,6 @@ export const Header = styled.div`
   }
   
   svg {
-    align-self: center;
     width: 20px;
     height: 20px;
   }

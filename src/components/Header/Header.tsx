@@ -3,15 +3,14 @@ import { NavLink } from 'react-router-dom';
 
 import { useResize } from '../../hooks/useResize';
 import { EmitterNames } from '../../emitterNames';
+import {ReactComponent as BurgerSvg} from '../../assets/images/burger.svg';
 
 import { HeaderStyled } from './Header.styles';
 
 
+
 const Header = () => {
   const width = useResize();
-  const toggleRightSide = () => {
-    window.emitter.emit(EmitterNames.TOGGLE_RIGHT_SIDEBAR);
-  };
 
   const toggleLeftSide = () => {
     window.emitter.emit(EmitterNames.TOGGLE_LEFT_SIDEBAR);
@@ -19,10 +18,7 @@ const Header = () => {
 
   return (
     <HeaderStyled>
-      {width < 1001 && <svg onClick={toggleLeftSide} width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
-        <path stroke="currentColor" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="2"
-          d="M4 7h22M4 15h22M4 23h22"/>
-      </svg>}
+      {width < 1001 && <BurgerSvg onClick={toggleLeftSide}/>}
       <nav>
         <ul>
           <li>
@@ -42,10 +38,6 @@ const Header = () => {
           </li>}
         </ul>
       </nav>
-      {width < 1001 && <svg onClick={toggleRightSide} width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
-        <path stroke="currentColor" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="2"
-          d="M4 7h22M4 15h22M4 23h22"/>
-      </svg>}
     </HeaderStyled>
   );
 };

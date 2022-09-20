@@ -7,7 +7,6 @@ export const CodeTextStyled = styled.code`
   width: fit-content;
   border: 1px solid ${props => props.theme.colors.border};
   margin-bottom: 25px;
-  font-size: 17px;
   color: ${props => props.theme.colors.paragraph};
   @media (max-width: 500px) {
     font-size: 15px;

@@ -28,12 +28,14 @@ a:visited {
 
 *::-webkit-scrollbar {
     width: 4px;
+    height: 4px;
     background-color: #f1f1f1;
     border-radius: 2px;
 }
 
 *::-webkit-scrollbar-thumb {
     width: 4px;
+    height: 4px;
     background-color: #c0c0c0;
     border-radius: 2px;
 }

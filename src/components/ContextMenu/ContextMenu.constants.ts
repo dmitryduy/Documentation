@@ -31,6 +31,12 @@ export const contextMenuActions: IContextMenuAction = {
     startSelection: 1,
     endSelection: 6
   },
+  'delete': {
+    template: '~текст~',
+    insert: str => `~${str}~`,
+    startSelection: 1,
+    endSelection: 6
+  },
   'marker': {
     template: '`маркер`',
     insert: str => `\`${str}\``,
@@ -88,6 +94,21 @@ ${str}
     endSelection: 21,
     multiselect: true
   },
+  'caution': {
+    template: `
+:::caution
+caution[заголовок]
+содержимое
+:::`,
+    insert: str => `
+:::caution
+caution[заголовок]
+${str}
+:::`,
+    startSelection: 20,
+    endSelection: 29,
+    multiselect: true
+  },
   'code': {
     template: `\`\`\`js
 код
@@ -124,5 +145,13 @@ ${str}
     insert: str => `![видео](${str})`,
     startSelection: 9,
     endSelection: 15
+  },
+  'table': {
+    template: `| заголовок | второй заголовок |
+| - | - | 
+| текст | текст |`,
+    insert: str => str,
+    startSelection: 2,
+    endSelection: 11
   },
 };

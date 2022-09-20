@@ -16,6 +16,7 @@ import CodeText from '../shared/CodeText/CodeText';
 import List from '../shared/List/List';
 import Image from '../shared/Image/Image';
 import Video from '../shared/Video/Video';
+import Table from '../shared/Table/Table';
 
 
 export const useMarkdownComponents = ():
@@ -34,15 +35,10 @@ export const useMarkdownComponents = ():
     },
     p(data) {
       const children = data.children;
+
       for (let i = 0; i < children.length; i++) {
         if (typeof children[i] === 'string') {
           children[i] = (children[i] as string).replaceAll(':::', '');
-        }
-      }
-      if (typeof children[0] === 'string') {
-        const match = children[0].match(/^(alert|tip|info)\[(.*)\]/);
-        if (match) {
-          children[0] = children[0].slice(match[0].length);
         }
       }
       return <Paragraph>{children}</Paragraph>;
@@ -57,8 +53,9 @@ export const useMarkdownComponents = ():
         style={dracula}
         language={match[1]}
         PreTag="div"
-      /> : <CodeText fontWeight="normal">{children}</CodeText>;
+      /> : <CodeText>{children}</CodeText>;
     },
+
     ul({children}) {
       return <List as="ul">{children}</List>;
     },
@@ -73,19 +70,17 @@ export const useMarkdownComponents = ():
       }
       return <Image src={src} alt={alt}/>;
     },
-    div({node, children}) {
-      const firstChild = node.children[0];
-      if (firstChild && 'tagName' in firstChild && firstChild.tagName === 'p') {
-        const match = (firstChild.children[0] && firstChild.children[0] as {value?: string})
-          ?.value?.match(/^(alert|tip|info)\[(.*)\]/);
-        if (match) {
-          const type = match[1] as InfoBlockType;
-          const title = match[2];
-          return <InfoBlock type={type} title={title}>{children}</InfoBlock>;
-        }
+    div(data) {
+      const {title, className, children} = data;
 
+      if (title) {
+        return <InfoBlock type={className as InfoBlockType} title={title || ''}>{children}</InfoBlock>;
       }
+
       return <div>{children}</div>;
+    },
+    table({children}) {
+      return <Table>{children}</Table>;
     }
   }), []);
 };

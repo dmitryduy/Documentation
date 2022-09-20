@@ -4,12 +4,11 @@ import { CodeTextStyled } from './CodeText.styles';
 
 interface ICodeTextProps {
   children: React.ReactNode;
-  fontWeight?: 'bold' | 'normal';
 }
 
-const CodeText: React.FC<ICodeTextProps> = ({children, fontWeight}) => {
+const CodeText: React.FC<ICodeTextProps> = ({children}) => {
   return (
-    <CodeTextStyled style={{fontWeight: fontWeight || 'normal'}}>
+    <CodeTextStyled>
       {children}
     </CodeTextStyled>
   );
