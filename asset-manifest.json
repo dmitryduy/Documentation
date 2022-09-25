@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Documentation/static/css/main.f135a672.css",
-    "main.js": "/Documentation/static/js/main.6baf8928.js",
+    "main.js": "/Documentation/static/js/main.a74b9bde.js",
     "index.html": "/Documentation/index.html",
     "static/media/burger.svg": "/Documentation/static/media/burger.605b4408d7505abb27820af1e68dfe43.svg",
     "main.f135a672.css.map": "/Documentation/static/css/main.f135a672.css.map",
-    "main.6baf8928.js.map": "/Documentation/static/js/main.6baf8928.js.map"
+    "main.a74b9bde.js.map": "/Documentation/static/js/main.a74b9bde.js.map"
   },
   "entrypoints": [
     "static/css/main.f135a672.css",
-    "static/js/main.6baf8928.js"
+    "static/js/main.a74b9bde.js"
   ]
 }
