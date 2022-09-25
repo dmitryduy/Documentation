@@ -13,7 +13,7 @@ const Header = () => {
   const width = useResize();
 
   const toggleLeftSide = () => {
-    window.emitter.emit(EmitterNames.TOGGLE_LEFT_SIDEBAR);
+    width < 1001 && window.emitter.emit(EmitterNames.TOGGLE_LEFT_SIDEBAR);
   };
 
   return (
