@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const TagListStyled = styled.div`
   .article-list {
-    padding: 5px 0;
     font-size: 18px;
     transition: .4s;
+    overflow: hidden;
     @media (max-width: 1000px) {
       font-size: 16px;
       padding: 0;

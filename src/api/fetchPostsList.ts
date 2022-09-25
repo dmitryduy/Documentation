@@ -1,7 +1,7 @@
 import { ITagList } from '../global.typings';
-import { BASE_URL } from '../global.constants';
+import axios from '../axios';
 
-export const fetchPostsList = async (): Promise<ITagList[]> => {
-  const response = await fetch(`${BASE_URL}/post-tags`);
-  return await response.json();
+export const fetchPostsList = async (): Promise<{error: null | string, tags: null | ITagList[]}> => {
+  const response = await axios.get('/post-tags');
+  return await response.data;
 };

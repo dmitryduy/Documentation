@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 
 import { ITagList } from '../../global.typings';
 import { useToggle } from '../../hooks/useToggle';
 import { EmitterNames } from '../../emitterNames';
+import { useResize } from '../../hooks/useResize';
+import { useHeightAnimate } from '../../hooks/useHeightAnimate';
 
 import { Header, TagListStyled } from './TagList.styles';
 
@@ -14,17 +16,12 @@ interface ITagListProps {
 
 const TagList: React.FC<ITagListProps> = ({tagInfo}) => {
   const [active, toggleActive] = useToggle(true);
-  const listRef = useRef<HTMLUListElement>(null);
+  const listRef = useHeightAnimate<HTMLUListElement>(active);
+  const width = useResize();
 
-  useEffect(() => {
-    if (!listRef.current) {
-      return;
-    }
-    listRef.current.style.maxHeight = active ? `${listRef.current.scrollHeight}px` : '0';
-  }, [active]);
 
   const closeLeftSide = () => {
-    window.emitter.emit(EmitterNames.TOGGLE_LEFT_SIDEBAR);
+    width < 1001 && window.emitter.emit(EmitterNames.TOGGLE_LEFT_SIDEBAR);
   };
 
   return (

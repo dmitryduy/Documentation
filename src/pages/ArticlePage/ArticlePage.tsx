@@ -1,42 +1,41 @@
-import React, { FC, useEffect, useLayoutEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import cn from 'classnames';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { fetchRandomPost } from '../../api/fetchRandomPost';
 import { IPost } from '../../global.typings';
 import InfoAside from '../../components/InfoAside/InfoAside';
 import { fetchPost } from '../../api/fetchPost';
-import Article from '../../components/Article/Article';
-import ArticleButtons from '../../components/ArticleButtons/ArticleButtons';
 import { useAppDispatch } from '../../hooks/useAppSelector';
 import { setNextPost, setPostInfo } from '../../reducers/articlesReducer/articlesReducer';
 import { fetchNextPost } from '../../api/fetchNextPost';
-import Loader from '../../shared/Loader/Loader';
-import { useEmit } from '../../hooks/useEmit';
 import { EmitterNames } from '../../emitterNames';
-import { useToggle } from '../../hooks/useToggle';
-import { useResize } from '../../hooks/useResize';
+import { Errors } from '../../errors';
+import ArticleSide from '../../components/ArticleSide/ArticleSide';
 
-import { ArticlePageStyled, Content, Menu } from './ArticlePage.styles';
-import { getArticleMenu } from './ArticlePage.utils/getArticleMenu';
+import { ArticlePageStyled } from './ArticlePage.styles';
 
-interface IArticlePageProps {
-  main?: boolean;
-}
-
-const ArticlePage: FC<IArticlePageProps> = ({main}) => {
+const ArticlePage = () => {
   const {title} = useParams();
   const [post, setPost] = useState<IPost | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const dispatch = useAppDispatch();
-  const [content, toggleContent]  = useToggle(false);
-  const width = useResize();
 
   useEffect(() => {
-    if (main) {
-      fetchRandomPost().then(setPost);
-    } else {
-      fetchPost(title || '').then(setPost);
-    }
+    setLoading(true);
+    setError(false);
+    (title ? fetchPost(title || '') : fetchRandomPost()).then(data => {
+      if (data.error) {
+        window.emitter.emit(EmitterNames.TOOLTIP_SHOW, {title: Errors.BACKEND_ERROR});
+      }
+      setPost(data.post);
+      setLoading(false);
+    }).catch(() =>  {
+      window.emitter.emit(EmitterNames.TOOLTIP_SHOW, {title: Errors.UNEXPECTED_ERROR});
+      setLoading(false);
+      setPost(null);
+      setError(true);
+    });
 
   }, [title]);
 
@@ -46,11 +45,10 @@ const ArticlePage: FC<IArticlePageProps> = ({main}) => {
     if (post) {
       fetchNextPost(post.link)
         .then(data => {
-          dispatch(setNextPost(data));
+          dispatch(setNextPost({title: data.title || data.error!, link: data.link || data.error!}));
         });
     }
   }, [post]);
-  useEmit(EmitterNames.TOGGLE_LEFT_SIDEBAR, () => toggleContent());
 
   useEffect(() => {
     post && dispatch(setPostInfo({title: post.title, link: post.link}));
@@ -58,22 +56,10 @@ const ArticlePage: FC<IArticlePageProps> = ({main}) => {
 
 
   return (
-    post ?
-      <ArticlePageStyled>
-        <InfoAside/>
-        <Content className={cn({transform: content})}>
-          <Link className="edit" to={`/edit-post/${post.link}`}>Редактировать</Link>
-          <Article markdown={post.markdown}/>
-          <ArticleButtons/>
-        </Content>
-        {post.menu.length && width > 1000 ?
-          <Menu>
-            {getArticleMenu(post.menu)}
-          </Menu> :
-          null
-        }
-      </ArticlePageStyled> :
-      <Loader/>
+    <ArticlePageStyled>
+      <InfoAside/>
+      <ArticleSide isError={error} isLoading={loading} post={post}/>
+    </ArticlePageStyled>
   );
 };
 

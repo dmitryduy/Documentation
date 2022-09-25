@@ -1,16 +1,12 @@
-import { BASE_URL } from '../global.constants';
 import { getMenuFromMarkdown } from '../utils/getMenuFromMarkdown';
+import axios from '../axios';
 
-export const updatePostBackend = (markdown: string, link: string) => {
-  return fetch(`${BASE_URL}/update-post`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      markdown,
-      menu: getMenuFromMarkdown(markdown),
-      link
-    })
+export const updatePostBackend = async (markdown: string, link: string):
+  Promise<{error: null | string}> => {
+  const response = await axios.put('/update-post', {
+    markdown,
+    menu: getMenuFromMarkdown(markdown),
+    link
   });
+  return response.data;
 };

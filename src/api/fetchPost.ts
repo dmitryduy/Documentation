@@ -1,7 +1,8 @@
 import { IPost } from '../global.typings';
-import { BASE_URL } from '../global.constants';
+import axios from '../axios';
 
-export const fetchPost = async (link: string): Promise<IPost > => {
-  const response = await fetch(`${BASE_URL}/post/${link}`);
-  return await response.json();
+export const fetchPost = async (link: string):
+Promise<{error: null | string, post: null | IPost}> => {
+  const response = await axios.get(`/post/${link}`);
+  return response.data;
 };

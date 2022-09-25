@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 
 import Button from '../../shared/Button/Button';
 import { MarkdownContext } from '../../pages/NewPostPage/MarkdownContext';
-import { useFocusOnMount } from '../../hooks/useFocusOnMount';
 import ContextMenu from '../ContextMenu/ContextMenu';
 import { getUpdatedMarkdown } from '../ContextMenu/ContextMenu.utils/getUpdatedMarkdown';
 import { Actions } from '../ContextMenu/ContextMenu.typings';
@@ -13,7 +12,7 @@ import { useCreatePost } from './Editor.hook/useCreatePost';
 
 const Editor = () => {
   const {markdown, setMarkdown, onButtonClick, buttonValue} = useContext(MarkdownContext);
-  const textareaRef = useFocusOnMount<HTMLTextAreaElement>();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const caretPosition = useRef<null | [number, number]>(null);
   const [tags, setTags] = useState<string[]>([]);
   const createPost = useCreatePost();

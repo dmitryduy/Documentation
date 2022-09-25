@@ -1,17 +1,14 @@
 import { getMenuFromMarkdown } from '../utils/getMenuFromMarkdown';
-import { BASE_URL } from '../global.constants';
+import axios from '../axios';
 
-export const sendPost = (markdown: string, tags: string[], title: string) => {
-  return fetch(`${BASE_URL}/create-post`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      markdown,
-      tags,
-      menu: getMenuFromMarkdown(markdown),
-      title
-    })
+export const sendPost = async (markdown: string, tags: string[], title: string):
+Promise<{error: null | string, link: null | string}> => {
+  const response = await axios.post('/create-post', {
+    markdown,
+    tags,
+    menu: getMenuFromMarkdown(markdown),
+    title
   });
+
+  return response.data;
 };

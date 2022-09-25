@@ -8,6 +8,7 @@ import Loader from '../../shared/Loader/Loader';
 import { getTitleFromMarkdown } from '../../utils/getTitleFromMarkdown';
 import { EmitterNames } from '../../emitterNames';
 import { updatePostBackend } from '../../api/updatePost';
+import { Errors } from '../../errors';
 
 
 const EditPostPage = () => {
@@ -17,7 +18,12 @@ const EditPostPage = () => {
 
   useEffect(() => {
     if (title) {
-      fetchPost(title).then(setPost);
+      fetchPost(title).then(data => {
+        if (data.error) {
+          window.emitter.emit(EmitterNames.TOOLTIP_SHOW, {title: Errors.BACKEND_ERROR});
+        }
+        setPost(data.post);
+      });
     }
   }, [title]);
 

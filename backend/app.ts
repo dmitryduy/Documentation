@@ -1,116 +1,48 @@
-/* eslint-disable */
+import http from 'http';
 
-import { IPost, ITagList } from './types';
-import { Request, Response } from 'express';
+import mongoose from 'mongoose';
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
-const express = require('express');
+import { creationValidation } from './validations/creation';
+import {
+  createPost,
+  getAllPosts,
+  getPost,
+  getRandomPost,
+  getRandomPostExcludeVisitedLink,
+  updatePost
+} from './controllers/PostController';
+import { getArticles } from './controllers/TagController';
+
+dotenv.config();
 
 const app = express();
-const http = require('http');
-
-const cors = require('cors');
-
-const fs = require('fs');
 const server = http.createServer(app);
+
 app.use(express.json());
 app.use(cors({
   origin: '*'
 }));
 app.use(express.static(__dirname + '/assets'));
-const posts: IPost[] = JSON.parse(fs.readFileSync(__dirname + '/db/posts.json', 'utf8'));
-const tags: string[] = JSON.parse(fs.readFileSync(__dirname + '/db/tags.json', 'utf8'));
 
-const writePostsToFile = () => {
-  fs.writeFileSync(__dirname + '/db/posts.json', JSON.stringify(posts));
-  fs.writeFileSync(__dirname + '/db/tags.json', JSON.stringify(tags));
-};
+mongoose.connect(process.env.DATABASE_URL)
+  .then(() => console.log('db success'))
+  .catch(console.log);
 
-app.put('/create-post', (req: Request, res: Response) => {
-  const {markdown, tags: articleTags, menu, title} = req.body;
+app.post('/create-post', creationValidation, createPost);
 
-  const link = title.replaceAll(/\s/g, '-').replaceAll(/\//g, '') + Date.now();
-  posts.push({
-    markdown,
-    tags: articleTags,
-    menu,
-    title,
-    date: Date.now(),
-    views: 1,
-    link
-  });
-  for (const tag of articleTags) {
-    if (!tags.includes(tag)) {
-      tags.push(tag);
-    }
-  }
-  writePostsToFile();
+app.put('/update-post', updatePost);
 
-  res.status(200);
-  res.json({link});
-});
+app.get('/posts', getAllPosts);
 
-app.put('/update-post', (req: Request, res: Response) => {
-  const {markdown, menu, link} = req.body;
-  const post = posts.find(post => post.link === link && post.link !== 'Упс.-Данной-статьи-не-существует');
-  if (!post) {
-    res.status(400);
-    res.send();
-    return;
-  }
+app.get('/random', getRandomPost);
 
-  post.menu = menu;
-  post.markdown = markdown;
-  writePostsToFile();
+app.get('/random/:visitedLink', getRandomPostExcludeVisitedLink);
 
-  res.status(200);
-  res.send();
-});
+app.get('/post/:link', getPost);
 
-app.get('/posts', (req: Request, res: Response) => {
-  res.json(posts);
-});
-
-app.get('/random', (req: Request, res: Response) => {
-  const notFoundPost = posts.filter(post => post.title !== 'Упс. Данной статьи не существует');
-  const postId = Math.floor(Math.random() * notFoundPost.length);
-
-  res.json(notFoundPost.find((_, index) => postId === index));
-});
-
-app.get('/post/:link', (req: Request, res: Response) => {
-  const notFoundPost = posts.find(post => post.title === 'Упс. Данной статьи не существует');
-  res.json(posts.find(post => post.link === req.params.link) || notFoundPost);
-});
-
-app.get('/post-tags', (req: Request, res: Response) => {
-  const tagList: ITagList[] = [];
-
-  tags.forEach(tag => {
-    const taggedPosts = posts.filter(post => post.tags[0] === tag);
-    tagList.push(
-      {
-        tagName: tag,
-        articles: taggedPosts.map(taggedPost => ({
-          link: taggedPost.link,
-          title: taggedPost.title
-        }))
-      }
-    );
-  });
-
-  res.json(tagList.filter(tagItem => tagItem.articles.length));
-});
-
-app.post('/new-post-info', (req: Request, res: Response) => {
-  const activeLink = req.body.activeLink;
-  const notViewedPosts = posts.filter(post => post.title !== 'Упс. Данной статьи не существует' && post.link !== activeLink);
-
-  const postId = Math.floor(Math.random() * notViewedPosts.length);
-  const post = notViewedPosts.find((_, index) => postId === index)!;
-
-  res.json({title: post.title, link: post.link});
-
-});
-
+app.get('/post-tags', getArticles);
 
 server.listen(process.env.PORT || 5000, () => console.log('server start'));

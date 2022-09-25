@@ -22,7 +22,7 @@ function App() {
           <Tooltip/>
           <div className="wrapper">
             <Routes>
-              <Route path="/Documentation" element={<ArticlePage main/>}/>
+              <Route path="/Documentation" element={<ArticlePage/>}/>
               <Route path="/create-post" element={<NewPostPage/>}/>
               <Route path="/edit-post/:title" element={<EditPostPage/>}/>
               <Route path="/post/:title" element={<ArticlePage/>}/>

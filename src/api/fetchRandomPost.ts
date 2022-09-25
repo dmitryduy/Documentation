@@ -1,8 +1,8 @@
 import { IPost } from '../global.typings';
-import { BASE_URL } from '../global.constants';
+import axios from '../axios';
 
-export const fetchRandomPost = async (): Promise<IPost> => {
-  const response = await fetch(`${BASE_URL}/random`);
+export const fetchRandomPost = async (): Promise<{error: null | string, post: null | IPost}> => {
+  const response = await axios.get('/random');
 
-  return await response.json();
+  return await response.data;
 };

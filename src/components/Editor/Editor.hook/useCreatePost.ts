@@ -21,13 +21,13 @@ export const useCreatePost = () => {
     }
 
     return sendPost(markdown, tags, title)
-      .then(data => data.json())
       .then(data => {
         if (data.link) {
           navigate(`/post/${data.link}`);
         }
       })
-      .catch(() =>
-        window.emitter.emit(EmitterNames.TOOLTIP_SHOW, {title: 'Ошибка добавления поста. Попробуйте позже.'}));
+      .catch(e => {
+        window.emitter.emit(EmitterNames.TOOLTIP_SHOW, {title: e.response.data.error});
+      });
   };
 };
