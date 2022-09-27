@@ -7,6 +7,10 @@ export const ButtonStyled = styled.button`
   border-radius: 5px;
   display: flex;
   padding: 5px 10px;
+  
+  &:disabled {
+    cursor: default;
+  }
 
   &:first-child {
     align-items: flex-start;
@@ -32,9 +36,17 @@ export const ButtonStyled = styled.button`
     color: ${props => props.theme.colors.link};
     font-size: 17px;
     font-weight: bold;
+    text-align: right;
+    margin-top: auto;
   }
 
-  &:hover {
+  &:not(:disabled):hover {
     border: 1px solid ${props => props.theme.colors.link};
+  }
+  
+  @media (max-width: 500px) {
+    .text, .subtitle {
+      font-size: 14px;
+    }
   }
 `;

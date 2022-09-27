@@ -9,10 +9,8 @@ export const ListStyled = styled.ul`
     position: relative;
     font-size: 17px;
     line-height: 25px;
-    margin-bottom: 20px;
     @media (max-width: 500px) {
       font-size: 15px;
-      margin-bottom: 10px;
       line-height: 20px;
     }
   }

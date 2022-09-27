@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const LoaderStyled = styled.div`
-  position: absolute;
-  top: calc(50% - 15px);
-  left: calc(50% - 15px);
+  margin: 0 auto;
   width: 30px;
+  align-self: center;
+  justify-self: center;
   height: 30px;
   border: 2px solid ${props => props.theme.colors.border};
   border-bottom-color: transparent;

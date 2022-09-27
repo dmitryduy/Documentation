@@ -10,10 +10,13 @@ import Tooltip from './shared/Tooltip/Tooltip';
 import windowExtends from './declare';
 import { store } from './store/store';
 import EditPostPage from './pages/EditPostPage/EditPostPage';
+import { useShowTooltipOnNetworkError } from './hooks/useShowTooltipOnNetworkError';
 
 windowExtends();
 
 function App() {
+  useShowTooltipOnNetworkError();
+
   return (
     <Theme>
       <Provider store={store}>

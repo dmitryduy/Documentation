@@ -1,38 +1,54 @@
 import styled from 'styled-components';
 
 export const ArticleSideStyled = styled.div`
-  width: 100%;
-  margin: 10px 230px 10px 200px;
   display: flex;
+  width: calc(100vw - 300px - 300px - 20px);
+  margin-left: 310px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   flex-direction: column;
   transition: .3s;
+  
+  @media (max-width: 1000px) {
+    width: 100%;
+    margin-left: 0;
+  }
+
   &.transform {
     transform: translateX(300px);
   }
 
   .edit {
-    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    gap: 5px;
     position: relative;
     z-index: 2;
+    margin-bottom: 10px;
+    color: ${props => props.theme.colors.link};
+
+    svg {
+      fill: ${props => props.theme.colors.link};
+    }
+
     &:hover {
       text-decoration: underline;
     }
-  }
-  @media (max-width: 1000px) {
-    margin: 10px 0;
   }
 `;
 
 export const Menu = styled.div`
   position: fixed;
   right: 0;
-  width: 200px;
+  width: 300px;
   top: 70px;
   height: fit-content;
+  max-height: calc(100vh - 70px);
   border-left: 1px solid ${props => props.theme.colors.border};
   padding: 20px 0;
   background-color: #fff;
   z-index: 10000;
+  overflow: auto;
 
   ul {
     margin-left: 15px;

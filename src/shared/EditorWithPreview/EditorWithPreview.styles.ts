@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const NewPostPageStyled = styled.div`
+export const EditorWithPreviewStyled = styled.div`
   display: flex;
   padding: 10px 20px;
   gap: 15px;
@@ -13,45 +13,34 @@ export const NewPostPageStyled = styled.div`
   }
 `;
 
-
 export const Preview = styled.div`
   flex: 1;
   position: relative;
   width: 50%;
   background-color: ${props => props.theme.colors.editorBg};
-  box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.2);
   margin-top: 15px;
   border-radius: 15px;
   overflow: hidden;
 
   @media (max-width: 1000px) {
     position: fixed;
-    padding-bottom: 10px;
-    top: 60px;
-    height: calc(100vh - 50px - 35px);
-    transform-origin: bottom right;
-    transform: scale(.15);
-    width: calc(100% - 10px);
+    width: auto;
+    top: 0;
+    left: 0;
     right: 0;
+    bottom: 0;
+    margin: 0;
     transition: .3s;
-    border: 1px solid #000;
-
-    a {
-      pointer-events: none;
+    transform-origin: bottom right;
+    transform: scale(0);
+    &.active {
+     transform: scale(1);
     }
-
+    z-index: 10000;
+    
     .content {
       margin-top: 25px;
-    }
-
-    &.active {
-      border: none;
-      transform: scale(1);
-      left: 5px;
-    }
-
-    &.active a {
-      pointer-events: auto;
     }
   }
 

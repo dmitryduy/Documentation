@@ -1,9 +1,11 @@
+import { IPost } from '../../global.typings';
+
 export interface PostInfo {
   link: string;
   title: string
 }
 
 export interface IArticlesReducerState {
-  postInfo: PostInfo | null;
+  post: IPost | null;
   nextPost: PostInfo | null;
 }

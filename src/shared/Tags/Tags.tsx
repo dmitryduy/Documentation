@@ -6,6 +6,8 @@ import { useEmit } from '../../hooks/useEmit';
 import { useToggle } from '../../hooks/useToggle';
 import Button from '../Button/Button';
 import { useHeightAnimate } from '../../hooks/useHeightAnimate';
+import { useInput } from '../../hooks/useInput';
+import { useResize } from '../../hooks/useResize';
 
 import { NewTags, TagsStyled } from './Tags.styles';
 import { useTags } from './Tags.hook/useTags';
@@ -16,7 +18,7 @@ interface ITagsProps {
 }
 
 const Tags: FC<ITagsProps> = ({setTags, tags}) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useInput('', 20);
   const [isActive, toggleIsActive] = useToggle(false);
   const tagsRef = useHeightAnimate<HTMLDivElement>(isActive, 10, [tags]);
   const addTag = useTags(setTags, tags);
@@ -39,6 +41,10 @@ const Tags: FC<ITagsProps> = ({setTags, tags}) => {
     setTags(tags.filter(tag => tag !== removedTag));
   };
 
+  const onInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
   return (
     <TagsStyled ref={tagsRef}>
       <div className="container">
@@ -47,13 +53,15 @@ const Tags: FC<ITagsProps> = ({setTags, tags}) => {
             {tag}
             <span>&times;</span>
           </li>)}
+          <input
+            type="text"
+            value={value}
+            onInput={onInput}
+            onDoubleClick={onClickButton}
+            placeholder="+ Добавить"
+            onKeyDown={onKeyDown}
+          />
         </NewTags>
-        <Input
-          value={value}
-          setValue={((value: string) => setValue(value))}
-          onKeyDown={onKeyDown}
-          placeholder="Введите теги..."/>
-        <Button text="Добавить" onClick={onClickButton}/>
       </div>
     </TagsStyled>
   );

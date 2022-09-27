@@ -8,7 +8,7 @@ interface ICodeTextProps {
 
 const CodeText: React.FC<ICodeTextProps> = ({children}) => {
   return (
-    <CodeTextStyled>
+    <CodeTextStyled className="marker">
       {children}
     </CodeTextStyled>
   );

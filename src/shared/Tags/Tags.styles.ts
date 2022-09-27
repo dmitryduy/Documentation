@@ -2,41 +2,45 @@ import styled from 'styled-components';
 
 export const TagsStyled = styled.div`
   width: 100%;
-  align-items: flex-start;
-  background-color: #fff;
   transition: .3s;
   box-sizing: border-box;
-  max-width: 500px;
   max-height: 0;
+  background-color: ${props => props.theme.colors.tagBg};
 
   .container {
     margin: 10px;
   }
 
   input {
-    margin-bottom: 10px;
+    flex: 1;
+    padding: 0 5px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    margin-top: 5px;
+    background-color: ${props => props.theme.colors.tagBg};
+    min-width: 100px;
   }
-
 `;
 export const NewTags = styled.ul`
   display: flex;
-  flex-wrap: wrap;
+  height: 100%;
+  align-items: center;
   gap: 5px;
   list-style-type: none;
-  max-height: 100px;
-  overflow: auto;
-  margin-bottom: 10px;
+  flex-wrap: wrap;
 
   .tag {
     display: flex;
     align-items: center;
-    border: 1px solid ${props => props.theme.colors.tagBorder};
+    background-color: #fff;
     padding: 5px 10px;
     border-radius: 10px;
     cursor: pointer;
     transition: .3s;
     overflow: auto;
     word-break: break-word;
+    font-size: 16px;
 
     span {
       margin-left: 5px;

@@ -1,7 +1,5 @@
 
-type MenuElement = string | MenuElement[];
-
-export type Menu = MenuElement[];
+export type Menu = (string | string[])[];
 
 export interface IPost {
   markdown: string;

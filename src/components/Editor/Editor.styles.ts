@@ -14,9 +14,6 @@ export const EditorStyled = styled.div`
   
   @media (max-width: 1000px) {
     width: 100%;
-    .buttons {
-      margin-right: 12vw;
-    }
   }
   
   &:before {

@@ -128,10 +128,10 @@ ${str}
   },
   'ordered-list': {
     template: `
--1. элемент\n2. элемент\n3. элемент`,
+1. элемент\n2. элемент\n3. элемент`,
     insert: str => `1. ${str}`,
-    startSelection: 5,
-    endSelection: 12
+    startSelection: 4,
+    endSelection: 11
   },
   'image': {
     template: '![текст](ссылка)',

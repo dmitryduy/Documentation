@@ -1,6 +1,5 @@
 import React  from 'react';
 import ReactMarkdown from 'react-markdown';
-import {visit} from 'unist-util-visit';
 import remarkDirective from 'remark-directive';
 import remarkGfm from 'remark-gfm';
 
@@ -8,7 +7,7 @@ import { useMarkdownComponents } from '../../hooks/useMarkdownComponents';
 import { customMarkdownBlocksPlugin } from '../../utils/customMarkdownBlocksPlugin';
 
 interface IArticleProps {
-    markdown: string
+    markdown: string;
 }
 
 

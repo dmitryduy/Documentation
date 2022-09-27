@@ -1,52 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import {  useParams } from 'react-router-dom';
 
-import NewPostPage from '../NewPostPage/NewPostPage';
 import { fetchPost } from '../../api/fetchPost';
-import { IPost } from '../../global.typings';
 import Loader from '../../shared/Loader/Loader';
-import { getTitleFromMarkdown } from '../../utils/getTitleFromMarkdown';
-import { EmitterNames } from '../../emitterNames';
-import { updatePostBackend } from '../../api/updatePost';
 import { Errors } from '../../errors';
+import EditorWithPreview from '../../shared/EditorWithPreview/EditorWithPreview';
+import { showTooltip } from '../../utils/showTooltip';
+import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
+import { setPostInfo } from '../../reducers/articlesReducer/articlesReducer';
+
+import { useUpdatePost } from './EditPostPage.hook/useUpdatePost';
 
 
 const EditPostPage = () => {
   const {title} = useParams();
-  const [post, setPost] = useState<IPost | null>(null);
-  const nagivate = useNavigate();
+  const post = useAppSelector(state => state.articles.post);
+  const dispatch = useAppDispatch();
+  const [isLoading, updatePost] = useUpdatePost(post);
 
   useEffect(() => {
-    if (title) {
+    if (title && title !== post?.title) {
       fetchPost(title).then(data => {
         if (data.error) {
-          window.emitter.emit(EmitterNames.TOOLTIP_SHOW, {title: Errors.BACKEND_ERROR});
+          showTooltip(Errors.BACKEND_ERROR);
         }
-        setPost(data.post);
-      });
+        dispatch(setPostInfo(data.post));
+      }).catch(() => showTooltip(Errors.UNEXPECTED_ERROR));
     }
   }, [title]);
 
-  const updateArticle = (markdown: string) => {
-    if (markdown === post?.markdown) {
-      window.emitter.emit(EmitterNames.TOOLTIP_SHOW, {title: 'Отредактируйте пост'});
-      return;
-    }
-    const title = getTitleFromMarkdown(markdown);
-    if (title !== post?.title) {
-      window.emitter.emit(EmitterNames.TOOLTIP_SHOW, {title: 'Нельзя менять заголовок статьи'});
-      return;
-    }
-
-    updatePostBackend(markdown, post.link)
-      .then(() => nagivate(`/post/${post.link}`))
-      .catch(() =>
-        window.emitter.emit(EmitterNames.TOOLTIP_SHOW, {title: 'Ошибка обновления поста. Попробуйте позже.'}));
-  };
-
 
   return post ?
-    <NewPostPage updateArticle={updateArticle} markdownTemplate={post.markdown} buttonValue="Редактировать"/> :
+    <EditorWithPreview
+      isLoading={isLoading}
+      onSubmit={updatePost}
+      defaultMarkdown={post.markdown}
+      buttonValue="Редактировать"
+    /> :
     <Loader/>;
 };
 

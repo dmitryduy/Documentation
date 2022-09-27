@@ -5,7 +5,10 @@ export const TableStyled = styled.table`
   border-collapse: collapse;
   font-size: 16px;
   margin-bottom: 10px;
+  max-width: 100%;
+  overflow-x: auto;
   thead tr {
+    background-color: ${props => props.theme.colors.tableEven};
     border-bottom: 2px solid ${props => props.theme.colors.border};
   }
   th {
@@ -18,8 +21,6 @@ export const TableStyled = styled.table`
     text-align: left;
     padding: 10px;
     border-right: 1px solid ${props => props.theme.colors.border};
-    max-width: 500px;
-    word-wrap: break-word;
   }
   
   tr {

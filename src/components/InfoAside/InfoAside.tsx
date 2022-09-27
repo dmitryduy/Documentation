@@ -9,33 +9,32 @@ import { useToggle } from '../../hooks/useToggle';
 import { useEmit } from '../../hooks/useEmit';
 import { EmitterNames } from '../../emitterNames';
 import { Errors } from '../../errors';
-import { useResize } from '../../hooks/useResize';
+import { showTooltip } from '../../utils/showTooltip';
+import useMatchMedia from '../../hooks/useMatchMedia';
 
 import { InfoAsideStyled } from './InfoAside.styles';
+import { useFetchTagsMenu } from './InfoAside.hook/useFetchTagsMenu';
 
 const InfoAside = React.memo(() => {
-  const [tags, setTags] = useState<ITagList[] | null>(null);
-  const [activeSide, toggleActiveSide] = useToggle(false);
-  const width = useResize();
-
-  useEmit(EmitterNames.TOGGLE_LEFT_SIDEBAR, () => width < 1001 &&  toggleActiveSide());
+  const [activeSide, toggleActiveSide, setActiveSide] = useToggle(false);
+  const phone = useMatchMedia();
+  const tags = useFetchTagsMenu();
 
   useEffect(() => {
-    fetchPostsList().then(data => {
-      if (data.error) {
-        window.emitter.emit(EmitterNames.TOOLTIP_SHOW, {title: Errors.BACKEND_ERROR});
-      }
-      setTags(data.tags);
-    });
-  }, []);
-  const tagsMemo = useMemo(() => tags, [tags]);
+    !phone && setActiveSide(false);
+  }, [phone]);
+
+  useEmit(EmitterNames.TOGGLE_LEFT_SIDEBAR, () => phone &&  toggleActiveSide());
+
 
   return (
     <InfoAsideStyled className={cn({active: activeSide})}>
-      {tagsMemo ?
-        tagsMemo.map(tagInfo => <TagList key={tagInfo.tagName} tagInfo={tagInfo}/>) :
-        <Loader/>
-      }
+      <div className="container">
+        {tags ?
+          tags.map(tagInfo => <TagList key={tagInfo.tagName} tagInfo={tagInfo}/>) :
+          <Loader/>
+        }
+      </div>
     </InfoAsideStyled>
   );
 });

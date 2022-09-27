@@ -6,16 +6,17 @@ export const getMenuFromMarkdown = (markdown: string) => {
   return [...markdown.matchAll(/##.+\s/g)].reduce((prev, curr) => {
     const match = curr[0];
 
-    if (match.startsWith('###')) {
+    if (match.startsWith('### ')) {
       const last = prev[prev.length - 1];
-      if (typeof last === 'string') {
-        return [...prev, [beautify(match)]];
+      if (Array.isArray(last)) {
+        last.push(beautify(match));
+        return prev;
       }
-      last.push(beautify(match));
-      return prev;
+      return [...prev, [beautify(match)]];
     }
-    if (match.startsWith('##')) {
+    if (match.startsWith('## ')) {
       return [...prev, beautify(match)];
     }
+    return prev;
   }, [] as (string | string[])[]);
 };
