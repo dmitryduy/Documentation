@@ -5,7 +5,7 @@ import { Menu } from '../../../global.typings';
 const getArticleItem = (itemValue: string) => {
   return (
     <li key={itemValue}>
-      <a href={`#${itemValue}`}>
+      <a href={`#user-content-${itemValue}`}>
         {itemValue}
       </a>
     </li>

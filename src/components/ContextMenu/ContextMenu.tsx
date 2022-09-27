@@ -31,18 +31,19 @@ const ContextMenu: React.FC<IContextMenuProps> = ({updateMarkdown}) => {
       <li data-action="strong" className="strong">b</li>
       <li data-action="italic" className="italic">i</li>
       <li data-action="delete" className="delete">u</li>
-      <li className="marker" data-action="marker">маркер</li>
-      <li data-action="image">изображение</li>
-      <li data-action="video">видео</li>
-      <li className="code" data-action="code">код</li>
-      <li className="link" data-action="link">ссылка</li>
-      <li data-action="table">таблица</li>
-      <li data-action="info">инфо</li>
-      <li data-action="alert">тревога</li>
-      <li data-action="tip">подсказка</li>
-      <li data-action="caution">предупреждение</li>
-      <li data-action="unordered-list">список</li>
-      <li data-action="ordered-list">нумерованный список</li>
+      <li data-action="paragraph">Параграф</li>
+      <li className="marker" data-action="marker">Маркер</li>
+      <li data-action="image">Изображение</li>
+      <li data-action="video">Видео</li>
+      <li className="code" data-action="code">Код</li>
+      <li className="link" data-action="link">Ссылка</li>
+      <li data-action="table">Таблица</li>
+      <li data-action="info">Инфо</li>
+      <li data-action="alert">Тревога</li>
+      <li data-action="tip">Подсказка</li>
+      <li data-action="caution">Предупреждение</li>
+      <li data-action="unordered-list">Список</li>
+      <li data-action="ordered-list">Нумерованный список</li>
     </ContextMenuStyled>
   );
 };
