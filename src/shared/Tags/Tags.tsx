@@ -1,13 +1,10 @@
-import React, { Dispatch, FC, SetStateAction, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction } from 'react';
 
-import Input from '../Input/Input';
 import { EmitterNames } from '../../emitterNames';
 import { useEmit } from '../../hooks/useEmit';
 import { useToggle } from '../../hooks/useToggle';
-import Button from '../Button/Button';
 import { useHeightAnimate } from '../../hooks/useHeightAnimate';
 import { useInput } from '../../hooks/useInput';
-import { useResize } from '../../hooks/useResize';
 
 import { NewTags, TagsStyled } from './Tags.styles';
 import { useTags } from './Tags.hook/useTags';
@@ -32,7 +29,8 @@ const Tags: FC<ITagsProps> = ({setTags, tags}) => {
     }
   };
 
-  const onClickButton = () => {
+  const onClickButton = (e: React.MouseEvent) => {
+    e.preventDefault();
     addTag(value);
     setValue('');
   };

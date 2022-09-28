@@ -9,7 +9,7 @@ const initialState = {
   nextPost: null
 } as IArticlesReducerState;
 
-const dialogSlice = createSlice({
+const articleSlice = createSlice({
   name: 'articles',
   initialState,
   reducers: {
@@ -22,6 +22,6 @@ const dialogSlice = createSlice({
   }
 });
 
-export const { setPostInfo, setNextPost} = dialogSlice.actions;
+export const { setPostInfo, setNextPost} = articleSlice.actions;
 
-export const {reducer: articleReducer} = dialogSlice;
+export const {reducer: articleReducer} = articleSlice;

@@ -28,6 +28,6 @@ export const getArticles = async (req: Request, res: Response) => {
 
 
   } catch (e) {
-    res.status(500).json({error: JSON.stringify(e), tags: null});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', tags: null});
   }
 };

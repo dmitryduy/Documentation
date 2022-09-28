@@ -1,21 +1,23 @@
 import styled from 'styled-components';
 
-export const InputStyled = styled.input`
-  background-color: ${props => props.theme.colors.inputBg};
-  border: 2px solid transparent;
-  padding: 5px 10px;
-  font-size: 16px;
-  border-radius: 10px;
-  transition: .3s;
+export const InputStyled = styled.div`
+  border-bottom: 2px solid ${props => props.theme.colors.border};
   width: 100%;
+  padding-bottom: 10px;
 
-  &:focus, &:hover {
-    border: 2px solid ${props => props.theme.colors.inputBorder};
-    background-color: transparent;
+  input {
     outline: none;
+    border: none;
+    font-size: 16px;
+    width: 100%;
   }
+`;
 
-  @media (max-width: 1000px) {
-    font-size: 15px;
-  }
+export const Label = styled.label`
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: ${props => props.theme.colors.border};
+  letter-spacing: 1px;
 `;

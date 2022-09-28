@@ -28,6 +28,10 @@ const PostSchema = new Schema({
     type: Number,
     required: true,
     default: 0
+  },
+  owner: {
+    type: String,
+    required: true
   }
 });
 

@@ -15,6 +15,9 @@ import {
   updatePost
 } from './controllers/PostController';
 import { getArticles } from './controllers/TagController';
+import { loginUser, register } from './controllers/UserController';
+import { registerValidation } from './validations/register';
+import { loginValidation } from './validations/login';
 
 dotenv.config();
 
@@ -44,5 +47,9 @@ app.get('/random/:visitedLink', getRandomPostExcludeVisitedLink);
 app.get('/post/:link', getPost);
 
 app.get('/post-tags', getArticles);
+
+app.post('/register', registerValidation, register);
+
+app.post('/login', loginValidation, loginUser);
 
 server.listen(process.env.PORT || 5000, () => console.log('server start'));

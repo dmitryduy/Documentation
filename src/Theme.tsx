@@ -38,6 +38,7 @@ export const lightTheme = {
     editorBg: '#fff',
     selection: colors.primary,
     tableEven: '#f5f6f7',
+    authButton: colors.primary
   }
 };
 

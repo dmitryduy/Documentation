@@ -9,6 +9,8 @@ GET /random
 GET /random/:visitedLink
 GET /post/:link
 GET /post-tags
+POST /register
+POST /login
 ```
 
 ## POST /create-post
@@ -51,6 +53,20 @@ GET /post-tags
 
 Либо `error = null`, либо `tags = null`
 
+## POST /register
+Возвращаемое значение:
+```{error:string | null, login: string | null}```
+
+Либо `error = null`, либо `login = null`
+{error:string | null, login: string | null}
+
+## POST /login
+Возвращаемое значение:
+```{error:string | null, login: string | null}```
+
+Либо `error = null`, либо `login = null`
+{error:string | null, login: string | null}
+
 ## Типы
 
 ```ts
@@ -71,5 +87,6 @@ interface IPost {
   date: number;
   views: number;
   link: string;
+  owner: string;
 }
 ```

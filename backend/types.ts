@@ -6,6 +6,7 @@ export interface IPost {
   date: number;
   views: number;
   link: string;
+  owner: string;
 }
 
 

@@ -9,6 +9,7 @@ export interface IPost {
   tags: string[];
   menu: Menu;
   link: string;
+  owner: string;
 }
 
 export interface ITagList {

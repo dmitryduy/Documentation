@@ -5,6 +5,7 @@ import { useEmit } from '../../hooks/useEmit';
 import { EmitterNames } from '../../emitterNames';
 
 import {TooltipStyled} from './Tooltip.styles';
+import { TOOLTIP_SHOW_TIME } from './Tooltip.constants';
 
 
 const Tooltip = () => {
@@ -20,7 +21,7 @@ const Tooltip = () => {
       clearTimeout(timerRef.current);
     }
 
-    timerRef.current = setTimeout(() => setActive(false), 1000);
+    timerRef.current = setTimeout(() => setActive(false), TOOLTIP_SHOW_TIME);
   });
 
   return (

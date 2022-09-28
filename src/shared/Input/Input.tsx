@@ -1,23 +1,40 @@
 import React from 'react';
 
-import { InputStyled } from './Input.styles';
+import { InputStyled, Label } from './Input.styles';
+import { InputContext } from './InputContext';
+import Password from './Password/Password';
 
 interface IInputProps {
   value: string;
-  setValue: (value: string) => void;
-  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  setValue: (value: React.FormEvent<HTMLInputElement> | string) => void;
   placeholder: string;
+  label: string;
+  children?: React.ReactNode;
 }
 
-const Input: React.FC<IInputProps> = ({value, setValue, onKeyDown, placeholder}) => {
-  const onInput = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = (e.target as HTMLInputElement).value;
-    setValue(value);
+interface IInputComponent {
+  Password: typeof Password;
+}
+
+const Input: React.FC<IInputProps> & IInputComponent = ({label, value, setValue, placeholder, children}) => {
+  const onInput = (e: React.FormEvent<HTMLInputElement> | string) => {
+    if (typeof e === 'string') {
+      setValue(e);
+      return;
+    }
+    setValue((e.target as HTMLInputElement).value);
   };
 
   return (
-    <InputStyled value={value} onInput={onInput} onKeyDown={onKeyDown} placeholder={placeholder}/>
+    <InputContext.Provider value={{value, setValue: onInput, placeholder}}>
+      <InputStyled className="input">
+        <Label>{label}</Label>
+        {children || <input type="text" value={value} onInput={onInput} placeholder={placeholder}/>}
+      </InputStyled>
+    </InputContext.Provider>
   );
 };
+
+Input.Password = Password;
 
 export default Input;
