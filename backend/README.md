@@ -13,6 +13,7 @@ POST /register
 POST /login
 GET /find-post/:value
 DELETE /delete-post
+GET /auth/me
 ```
 
 ## POST /create-post

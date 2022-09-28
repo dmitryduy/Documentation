@@ -57,6 +57,7 @@ export const useRegister = () => {
           return;
         }
         dispatch(loginUser(data.login!));
+        window.localStorage.setItem('auth-token', data.token!);
       }).catch(e => {
         setIsLoading(false);
         const error = e.response && e.response.data && e.response.data.error;

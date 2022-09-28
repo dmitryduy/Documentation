@@ -30,6 +30,7 @@ export const Results = styled.div`
     font-weight: normal !important;
     padding: 5px;
     word-break: break-word;
+    border-radius: 5px;
   }
   a:hover {
     background-color:  ${props => props.theme.colors.searchResultsBg};

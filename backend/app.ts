@@ -15,7 +15,7 @@ import {
   updatePost
 } from './controllers/PostController';
 import { getArticles } from './controllers/TagController';
-import { loginUser, register } from './controllers/UserController';
+import { authMe, loginUser, register } from './controllers/UserController';
 import { registerValidation } from './validations/register';
 import { loginValidation } from './validations/login';
 import { deleteValidation } from './validations/delete';
@@ -56,5 +56,7 @@ app.post('/login', loginValidation, loginUser);
 app.get('/find-post/:value', findPosts);
 
 app.delete('/delete-post', deleteValidation, deletePost);
+
+app.get('/auth/me', authMe);
 
 server.listen(process.env.PORT || 5000, () => console.log('server start'));

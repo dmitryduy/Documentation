@@ -3,12 +3,12 @@ import { model, Schema } from 'mongoose';
 const UserSchema = new Schema({
   login: {
     required: true,
+    unique: true,
     type: String
   },
   password: {
     required: true,
-    type: String,
-    default: Date.now
+    type: String
   }
 }, {
   timestamps: true
