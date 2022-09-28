@@ -5,7 +5,7 @@ import { showTooltip } from '../../../utils/showTooltip';
 import { Errors } from '../../../errors';
 
 export const useFindPosts = (value: string) => {
-  const [postsInfo, setPostsInfo] = useState<null | {title: string, link: string}[]>(null);
+  const [postsInfo, setPostsInfo] = useState<null | {title: string, link: string, owner: string}[]>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 
 import { creationValidation } from './validations/creation';
 import {
-  createPost, findPosts,
+  createPost, deletePost, findPosts,
   getAllPosts,
   getPost,
   getRandomPost,
@@ -18,6 +18,7 @@ import { getArticles } from './controllers/TagController';
 import { loginUser, register } from './controllers/UserController';
 import { registerValidation } from './validations/register';
 import { loginValidation } from './validations/login';
+import { deleteValidation } from './validations/delete';
 
 dotenv.config();
 
@@ -53,5 +54,7 @@ app.post('/register', registerValidation, register);
 app.post('/login', loginValidation, loginUser);
 
 app.get('/find-post/:value', findPosts);
+
+app.delete('/delete-post', deleteValidation, deletePost);
 
 server.listen(process.env.PORT || 5000, () => console.log('server start'));

@@ -13,7 +13,7 @@ const useMatchMedia = () => {
 
     return () => phoneMedia.removeEventListener('change', handler);
 
-  });
+  }, []);
 
   return isPhone;
 };

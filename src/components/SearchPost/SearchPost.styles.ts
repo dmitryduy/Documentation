@@ -23,12 +23,23 @@ export const Results = styled.div`
   background-color: #fff;
   box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.2);
   & a{
-    font-weight: normal;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 5px;
+    font-weight: normal !important;
     padding: 5px;
     word-break: break-word;
   }
   a:hover {
     background-color:  ${props => props.theme.colors.searchResultsBg};
+  }
+  
+  .my-post {
+    word-break: normal;
+    border: 1px solid ${props => props.theme.colors.border};
+    padding: 5px;
+    border-radius: 5px;
   }
 
 `;

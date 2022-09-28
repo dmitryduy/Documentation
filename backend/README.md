@@ -12,6 +12,7 @@ GET /post-tags
 POST /register
 POST /login
 GET /find-post/:value
+DELETE /delete-post
 ```
 
 ## POST /create-post
@@ -68,9 +69,14 @@ GET /find-post/:value
 
 ## GET /find-post/:value
 Возвращаемое значение:
-```{error: null | string, foundedPosts: {link: string, title: string}[] | null}```
+```{error: null | string, foundedPosts: {link: string, title: string, owner: string}[] | null}```
 
 Либо `error = null`, либо `foundedPosts = null`
+
+## DELETE /delete-post
+Возвращаемое значение:
+```{error: null | string}```
+
 
 ## Типы
 

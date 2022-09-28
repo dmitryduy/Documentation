@@ -39,7 +39,8 @@ export const lightTheme = {
     selection: colors.primary,
     tableEven: '#f5f6f7',
     authButton: colors.primary,
-    searchResultsBg: '#efefef'
+    searchResultsBg: '#efefef',
+    deletion: '#d9534f'
   }
 };
 

@@ -5,9 +5,9 @@ export const ArticleSideStyled = styled.div`
   width: calc(100vw - 300px - 300px - 20px);
   margin-left: 310px;
   margin-top: 10px;
-  margin-bottom: 10px;
   flex-direction: column;
   transition: .3s;
+  margin-bottom: 70px;
   
   @media (max-width: 1000px) {
     width: 100%;
@@ -17,24 +17,6 @@ export const ArticleSideStyled = styled.div`
   &.transform {
     transform: translateX(300px);
   }
-
-  .edit {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    position: relative;
-    z-index: 2;
-    margin-bottom: 10px;
-    color: ${props => props.theme.colors.link};
-
-    svg {
-      fill: ${props => props.theme.colors.link};
-    }
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
 `;
 
 export const Menu = styled.div`
@@ -43,7 +25,7 @@ export const Menu = styled.div`
   width: 300px;
   top: 70px;
   height: fit-content;
-  max-height: calc(100vh - 70px);
+  max-height: calc(100vh - 70px - 80px);
   border-left: 1px solid ${props => props.theme.colors.border};
   padding: 20px 0;
   background-color: #fff;
@@ -58,6 +40,7 @@ export const Menu = styled.div`
     list-style-type: none;
     padding: 5px 0;
     cursor: pointer;
+    word-break: break-word;
 
     a {
       color: ${props => props.theme.colors.sideMenu};
@@ -68,3 +51,40 @@ export const Menu = styled.div`
     }
   }
 `;
+
+
+export const Actions = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .delete:hover, .edit:hover {
+      text-decoration: underline;
+  }
+  .delete {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    color: ${props => props.theme.colors.deletion};
+    svg {
+     fill: ${props => props.theme.colors.deletion}; 
+    }
+  }
+  .edit {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+    z-index: 2;
+    color: ${props => props.theme.colors.link};
+    svg {
+      fill: ${props => props.theme.colors.link};
+    }
+  }`;

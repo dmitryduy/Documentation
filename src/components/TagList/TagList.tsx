@@ -7,6 +7,7 @@ import { useToggle } from '../../hooks/useToggle';
 import { EmitterNames } from '../../emitterNames';
 import { useResize } from '../../hooks/useResize';
 import { useHeightAnimate } from '../../hooks/useHeightAnimate';
+import useMatchMedia from '../../hooks/useMatchMedia';
 
 import { Header, TagListStyled } from './TagList.styles';
 
@@ -17,11 +18,11 @@ interface ITagListProps {
 const TagList: React.FC<ITagListProps> = ({tagInfo}) => {
   const [active, toggleActive] = useToggle(true);
   const listRef = useHeightAnimate<HTMLUListElement>(active);
-  const width = useResize();
+  const phone = useMatchMedia();
 
 
   const closeLeftSide = () => {
-    width < 1001 && window.emitter.emit(EmitterNames.TOGGLE_LEFT_SIDEBAR);
+    phone && window.emitter.emit(EmitterNames.TOGGLE_LEFT_SIDEBAR);
   };
 
   return (

@@ -4,7 +4,7 @@ import { NavLink, useParams } from 'react-router-dom';
 import InfoAside from '../../components/InfoAside/InfoAside';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import ArticleSide from '../../components/ArticleSide/ArticleSide';
-import { ReactComponent as EditSvg } from '../../assets/images/edit.svg';
+import { ReactComponent as AddSvg } from '../../assets/images/add.svg';
 
 import { useFetchPost } from './ArticlePage.hook/useFetchPost';
 import { ArticlePageStyled } from './ArticlePage.styles';
@@ -23,8 +23,7 @@ const ArticlePage = () => {
       <InfoAside/>
       <ArticleSide isLoading={isLoading} post={post}/>
       <NavLink className="add-post" to="/create-post">
-        <span>Создать</span>
-        <EditSvg/>
+        <AddSvg/>
       </NavLink>
     </ArticlePageStyled>
   );

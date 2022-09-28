@@ -31,6 +31,8 @@ export const TagListStyled = styled.div`
     display: block;
     color: ${props => props.theme.colors.paragraph};
     width: 100%;
+    word-break: break-word;
+    user-select: none;
   }
   a:visited{
     color: ${props => props.theme.colors.link};

@@ -70,7 +70,6 @@ export const updatePost = async (req: Request, res: Response) => {
     }
 
     const {markdown, menu, link, owner} = req.body;
-    console.log(req.body);
     const post = await PostModel.findOne({link});
     if (post.owner !== owner) {
       return res.status(400).json({error: 'У вас нет доступа.', link: null});
@@ -110,13 +109,33 @@ export const getRandomPostExcludeVisitedLink = async (req: Request, res: Respons
   }
 };
 export const findPosts = async (req: Request, res: Response) => {
-  const {value} = req.params;
   try {
-    const posts = await PostModel.find({title: {$regex: value}}).limit(10);
-    const foundedPosts = posts.map(post => ({title: post.title, link: post.link}));
+    const {value} = req.params;
+    const regexp = new RegExp(value, 'i');
+    const posts = await PostModel.find({title: {$regex: regexp}}).limit(10);
+    const foundedPosts = posts.map(post => ({title: post.title, link: post.link, owner: post.owner}));
 
     res.status(200).json({error: null, foundedPosts});
   } catch (e) {
     res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', post: null});
+  }
+};
+
+export const deletePost = async (req: Request, res: Response) => {
+  try {
+    const errors = customValidationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({error: errors.array()[0].error});
+    }
+
+    const {link, owner} = req.body;
+    const post = await PostModel.findOne({link});
+    if (post.owner !== owner) {
+      return res.status(400).json({error: 'У вас нет доступа.'});
+    }
+    await PostModel.deleteOne({link});
+    res.status(200).json({error: null});
+  } catch (e) {
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
   }
 };
