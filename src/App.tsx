@@ -59,7 +59,7 @@ function App() {
                 path={route.path}
                 element={<route.component/>}
               />)}
-          <Route path="*" element={<Navigate to={isLogin ? '/Documentation' : '/login'}/>}/>
+          <Route path="*" element={<Navigate to={isLogin ? '/Documentation' : '/Documentation/login'}/>}/>
         </Routes>
       </Wrapper>
     </>

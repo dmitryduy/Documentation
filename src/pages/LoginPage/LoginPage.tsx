@@ -25,7 +25,7 @@ const LoginPage = () => {
       <AuthButton disabled={isLoading} onClick={() => signUp(login, password)}>
         {isLoading ? <Loader/> : 'Войти'}
       </AuthButton>
-      <Link to="/register">Создать аккаунт</Link>
+      <Link to="/Documentation/register">Создать аккаунт</Link>
     </LoginPageStyled>
   );
 };

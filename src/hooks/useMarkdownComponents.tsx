@@ -1,7 +1,7 @@
 import { NormalComponents } from 'react-markdown/lib/complex-types';
 import { SpecialComponents } from 'react-markdown/lib/ast-to-react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula} from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { dracula,  oneLight} from 'react-syntax-highlighter/dist/esm/styles/prism';
 import React, { useMemo } from 'react';
 
 import Title from '../shared/Title/Title';
@@ -18,7 +18,7 @@ import Video from '../shared/Video/Video';
 import Table from '../shared/Table/Table';
 
 
-export const useMarkdownComponents = ():
+export const useMarkdownComponents = (theme: 'dark' | 'light'):
   Partial<Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents> => {
   return useMemo(() => ({
     h1({children}) {
@@ -49,7 +49,7 @@ export const useMarkdownComponents = ():
       const match = /language-(\w+)/.exec(className || '');
       return match ? <SyntaxHighlighter
         children={String(children).replace(/\n$/, '')}
-        style={dracula}
+        style={theme === 'light' ? oneLight : dracula}
         language={match[1]}
         PreTag="div"
       /> : <CodeText>{children}</CodeText>;
@@ -81,5 +81,5 @@ export const useMarkdownComponents = ():
     table({children}) {
       return <Table>{children}</Table>;
     }
-  }), []);
+  }), [theme]);
 };

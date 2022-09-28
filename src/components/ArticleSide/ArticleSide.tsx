@@ -60,7 +60,7 @@ const ArticleSide: React.FC<IArticleSideProps> = ({post, isLoading}) => {
       <ArticleSideStyled className={cn({transform: content})}>
         <Article markdown={post.markdown}/>
         {post.owner === login && <Actions>
-          <Link className="edit" to={`/edit-post/${post.link}`}><EditSvg/>Редактировать</Link>
+          <Link className="edit" to={`/Documentation/edit-post/${post.link}`}><EditSvg/>Редактировать</Link>
           <span className="delete" onClick={onDeleteClick} onDoubleClick={onDeleteDoubleClick}>
             <DeleteSvg/>Удалить
           </span>

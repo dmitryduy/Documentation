@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm';
 
 import { useMarkdownComponents } from '../../hooks/useMarkdownComponents';
 import { customMarkdownBlocksPlugin } from '../../utils/customMarkdownBlocksPlugin';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 interface IArticleProps {
     markdown: string;
@@ -12,7 +13,8 @@ interface IArticleProps {
 
 
 const Article: React.FC<IArticleProps> = React.memo(({markdown}) => {
-  const components = useMarkdownComponents();
+  const theme = useAppSelector(state => state.settings.theme);
+  const components = useMarkdownComponents(theme);
   return (
     <ReactMarkdown
       components={components}
