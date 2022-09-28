@@ -23,6 +23,7 @@ const ArticlePage = () => {
       <InfoAside/>
       <ArticleSide isLoading={isLoading} post={post}/>
       <NavLink className="add-post" to="/create-post">
+        <span>Создать</span>
         <EditSvg/>
       </NavLink>
     </ArticlePageStyled>

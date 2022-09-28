@@ -31,9 +31,6 @@ const InfoAside = React.memo(() => {
   return (
     <InfoAsideStyled className={cn({active: activeSide})}>
       <div className="container">
-        <NavLink className="how-to" to="post/Как-пользоваться-редактором1664099957150">
-          Как пользоваться редактором
-        </NavLink>
         {tags ?
           tags.map(tagInfo => <TagList key={tagInfo.tagName} tagInfo={tagInfo}/>) :
           <Loader/>
