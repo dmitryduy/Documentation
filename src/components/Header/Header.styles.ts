@@ -14,7 +14,7 @@ export const HeaderStyled = styled.header`
   align-self: center;
   justify-content: space-between;
   box-shadow: 0 2px 2px 0 rgba(34, 60, 80, 0.2);
-  background-color: ${props => props.theme.colors.bg};
+  background-color: ${props => props.theme.colors.headerBg};
   
   svg {
     height: 20px;
@@ -24,9 +24,14 @@ export const HeaderStyled = styled.header`
   nav, ul {
     display: flex;
     width: 100%;
-    gap: 10px;
+    gap: 15px;
   }
-
+  .theme {
+    cursor: pointer;
+    path {
+      fill: ${props => props.theme.colors.link};
+    }
+  }
   .logout {
     cursor: pointer;
     svg {
@@ -38,6 +43,7 @@ export const HeaderStyled = styled.header`
   }
   li {
     list-style-type: none;
+    color: ${props => props.theme.colors.paragraph};
   }
   
   .search {
@@ -48,6 +54,7 @@ export const HeaderStyled = styled.header`
     text-decoration: none;
     font-weight: bold;
     cursor: pointer;
+    color: ${props => props.theme.colors.paragraph};
 
     &:hover {
       color: ${props => props.theme.colors.link};

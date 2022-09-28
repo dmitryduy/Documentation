@@ -10,6 +10,8 @@ export const InputStyled = styled.div`
     border: none;
     font-size: 16px;
     width: 100%;
+    background-color: inherit;
+    color: ${props => props.theme.colors.paragraph};
   }
 `;
 

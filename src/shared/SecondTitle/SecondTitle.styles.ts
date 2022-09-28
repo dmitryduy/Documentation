@@ -5,6 +5,7 @@ export const SecondTitleStyled = styled.h3`
   margin-top: -60px;
   margin-bottom: 15px;
   font-size: 25px;
+  color: ${props => props.theme.colors.paragraph};
   word-break: break-word;
   @media (max-width: 500px) {
     font-size: 17px;

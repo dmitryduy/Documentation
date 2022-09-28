@@ -8,7 +8,7 @@ export const InfoAsideStyled = styled.aside`
   height: calc(100vh - 50px);
   padding: 10px 5px 10px 0;
   left: 0;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.background};
   z-index: 1;
   border-right: 1px solid ${props => props.theme.colors.border};
   .container {

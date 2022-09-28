@@ -1,22 +1,25 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
+import { useAppSelector } from './hooks/useAppSelector';
+
 const colors = {
   primary: '#64c9c5'
 };
 
 export const lightTheme = {
   colors: {
+    headerBg: '#fff',
+    background: '#fff',
     codeBg: '#f6f7f8',
     border: '#c4c6ca',
     paragraph: '#1c1e21',
     link: colors.primary,
-    bg: '#ffffff',
     sideMenu: '#525862',
     svg: '#7f7f7f',
     listItemHover: '#f5f5f5',
     alertBorder: '#d9534f',
-    alertBg: '#fff2f2',
+    alertBg: '#ffebec',
     tipMarker: '#c4e9c4',
     tipMarkerBorder: '#b0d1b0',
     tipBorder: '#009400',
@@ -40,7 +43,51 @@ export const lightTheme = {
     tableEven: '#f5f6f7',
     authButton: colors.primary,
     searchResultsBg: '#efefef',
-    deletion: '#d9534f'
+    deletion: '#d9534f',
+    scrollBar: '#f1f1f1',
+    thumb: '#c0c0c0'
+  }
+};
+
+export const darkTheme = {
+  colors: {
+    headerBg: '#242526',
+    background: '#1b1b1d',
+    codeBg: '#323234',
+    border: '#444950',
+    paragraph: '#fff',
+    link: colors.primary,
+    sideMenu: '#fff',
+    svg: '#7f7f7f',
+    listItemHover: '#272729',
+    alertBorder: '#e13238',
+    alertBg: '#4b1113',
+    tipMarker: '#004200',
+    tipMarkerBorder: '#004200',
+    tipBorder: '#009400',
+    tipBg: '#003100',
+    cautionMarker: '#684c00',
+    cautionMarkerBorder: '#684c00',
+    cautionBorder: '#e6a700',
+    cautionBg: '#4d3800',
+    infoMarker: '#5f5f61',
+    infoMarkerBorder: '#5f5f61',
+    infoBg: '#474748',
+    infoBorder: '#d4d5d8',
+    inputBg: '#eef9fd',
+    inputBorder: colors.primary,
+    tagBg: '#242526',
+    buttonSubtitle: '#fff',
+    contextMenuHover: '#242526',
+    newPostBg: '#1b1b1d',
+    editorBg: '#242526',
+    selection: colors.primary,
+    tableEven: '#2b2b2d',
+    authButton: colors.primary,
+    searchResultsBg: '#1c1e21',
+    deletion: '#d9534f',
+    scrollbar: '#444444',
+    thumb: '#686868'
   }
 };
 
@@ -49,9 +96,9 @@ interface IThemeProps {
 }
 
 const Theme: React.FC<IThemeProps> = ({children}) => {
-
+  const theme = useAppSelector(state => state.settings.theme);
   return (
-    <ThemeProvider theme={lightTheme}>
+    <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
       {children}
     </ThemeProvider>
   );

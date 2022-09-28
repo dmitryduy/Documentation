@@ -17,7 +17,7 @@ const LoginPage = () => {
 
   return (
     <LoginPageStyled>
-      <AuthTitle>Привет.<br/>С возвращением</AuthTitle>
+      <AuthTitle>Вход</AuthTitle>
       <Input value={login} setValue={setLogin} placeholder="Логин" label="Логин"/>
       <Input value={password} setValue={setPassword} placeholder="Пароль" label="Пароль">
         <Input.Password/>

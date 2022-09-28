@@ -20,6 +20,7 @@ export const TagsStyled = styled.div`
     margin-top: 5px;
     background-color: ${props => props.theme.colors.tagBg};
     min-width: 100px;
+    color: ${props => props.theme.colors.paragraph};
   }
 `;
 export const NewTags = styled.ul`
@@ -33,7 +34,6 @@ export const NewTags = styled.ul`
   .tag {
     display: flex;
     align-items: center;
-    background-color: #fff;
     padding: 5px 10px;
     border-radius: 10px;
     cursor: pointer;
@@ -41,6 +41,8 @@ export const NewTags = styled.ul`
     overflow: auto;
     word-break: break-word;
     font-size: 16px;
+    color: ${props => props.theme.colors.paragraph};
+    background-color: ${props => props.theme.colors.background};
 
     span {
       margin-left: 5px;

@@ -9,15 +9,6 @@ body {
     overflow-x: hidden;
 }
 
-
-.wrapper {
-    position: relative;
-    margin-top: 50px;
-    width: 100vw;
-    min-height: calc(100vh - 50px);
-    overflow-x: hidden;
-}
-
 a {
     text-decoration: none;
     color: #1c1e21;

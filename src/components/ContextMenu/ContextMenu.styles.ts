@@ -21,6 +21,7 @@ li {
   border-right: 1px solid ${props => props.theme.colors.border};
   flex: 1;
   white-space: nowrap;
+  color: ${props => props.theme.colors.paragraph};
 
   &.delete {
     text-decoration: line-through;

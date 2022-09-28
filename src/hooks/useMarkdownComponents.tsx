@@ -1,7 +1,7 @@
 import { NormalComponents } from 'react-markdown/lib/complex-types';
 import { SpecialComponents } from 'react-markdown/lib/ast-to-react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula,  oneLight} from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { dracula} from 'react-syntax-highlighter/dist/esm/styles/prism';
 import React, { useMemo } from 'react';
 
 import Title from '../shared/Title/Title';
@@ -49,7 +49,7 @@ export const useMarkdownComponents = ():
       const match = /language-(\w+)/.exec(className || '');
       return match ? <SyntaxHighlighter
         children={String(children).replace(/\n$/, '')}
-        style={match[1] === 'md' ? oneLight : dracula}
+        style={dracula}
         language={match[1]}
         PreTag="div"
       /> : <CodeText>{children}</CodeText>;

@@ -13,6 +13,7 @@ import { Errors } from './errors';
 import { useAppDispatch } from './hooks/useAppSelector';
 import { loginUser } from './reducers/authReducer/authReducer';
 import Loader from './shared/Loader/Loader';
+import { Wrapper } from './App.styles';
 
 
 windowExtends();
@@ -40,7 +41,7 @@ function App() {
 
   return (
     <>
-      <div className="wrapper">
+      <Wrapper>
         <Tooltip/>
         {isLogin && <Header/>}
         <Routes>
@@ -60,7 +61,7 @@ function App() {
               />)}
           <Route path="*" element={<Navigate to={isLogin ? '/Documentation' : '/login'}/>}/>
         </Routes>
-      </div>
+      </Wrapper>
     </>
   );
 }

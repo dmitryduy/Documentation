@@ -15,12 +15,14 @@ export const TableStyled = styled.table`
     font-weight: bold;
     padding: 10px;
     border-right: 1px solid ${props => props.theme.colors.border};
+    color: ${props => props.theme.colors.paragraph};
   }
   
   td {
     text-align: left;
     padding: 10px;
     border-right: 1px solid ${props => props.theme.colors.border};
+    color: ${props => props.theme.colors.paragraph};
   }
   
   tr {

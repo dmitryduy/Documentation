@@ -20,7 +20,7 @@ export const Results = styled.div`
   left: 50%;
   overflow: auto;
   width: min(300px, calc(100vw - 10px));
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.background};
   box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.2);
   & a{
     display: flex;
@@ -31,6 +31,7 @@ export const Results = styled.div`
     padding: 5px;
     word-break: break-word;
     border-radius: 5px;
+    color: ${props => props.theme.colors.paragraph};
   }
   a:hover {
     background-color:  ${props => props.theme.colors.searchResultsBg};

@@ -28,7 +28,7 @@ export const Menu = styled.div`
   max-height: calc(100vh - 70px - 80px);
   border-left: 1px solid ${props => props.theme.colors.border};
   padding: 20px 0;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.background};
   z-index: 10;
   overflow: auto;
 
