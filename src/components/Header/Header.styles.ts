@@ -27,6 +27,12 @@ export const HeaderStyled = styled.header`
     gap: 10px;
   }
 
+  .logout {
+    cursor: pointer;
+    svg {
+      fill: ${props => props.theme.colors.link};
+    }
+  }
   .home {
     margin-left: 5px;
   }

@@ -14,10 +14,15 @@ const authSlice = createSlice({
     loginUser(state, action: PayloadAction<string>) {
       state.login = action.payload;
       state.isLogin = true;
+    },
+    logout(state) {
+      state.isLogin = false;
+      state.login = null;
+      window.localStorage.removeItem('auth-token');
     }
   }
 });
 
-export const {loginUser} = authSlice.actions;
+export const {loginUser, logout} = authSlice.actions;
 
 export const {reducer: authReducer} = authSlice;
