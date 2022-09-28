@@ -1,41 +1,36 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { useResize } from '../../hooks/useResize';
 import { EmitterNames } from '../../emitterNames';
 import {ReactComponent as BurgerSvg} from '../../assets/images/burger.svg';
+import useMatchMedia from '../../hooks/useMatchMedia';
+import SearchPost from '../SearchPost/SearchPost';
+import {ReactComponent as EditSvg} from '../../assets/images/edit.svg';
 
 import { HeaderStyled } from './Header.styles';
 
 
 
 const Header = () => {
-  const width = useResize();
+  const phone = useMatchMedia();
 
   const toggleLeftSide = () => {
-    width < 1001 && window.emitter.emit(EmitterNames.TOGGLE_LEFT_SIDEBAR);
+    phone && window.emitter.emit(EmitterNames.TOGGLE_LEFT_SIDEBAR);
   };
 
   return (
     <HeaderStyled>
-      {width < 1001 && <BurgerSvg onClick={toggleLeftSide}/>}
+      {phone && <BurgerSvg onClick={toggleLeftSide}/>}
       <nav>
         <ul>
-          <li>
+          <li className="home">
             <NavLink className={({isActive}) => (isActive ? 'active' : '')} to="/Documentation">
               Главная
             </NavLink>
           </li>
-          <li>
-            <NavLink className={({isActive}) => (isActive ? 'active' : '')} to="/create-post">
-              Добавить статью
-            </NavLink>
+          <li className="search">
+            <SearchPost/>
           </li>
-          {width > 600 && <li>
-            <NavLink to="post/Как-пользоваться-редактором1664099957150">
-              Как пользоваться редактором
-            </NavLink>
-          </li>}
         </ul>
       </nav>
     </HeaderStyled>

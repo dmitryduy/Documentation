@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import cn from 'classnames';
+import { NavLink } from 'react-router-dom';
 
 import { ITagList } from '../../global.typings';
 import TagList from '../TagList/TagList';
@@ -30,6 +31,9 @@ const InfoAside = React.memo(() => {
   return (
     <InfoAsideStyled className={cn({active: activeSide})}>
       <div className="container">
+        <NavLink className="how-to" to="post/Как-пользоваться-редактором1664099957150">
+          Как пользоваться редактором
+        </NavLink>
         {tags ?
           tags.map(tagInfo => <TagList key={tagInfo.tagName} tagInfo={tagInfo}/>) :
           <Loader/>

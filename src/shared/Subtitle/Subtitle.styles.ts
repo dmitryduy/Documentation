@@ -5,7 +5,7 @@ export const SubtitleStyled = styled.h2`
   padding-top: 60px;
   margin-top: -30px;
   margin-bottom: 15px;
-  word-wrap: break-word;
+  word-break: break-word;
   @media (max-width: 500px) {
     font-size: 20px;
     margin-bottom: 5px;

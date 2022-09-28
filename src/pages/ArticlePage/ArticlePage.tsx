@@ -1,9 +1,10 @@
 import React, { useLayoutEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 import InfoAside from '../../components/InfoAside/InfoAside';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import ArticleSide from '../../components/ArticleSide/ArticleSide';
+import { ReactComponent as EditSvg } from '../../assets/images/edit.svg';
 
 import { useFetchPost } from './ArticlePage.hook/useFetchPost';
 import { ArticlePageStyled } from './ArticlePage.styles';
@@ -21,6 +22,9 @@ const ArticlePage = () => {
     <ArticlePageStyled>
       <InfoAside/>
       <ArticleSide isLoading={isLoading} post={post}/>
+      <NavLink className="add-post" to="/create-post">
+        <EditSvg/>
+      </NavLink>
     </ArticlePageStyled>
   );
 };

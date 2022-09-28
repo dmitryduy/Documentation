@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 
 import { creationValidation } from './validations/creation';
 import {
-  createPost,
+  createPost, findPosts,
   getAllPosts,
   getPost,
   getRandomPost,
@@ -51,5 +51,7 @@ app.get('/post-tags', getArticles);
 app.post('/register', registerValidation, register);
 
 app.post('/login', loginValidation, loginUser);
+
+app.get('/find-post/:value', findPosts);
 
 server.listen(process.env.PORT || 5000, () => console.log('server start'));

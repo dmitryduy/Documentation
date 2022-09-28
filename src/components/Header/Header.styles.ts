@@ -10,6 +10,7 @@ export const HeaderStyled = styled.header`
   display: flex;
   padding: 15px;
   width: 100%;
+
   align-self: center;
   justify-content: space-between;
   box-shadow: 0 2px 2px 0 rgba(34, 60, 80, 0.2);
@@ -23,18 +24,22 @@ export const HeaderStyled = styled.header`
   nav, ul {
     display: flex;
     width: 100%;
+    gap: 10px;
   }
 
+  .home {
+    margin-left: 5px;
+  }
   li {
     list-style-type: none;
   }
-  li:last-child {
-    margin-left: auto;
+  
+  .search {
+    flex: 1;
   }
 
   a {
     text-decoration: none;
-    padding: 0 10px;
     font-weight: bold;
     cursor: pointer;
 

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const LinkStyled = styled.a`
+  word-break: break-word;
   &:visited {
     color: ${props => props.theme.colors.link};
   }

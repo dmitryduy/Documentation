@@ -12,6 +12,11 @@ export const InfoAsideStyled = styled.aside`
   z-index: 1;
   border-right: 1px solid ${props => props.theme.colors.border};
   
+  .how-to {
+    padding: 0 10px;
+    margin: 0 auto 10px;
+    font-weight: bold;
+  }
   .container {
     display: flex;
     flex-direction: column;

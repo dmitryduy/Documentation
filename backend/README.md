@@ -11,6 +11,7 @@ GET /post/:link
 GET /post-tags
 POST /register
 POST /login
+GET /find-post/:value
 ```
 
 ## POST /create-post
@@ -58,14 +59,18 @@ POST /login
 ```{error:string | null, login: string | null}```
 
 Либо `error = null`, либо `login = null`
-{error:string | null, login: string | null}
 
 ## POST /login
 Возвращаемое значение:
 ```{error:string | null, login: string | null}```
 
 Либо `error = null`, либо `login = null`
-{error:string | null, login: string | null}
+
+## GET /find-post/:value
+Возвращаемое значение:
+```{error: null | string, foundedPosts: {link: string, title: string}[] | null}```
+
+Либо `error = null`, либо `foundedPosts = null`
 
 ## Типы
 

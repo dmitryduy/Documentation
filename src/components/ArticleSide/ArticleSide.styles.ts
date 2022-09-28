@@ -47,7 +47,7 @@ export const Menu = styled.div`
   border-left: 1px solid ${props => props.theme.colors.border};
   padding: 20px 0;
   background-color: #fff;
-  z-index: 10000;
+  z-index: 10;
   overflow: auto;
 
   ul {

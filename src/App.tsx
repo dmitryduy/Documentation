@@ -35,7 +35,7 @@ function App() {
                 path={route.path}
                 element={<route.component/>}
               />)}
-          <Route path="*" element={<Navigate to={isLogin ? '/Documentation' : '/register'}/>}/>
+          <Route path="*" element={<Navigate to={isLogin ? '/Documentation' : '/login'}/>}/>
         </Routes>
       </div>
     </>

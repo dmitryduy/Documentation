@@ -13,6 +13,7 @@ import {ReactComponent as EditSvg} from '../../assets/images/edit.svg';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import ButtonLink from '../../shared/Button/ButtonLink/ButtonLink';
 import useMatchMedia from '../../hooks/useMatchMedia';
+import { useAuth } from '../../hooks/useAuth';
 
 import {ArticleSideStyled, Menu} from './ArticleSide.styles';
 
@@ -25,6 +26,7 @@ const ArticleSide: React.FC<IArticleSideProps> = ({post, isLoading}) => {
   const [content, toggleContent, setContent]  = useToggle(false);
   const phone = useMatchMedia();
   const nextArticle = useAppSelector(state => state.articles.nextPost);
+  const {login} = useAuth();
   useEmit(EmitterNames.TOGGLE_LEFT_SIDEBAR, () => toggleContent());
 
   useEffect(() => {
@@ -35,7 +37,7 @@ const ArticleSide: React.FC<IArticleSideProps> = ({post, isLoading}) => {
     return (
       <ArticleSideStyled className={cn({transform: content})}>
         <Article markdown={post.markdown}/>
-        <Link className="edit" to={`/edit-post/${post.link}`}><EditSvg/>Редактировать</Link>
+        {post.owner === login && <Link className="edit" to={`/edit-post/${post.link}`}><EditSvg/>Редактировать</Link>}
         {nextArticle && <ButtonLink link={nextArticle.link} subtitle="Случайная статья" text={nextArticle.title}/>}
         {post.menu.length && !phone ?
           <Menu className="without-scroll">

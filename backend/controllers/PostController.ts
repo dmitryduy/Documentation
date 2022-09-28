@@ -65,14 +65,14 @@ export const getAllPosts = async (req: Request, res: Response) => {
 export const updatePost = async (req: Request, res: Response) => {
   try {
     const errors = customValidationResult(req);
-
     if (!errors.isEmpty()) {
       return res.status(400).json({error: errors.array()[0].error, link: null});
     }
 
-    const {markdown, menu, link, user} = req.body;
+    const {markdown, menu, link, owner} = req.body;
+    console.log(req.body);
     const post = await PostModel.findOne({link});
-    if (post.owner !== user) {
+    if (post.owner !== owner) {
       return res.status(400).json({error: 'У вас нет доступа.', link: null});
     }
     await PostModel.updateOne({link},
@@ -107,5 +107,16 @@ export const getRandomPostExcludeVisitedLink = async (req: Request, res: Respons
     res.status(200).json({error: null, title: post.title, link: post.link});
   } catch (e) {
     res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', title: null, link: null});
+  }
+};
+export const findPosts = async (req: Request, res: Response) => {
+  const {value} = req.params;
+  try {
+    const posts = await PostModel.find({title: {$regex: value}}).limit(10);
+    const foundedPosts = posts.map(post => ({title: post.title, link: post.link}));
+
+    res.status(200).json({error: null, foundedPosts});
+  } catch (e) {
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', post: null});
   }
 };

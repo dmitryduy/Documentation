@@ -28,7 +28,7 @@ const RegisterPage = () => {
         <Input.Password/>
       </Input>
       <AuthButton disabled={isLoading} onClick={() => register(login, password, repeatPassword)}>
-        {isLoading ? <Loader/> : 'Войти'}
+        {isLoading ? <Loader/> : 'Зарегестрироваться'}
       </AuthButton>
       <Link to="/login">Войти</Link>
     </RegisterPageStyled>

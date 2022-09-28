@@ -5,7 +5,7 @@ export const ParagraphStyled = styled.p`
   font-size: 17px;
   line-height: 25px;
   margin-bottom: 15px;
-  word-wrap: break-word;
+  word-break: break-word;
   @media (max-width: 500px) {
     font-size: 15px;
     margin-bottom: 10px;

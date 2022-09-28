@@ -5,7 +5,7 @@ export const SecondTitleStyled = styled.h3`
   margin-top: -60px;
   margin-bottom: 15px;
   font-size: 25px;
-  word-wrap: break-word;
+  word-break: break-word;
   @media (max-width: 500px) {
     font-size: 17px;
     margin-bottom: 5px;

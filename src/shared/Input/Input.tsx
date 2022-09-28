@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { InputStyled, Label } from './Input.styles';
 import { InputContext } from './InputContext';
@@ -8,7 +8,7 @@ interface IInputProps {
   value: string;
   setValue: (value: React.FormEvent<HTMLInputElement> | string) => void;
   placeholder: string;
-  label: string;
+  label?: string;
   children?: React.ReactNode;
 }
 
@@ -28,7 +28,7 @@ const Input: React.FC<IInputProps> & IInputComponent = ({label, value, setValue,
   return (
     <InputContext.Provider value={{value, setValue: onInput, placeholder}}>
       <InputStyled className="input">
-        <Label>{label}</Label>
+        {label && <Label>{label}</Label>}
         {children || <input type="text" value={value} onInput={onInput} placeholder={placeholder}/>}
       </InputStyled>
     </InputContext.Provider>
