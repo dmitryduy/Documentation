@@ -14,7 +14,7 @@ export const routes = {
     component: LoginPage
   }],
   private: [{
-    path: '/Documentation',
+    path: '/',
     component: ArticlePage
   }, {
     path: '/create-post',

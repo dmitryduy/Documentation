@@ -16,6 +16,11 @@ export const HeaderStyled = styled.header`
   box-shadow: 0 2px 2px 0 rgba(34, 60, 80, 0.2);
   background-color: ${props => props.theme.colors.headerBg};
   
+  .hamburger {
+    path {
+      stroke: ${props => props.theme.colors.paragraph};;
+    }
+  }
   svg {
     height: 20px;
     width: 20px;

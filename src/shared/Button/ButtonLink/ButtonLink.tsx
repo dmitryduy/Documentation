@@ -11,7 +11,7 @@ interface IButtonLinkProps {
 
 const ButtonLink: React.FC<IButtonLinkProps> = ({text, subtitle, link}) => {
   return (
-    <Link to={`/Documentation/post/${link}`}>
+    <Link to={`/post/${link}`}>
       <ButtonStyled>
         <span className="subtitle">{subtitle}</span>
         <span className="text">{text}</span>

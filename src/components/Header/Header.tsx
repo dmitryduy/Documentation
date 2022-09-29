@@ -33,11 +33,11 @@ const Header = () => {
 
   return (
     <HeaderStyled>
-      {phone && <BurgerSvg onClick={toggleLeftSide}/>}
+      {phone && <BurgerSvg className="hamburger" onClick={toggleLeftSide}/>}
       <nav>
         <ul>
           <li className="home">
-            <NavLink className={({isActive}) => (isActive ? 'active' : '')} to="/Documentation">
+            <NavLink className={({isActive}) => (isActive ? 'active' : '')} to="/">
               Главная
             </NavLink>
           </li>

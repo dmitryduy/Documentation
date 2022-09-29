@@ -14,5 +14,7 @@ export const PasswordStyled = styled.div`
     font-size: 14px;
     font-weight: bold;
     color: ${props => props.theme.colors.link};
+    cursor: pointer;
+    user-select: none;
   }
 `;

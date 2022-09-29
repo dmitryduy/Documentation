@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { ITagList } from '../../global.typings';
 import { useToggle } from '../../hooks/useToggle';
 import { EmitterNames } from '../../emitterNames';
-import { useResize } from '../../hooks/useResize';
 import { useHeightAnimate } from '../../hooks/useHeightAnimate';
 import useMatchMedia from '../../hooks/useMatchMedia';
 
@@ -36,7 +35,7 @@ const TagList: React.FC<ITagListProps> = ({tagInfo}) => {
       <ul ref={listRef} className={cn('article-list', {active})}>
         {tagInfo.articles.map(article =>
           <li className="article-title" key={article.link}>
-            <Link to={`/Documentation/post/${article.link}`} onClick={closeLeftSide}>
+            <Link to={`/post/${article.link}`} onClick={closeLeftSide}>
               {article.title}
             </Link>
           </li>

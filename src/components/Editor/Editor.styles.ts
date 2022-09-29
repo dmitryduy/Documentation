@@ -40,6 +40,7 @@ export const EditorStyled = styled.div`
     resize: none;
     outline: none;
     padding: 5px;
+    color: ${props => props.theme.colors.paragraph};
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     flex: 1;

@@ -30,7 +30,7 @@ const RegisterPage = () => {
       <AuthButton disabled={isLoading} onClick={() => register(login, password, repeatPassword)}>
         {isLoading ? <Loader/> : 'Зарегестрироваться'}
       </AuthButton>
-      <Link to="/Documentation/login">Войти</Link>
+      <Link to="/login">Войти</Link>
     </RegisterPageStyled>
   );
 };

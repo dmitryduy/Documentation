@@ -31,13 +31,13 @@ function App() {
           dispatch(loginUser(data.login!));
         }
       })
-      .catch(e => {
+      .catch(() => {
         setShow(true);
         showTooltip(Errors.UNEXPECTED_ERROR);
       });
   }, []);
 
-  if (!show) return <Loader/>;
+  if (!show) return <Wrapper><Loader/></Wrapper>;
 
   return (
     <>
@@ -59,7 +59,7 @@ function App() {
                 path={route.path}
                 element={<route.component/>}
               />)}
-          <Route path="*" element={<Navigate to={isLogin ? '/Documentation' : '/Documentation/login'}/>}/>
+          <Route path="*" element={<Navigate to={isLogin ? '/' : '/login'}/>}/>
         </Routes>
       </Wrapper>
     </>

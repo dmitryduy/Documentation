@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   position: relative;
-  margin-top: 50px;
+  padding-top: 50px;
   width: 100vw;
-  min-height: calc(100vh - 50px);
+  min-height: 100vh;
+  height: 100vh;
   overflow-x: hidden;
   background-color: ${props => props.theme.colors.background};
 
-
-  *::-webkit-scrollbar, body::-webkit-scrollbar {
+  *::-webkit-scrollbar {
     width: 4px;
     height: 4px;
     background-color: ${props => props.theme.colors.scrollbar};

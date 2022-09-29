@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 
 import App from './App';
@@ -15,9 +15,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <Theme>
-      <BrowserRouter>
+      <HashRouter>
         <App/>
-      </BrowserRouter>
+      </HashRouter>
     </Theme>
   </Provider>
 );

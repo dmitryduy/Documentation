@@ -22,7 +22,7 @@ const ArticlePage = () => {
     <ArticlePageStyled>
       <InfoAside/>
       <ArticleSide isLoading={isLoading} post={post}/>
-      <NavLink className="add-post" to="/Documentation/create-post">
+      <NavLink className="add-post" to="/create-post">
         <AddSvg/>
       </NavLink>
     </ArticlePageStyled>
