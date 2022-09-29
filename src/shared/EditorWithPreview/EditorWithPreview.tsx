@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import cn from 'classnames';
 
 import Editor from '../../components/Editor/Editor';
 import Button from '../Button/Button';
 import Article from '../../components/Article/Article';
 import useMatchMedia from '../../hooks/useMatchMedia';
+import { useDebounce } from '../../hooks/useDebounce';
 
-import {EditorWithPreviewStyled, PreviewButton, Preview} from './EditorWithPreview.styles';
+import {EditorWithPreviewStyled} from './EditorWithPreview.styles';
 import { useAutoScroll } from './EditorWithPreview.hook/useAutoScroll';
+import Preview from './Preview/Preview';
 
 interface IEditorWithPreviewProps {
     onSubmit: (markdown: string, tags: string[]) => void;
@@ -23,11 +25,12 @@ const EditorWithPreview: React.FC<IEditorWithPreviewProps> = ({
   isLoading
 }) => {
   const [markdown, setMarkdown] = useState(defaultMarkdown);
+  const debouncedMarkdown = useDebounce(markdown, 400);
   const [tags, setTags] = useState<string[]>([]);
   const phone = useMatchMedia();
-  const previewRef = useAutoScroll(!defaultMarkdown, [markdown]);
   const [widePreview, setWidePreview] = useState(false);
 
+  const hidePreview = useCallback(() => setWidePreview(false), []);
 
   return (
     <EditorWithPreviewStyled>
@@ -40,12 +43,12 @@ const EditorWithPreview: React.FC<IEditorWithPreviewProps> = ({
         />
         {phone && <Button subtitle="Статья" text="Превью" onClick={() => setWidePreview(true)}/>}
       </Editor>
-      <Preview className={cn({active: widePreview})}>
-        {phone && <PreviewButton onClick={() => setWidePreview(false)}>&times;</PreviewButton>}
-        <div ref={previewRef} className="content">
-          {phone && !widePreview ? null : <Article markdown={markdown}/>}
-        </div>
-      </Preview>
+      <Preview
+        widePreview={widePreview}
+        markdown={debouncedMarkdown}
+        defaultMarkdown={debouncedMarkdown}
+        hidePreview={hidePreview}
+      />
     </EditorWithPreviewStyled>
   );
 };

@@ -11,14 +11,14 @@ export const Wrapper = styled.div`
   overflow-x: hidden;
   background-color: ${props => props.theme.colors.background};
 
-  *::-webkit-scrollbar {
+  .scroll::-webkit-scrollbar {
     width: 4px;
     height: 4px;
     background-color: ${props => props.theme.colors.scrollbar};
     border-radius: 2px;
   }
 
-  *::-webkit-scrollbar-thumb {
+  .scroll::-webkit-scrollbar-thumb {
     width: 4px;
     height: 4px;
     background-color: ${props => props.theme.colors.thumb};
@@ -26,7 +26,7 @@ export const Wrapper = styled.div`
   }
 
 
-  *::-webkit-scrollbar-thumb:hover {
+  .scroll::-webkit-scrollbar-thumb:hover {
     background-color: #a7a7a7;
   }
 

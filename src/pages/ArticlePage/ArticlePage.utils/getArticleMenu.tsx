@@ -1,13 +1,16 @@
 import React from 'react';
+import { HashLink } from 'react-router-hash-link';
 
 import { Menu } from '../../../global.typings';
+import Article from '../../../components/Article/Article';
+import { unifyMenuLinks } from '../../../utils/unifyMenuLinks';
 
 const getArticleItem = (itemValue: string) => {
   return (
     <li key={itemValue}>
-      <a href={`#${itemValue}`}>
-        {itemValue}
-      </a>
+      <HashLink to={`#${unifyMenuLinks(itemValue)}`}>
+        <Article markdown={itemValue}/>
+      </HashLink>
     </li>
   );
 };

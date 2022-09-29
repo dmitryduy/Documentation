@@ -3,7 +3,6 @@ import cn from 'classnames';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Article from '../Article/Article';
-import { getArticleMenu } from '../../pages/ArticlePage/ArticlePage.utils/getArticleMenu';
 import { useToggle } from '../../hooks/useToggle';
 import { EmitterNames } from '../../emitterNames';
 import { IPost } from '../../global.typings';
@@ -16,8 +15,9 @@ import ButtonLink from '../../shared/Button/ButtonLink/ButtonLink';
 import useMatchMedia from '../../hooks/useMatchMedia';
 import { useAuth } from '../../hooks/useAuth';
 import { showTooltip } from '../../utils/showTooltip';
+import ArticleMenu from '../ArticleMenu/ArticleMenu';
 
-import {ArticleSideStyled, Menu, Actions} from './ArticleSide.styles';
+import {ArticleSideStyled, Actions} from './ArticleSide.styles';
 import { useDeletePost } from './ArticleSide.hook/useDeletePost';
 
 interface IArticleSideProps {
@@ -67,9 +67,7 @@ const ArticleSide: React.FC<IArticleSideProps> = ({post, isLoading}) => {
         </Actions>}
         {nextArticle && <ButtonLink link={nextArticle.link} subtitle="Случайная статья" text={nextArticle.title}/>}
         {post.menu.length && !phone ?
-          <Menu className="without-scroll">
-            {getArticleMenu(post.menu)}
-          </Menu> :
+          <ArticleMenu menu={post.menu}/> :
           null
         }
       </ArticleSideStyled>

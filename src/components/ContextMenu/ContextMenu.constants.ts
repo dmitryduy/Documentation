@@ -123,7 +123,7 @@ ${str}
     template: `
 - элемент\n- элемент\n- элемент`,
     insert: str => `- ${str}`,
-    startSelection: 4,
+    startSelection: 3,
     endSelection: 10
   },
   'ordered-list': {

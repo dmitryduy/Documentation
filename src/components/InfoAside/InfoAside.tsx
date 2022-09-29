@@ -25,7 +25,7 @@ const InfoAside = React.memo(() => {
   useEmit(EmitterNames.TOGGLE_LEFT_SIDEBAR, () => phoneRef.current &&  toggleActiveSide());
 
   return (
-    <InfoAsideStyled className={cn({active: activeSide})}>
+    <InfoAsideStyled className={cn('scroll', {active: activeSide})}>
       <div className="container">
         {!isLoading ?
           tags?.map(tagInfo => <TagList key={tagInfo.tagName} tagInfo={tagInfo}/>) :
@@ -35,5 +35,7 @@ const InfoAside = React.memo(() => {
     </InfoAsideStyled>
   );
 });
+
+InfoAside.displayName = 'InfoAside';
 
 export default InfoAside;

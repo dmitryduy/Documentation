@@ -23,7 +23,7 @@ export const createPost = async (req: Request, res: Response) => {
 
     const {markdown, tags, menu, title, owner} = req.body;
 
-    const link =  title.replaceAll(/\s/g, '-').replaceAll(/\//g, '') + Date.now();
+    const link =  title.replaceAll(/[^a-zA-Z0-9 А-Яа-я]/g, '').replaceAll(' ', '-') + Date.now();
 
     const docPost = new PostModel({link, title, menu, tags, markdown, owner});
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Header from './components/Header/Header';
@@ -36,6 +36,7 @@ function App() {
         showTooltip(Errors.UNEXPECTED_ERROR);
       });
   }, []);
+  const routesMemo = useMemo(() => (isLogin ? routes.private : routes.common), [isLogin]);
 
   if (!show) return <Wrapper><Loader/></Wrapper>;
 
@@ -45,20 +46,12 @@ function App() {
         <Tooltip/>
         {isLogin && <Header/>}
         <Routes>
-          {isLogin &&
-            routes.private.map(route =>
-              <Route
-                key={route.path}
-                path={route.path}
-                element={<route.component/>}
-              />)}
-          {!isLogin &&
-            routes.common.map(route =>
-              <Route
-                key={route.path}
-                path={route.path}
-                element={<route.component/>}
-              />)}
+          {routesMemo.map(route =>
+            <Route
+              key={route.path}
+              path={route.path}
+              element={<route.component/>}
+            />)}
           <Route path="*" element={<Navigate to={isLogin ? '/' : '/login'}/>}/>
         </Routes>
       </Wrapper>

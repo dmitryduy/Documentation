@@ -18,12 +18,12 @@ a:visited {
     color: #000;
 }
 
-body::-webkit-scrollbar {
+*::-webkit-scrollbar {
     width: 0;
     height: 0;
 }
 
-body::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb{
     width: 0;
     height: 0;
 }

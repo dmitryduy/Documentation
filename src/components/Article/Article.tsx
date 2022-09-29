@@ -13,8 +13,7 @@ interface IArticleProps {
 
 
 const Article: React.FC<IArticleProps> = React.memo(({markdown}) => {
-  const theme = useAppSelector(state => state.settings.theme);
-  const components = useMarkdownComponents(theme);
+  const components = useMarkdownComponents();
   return (
     <ReactMarkdown
       components={components}

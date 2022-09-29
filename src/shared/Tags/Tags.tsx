@@ -6,7 +6,7 @@ import { useToggle } from '../../hooks/useToggle';
 import { useHeightAnimate } from '../../hooks/useHeightAnimate';
 import { useInput } from '../../hooks/useInput';
 
-import { NewTags, TagsStyled, Input } from './Tags.styles';
+import { NewTags, TagsStyled } from './Tags.styles';
 import { useTags } from './Tags.hook/useTags';
 
 interface ITagsProps {
@@ -45,25 +45,23 @@ const Tags: FC<ITagsProps> = ({setTags, tags}) => {
   };
 
   return (
-    <TagsStyled ref={tagsRef}>
+    <TagsStyled ref={tagsRef} className="scroll">
       <div className="container">
         <NewTags>
           {tags.map(tag => <li className="tag" onClick={removeTag.bind(null, tag)} key={tag}>
             {tag}
             <span>&times;</span>
           </li>)}
-          <Input>
-            {value && <span onClick={onClickButton} className="tooltip"><span className="add">+</span> {value}</span>}
-            <input
-              ref={inputRef}
-              type="text"
-              value={value}
-              onInput={onInput}
-              placeholder="+ Добавить"
-              onKeyDown={onKeyDown}
-            />
-          </Input>
+          {value && <li onClick={onClickButton} className="tooltip tag"><span className="add">+</span> {value}</li>}
         </NewTags>
+        <input
+          ref={inputRef}
+          type="text"
+          value={value}
+          onInput={onInput}
+          placeholder="+ Добавить"
+          onKeyDown={onKeyDown}
+        />
       </div>
     </TagsStyled>
   );

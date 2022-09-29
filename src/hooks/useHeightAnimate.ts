@@ -12,7 +12,7 @@ export const useHeightAnimate = <T extends HTMLElement>(isUpdate: boolean, confi
   const elementRef = useRef<T>(null);
   const width = useResize();
 
-  const {extraHeight = 0, maxHeight = 0, deps = []} = config;
+  const {extraHeight = 0, maxHeight = Infinity, deps = []} = config;
 
   useLayoutEffect(() => {
     if (isUpdate && elementRef.current) {

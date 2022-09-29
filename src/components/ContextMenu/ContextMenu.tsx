@@ -23,7 +23,7 @@ const ContextMenu: React.FC<IContextMenuProps> = ({updateMarkdown}) => {
   };
 
   return (
-    <ContextMenuStyled ref={menuRef} onClick={editText}>
+    <ContextMenuStyled className="scroll" ref={menuRef} onClick={editText}>
       <li onClick={() => window.emitter.emit(EmitterNames.TOGGLE_POST_TAGS)}>теги</li>
       <li data-action="heading-1">h1</li>
       <li data-action="heading-2">h2</li>

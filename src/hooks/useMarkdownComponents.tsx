@@ -2,7 +2,7 @@ import { NormalComponents } from 'react-markdown/lib/complex-types';
 import { SpecialComponents } from 'react-markdown/lib/ast-to-react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula,  oneLight} from 'react-syntax-highlighter/dist/esm/styles/prism';
-import React, { useMemo } from 'react';
+import React, { ReactElement, useMemo } from 'react';
 
 import Title from '../shared/Title/Title';
 import Subtitle from '../shared/Subtitle/Subtitle';
@@ -16,9 +16,12 @@ import List from '../shared/List/List';
 import Image from '../shared/Image/Image';
 import Video from '../shared/Video/Video';
 import Table from '../shared/Table/Table';
+import { unifyMenuLinks } from '../utils/unifyMenuLinks';
+import Code from '../shared/Code/Code';
+import { reactChildrenToString } from '../utils/reactChildrenToString';
 
 
-export const useMarkdownComponents = (theme: 'dark' | 'light'):
+export const useMarkdownComponents = ():
   Partial<Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents> => {
   return useMemo(() => ({
     h1({children}) {
@@ -26,11 +29,15 @@ export const useMarkdownComponents = (theme: 'dark' | 'light'):
     },
     h2({children}) {
       if (!children) return null;
-      return <Subtitle id={typeof children[0] === 'string' ? children[0] : ''}>{children}</Subtitle>;
+      const id = unifyMenuLinks(reactChildrenToString(children));
+      return <Subtitle id={id}>{children}</Subtitle>;
     },
     h3({children}) {
       if (!children) return null;
-      return <SecondTitle id={typeof children[0] === 'string' ? children[0] : ''}>{children}</SecondTitle>;
+      const id = unifyMenuLinks(reactChildrenToString(children));
+      return (
+        <SecondTitle id={id}>{children}</SecondTitle>
+      );
     },
     p(data) {
       const children = data.children;
@@ -47,12 +54,7 @@ export const useMarkdownComponents = (theme: 'dark' | 'light'):
     },
     code({children, className}) {
       const match = /language-(\w+)/.exec(className || '');
-      return match ? <SyntaxHighlighter
-        children={String(children).replace(/\n$/, '')}
-        style={theme === 'light' ? oneLight : dracula}
-        language={match[1]}
-        PreTag="div"
-      /> : <CodeText>{children}</CodeText>;
+      return match ? <Code code={children.toString()} language={match[0]}/> : <CodeText>{children}</CodeText>;
     },
 
     ul({children}) {
@@ -81,5 +83,5 @@ export const useMarkdownComponents = (theme: 'dark' | 'light'):
     table({children}) {
       return <Table>{children}</Table>;
     }
-  }), [theme]);
+  }), []);
 };

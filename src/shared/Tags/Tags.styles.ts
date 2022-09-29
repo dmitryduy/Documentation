@@ -10,6 +10,18 @@ export const TagsStyled = styled.div`
   .container {
     margin: 10px;
   }
+  input {
+    width: 100%;
+    padding: 0 5px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    margin-top: 5px;
+    background-color: ${props => props.theme.colors.tagBg};
+    min-width: 100px;
+    color: ${props => props.theme.colors.paragraph};
+  }
+  
 `;
 export const NewTags = styled.ul`
   display: flex;
@@ -36,35 +48,18 @@ export const NewTags = styled.ul`
       margin-left: 5px;
     }
   }
-`;
 
-
-export const Input = styled.li`
-  display: flex;
-  flex-direction: column;
   .tooltip {
     width: fit-content;
     color: ${props => props.theme.colors.paragraph};
-    background-color: ${props => props.theme.colors.background};
-    padding: 5px 10px;
-    border-radius: 10px;
+    background-color: ${props => props.theme.colors.border};
     cursor: pointer;
-    font-size: 16px;
+    .add {
+      margin-left: 0;
+      margin-right: 5px;
+      color: ${props => props.theme.colors.link};
+    }
   }
   
-  .add {
-    color: ${props => props.theme.colors.link};
-  }
-
-  input {
-    flex: 1;
-    padding: 0 5px;
-    border: none;
-    outline: none;
-    font-size: 16px;
-    margin-top: 5px;
-    background-color: ${props => props.theme.colors.tagBg};
-    min-width: 100px;
-    color: ${props => props.theme.colors.paragraph};
-  }
+  
 `;
