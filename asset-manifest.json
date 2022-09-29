@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Documentation/static/css/main.052d3863.css",
-    "main.js": "/Documentation/static/js/main.04bce530.js",
+    "main.css": "/Documentation/static/css/main.c235a7b4.css",
+    "main.js": "/Documentation/static/js/main.c75fca1d.js",
     "static/media/lightTheme.svg": "/Documentation/static/media/lightTheme.2ad0a194acac9b29002a871a78174925.svg",
     "static/media/add.svg": "/Documentation/static/media/add.9f376e3f3f4c2d7e4493f3ffa40a8bd4.svg",
     "index.html": "/Documentation/index.html",
@@ -9,11 +9,11 @@
     "static/media/darkTheme.svg": "/Documentation/static/media/darkTheme.b8cc8d678254073bb347d1319be9cdbd.svg",
     "static/media/edit.svg": "/Documentation/static/media/edit.78fba9c9ace471b63fbe8e3260656685.svg",
     "static/media/burger.svg": "/Documentation/static/media/burger.605b4408d7505abb27820af1e68dfe43.svg",
-    "main.052d3863.css.map": "/Documentation/static/css/main.052d3863.css.map",
-    "main.04bce530.js.map": "/Documentation/static/js/main.04bce530.js.map"
+    "main.c235a7b4.css.map": "/Documentation/static/css/main.c235a7b4.css.map",
+    "main.c75fca1d.js.map": "/Documentation/static/js/main.c75fca1d.js.map"
   },
   "entrypoints": [
-    "static/css/main.052d3863.css",
-    "static/js/main.04bce530.js"
+    "static/css/main.c235a7b4.css",
+    "static/js/main.c75fca1d.js"
   ]
 }
