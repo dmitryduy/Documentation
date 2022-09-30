@@ -7,9 +7,10 @@ export const CodeTextStyled = styled.code`
   width: fit-content;
   border: 1px solid ${props => props.theme.colors.border};
   margin-bottom: 25px;
+  font-weight: inherit;
+  font-size: inherit;
   color: ${props => props.theme.colors.paragraph};
   @media (max-width: 500px) {
-    font-size: 15px;
     margin-bottom: 10px;
     line-height: 20px;
   }

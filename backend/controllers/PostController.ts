@@ -18,7 +18,7 @@ export const createPost = async (req: Request, res: Response) => {
   try {
     const errors = customValidationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({error: errors.array()[0].error, link: null});
+      return res.status(400).json({error: errors.array()[0].error});
     }
 
     const {markdown, tags, menu, title, owner} = req.body;
@@ -29,36 +29,18 @@ export const createPost = async (req: Request, res: Response) => {
 
     const post = await docPost.save();
 
-    res.status(200).json({error: null, link: post.link});
+    res.status(200).json({link: post.link});
   } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', link: null});
-  }
-};
-
-export const getPost = async (req: Request, res: Response) => {
-  try {
-    PostModel.findOneAndUpdate(
-      {link: req.params.link},
-      {$inc: {views: 1}},
-      {returnDocument: 'after'},
-      (e, doc) => {
-        if (e) {
-          return res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', post: null});
-        }
-        res.json({error: null, post: doc || notFoundPost});
-      }
-    );
-  } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', post: null});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
   }
 };
 
 export const getAllPosts = async (req: Request, res: Response) => {
   try {
     const posts = await PostModel.find();
-    res.json({error: null, posts});
+    res.json({posts});
   } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', posts: null});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
   }
 };
 
@@ -66,13 +48,13 @@ export const updatePost = async (req: Request, res: Response) => {
   try {
     const errors = customValidationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({error: errors.array()[0].error, link: null});
+      return res.status(400).json({error: errors.array()[0].error});
     }
 
     const {markdown, menu, link, owner} = req.body;
     const post = await PostModel.findOne({link});
     if (post.owner !== owner) {
-      return res.status(400).json({error: 'У вас нет доступа.', link: null});
+      return res.status(400).json({error: 'У вас нет доступа.'});
     }
     await PostModel.updateOne({link},
       {
@@ -91,33 +73,49 @@ export const getRandomPost = async (req: Request, res: Response) => {
 
     const random = Math.floor(Math.random() * count);
     const post = await PostModel.findOne().skip(random);
-    res.status(200).json({error: null, post});
+
+    const random2 = Math.floor(Math.random() * (count - 1));
+    const nextPost = await PostModel.findOne({link: {$ne: post.link}}).skip(random2);
+    res.status(200).json({post, nextPostInfo: {title: nextPost.title, link: nextPost.link}});
   } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', post: null});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
   }
 };
 
-export const getRandomPostExcludeVisitedLink = async (req: Request, res: Response) => {
+export const getPost = async (req: Request, res: Response) => {
   try {
-    const count = await PostModel.count() - 1;
+    if (!req.query.link) {
+      return getRandomPost(req, res);
+    }
 
+    const count = await PostModel.count() - 1;
     const random = Math.floor(Math.random() * count);
-    const post = await PostModel.findOne({link: {$ne: req.params.visitedLink}}).skip(random);
-    res.status(200).json({error: null, title: post.title, link: post.link});
+    const post = await PostModel.findOne({link: {$ne: req.query.link}}).skip(random);
+    PostModel.findOneAndUpdate(
+      {link: req.query.link},
+      {$inc: {views: 1}},
+      {returnDocument: 'after'},
+      (e, doc) => {
+        if (e) {
+          return res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
+        }
+        res.json({post: doc || notFoundPost, nextPostInfo: {title: post.title, link: post.link}});
+      }
+    );
   } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', title: null, link: null});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
   }
 };
 export const findPosts = async (req: Request, res: Response) => {
   try {
-    const {value} = req.params;
-    const regexp = new RegExp(value, 'i');
+    const {value} = req.query;
+    const regexp = new RegExp(value.toString(), 'i');
     const posts = await PostModel.find({title: {$regex: regexp}}).limit(10);
     const foundedPosts = posts.map(post => ({title: post.title, link: post.link, owner: post.owner}));
 
-    res.status(200).json({error: null, foundedPosts});
+    res.status(200).json({foundedPosts});
   } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', post: null});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
   }
 };
 

@@ -15,7 +15,7 @@ export const ListStyled = styled.ul`
     color: ${props => props.theme.colors.paragraph};
     @media (max-width: 500px) {
       font-size: 15px;
-      line-height: 20px;
+      line-height: 22px;
       margin-left: 10px;
     }
   }

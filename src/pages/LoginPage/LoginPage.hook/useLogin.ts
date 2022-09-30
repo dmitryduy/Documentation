@@ -1,13 +1,9 @@
-import { useState } from 'react';
-
-import { fetchLogin } from '../../../api/fetchLogin';
 import { showTooltip } from '../../../utils/showTooltip';
-import { useAppDispatch } from '../../../hooks/useAppSelector';
-import { loginUser } from '../../../reducers/authReducer/authReducer';
-import { Errors } from '../../../errors';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useAppSelector';
+import {  signIn } from '../../../reducers/authReducer/authReducer';
 
 export const useLogin = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const isLoading = useAppSelector(state => state.auth.loading);
   const dispatch = useAppDispatch();
 
   const signUp = (login: string, password: string) => {
@@ -16,21 +12,10 @@ export const useLogin = () => {
     if (!loginTrimmed || !passwordTrimmed) {
       return;
     }
-    setIsLoading(true);
-    fetchLogin(passwordTrimmed, loginTrimmed)
-      .then(data => {
-        setIsLoading(false);
-        if (data.error) {
-          showTooltip(data.error);
-          return;
-        }
-        dispatch(loginUser(data.login!));
-        window.localStorage.setItem('auth-token', data.token!);
-      }).catch(e => {
-        setIsLoading(false);
-        const error = e.response && e.response.data && e.response.data.error;
-        showTooltip(error || Errors.UNEXPECTED_ERROR);
-      });
+    dispatch(signIn({login: loginTrimmed, password: passwordTrimmed}))
+      .unwrap()
+      .then(data => window.localStorage.setItem('auth-token', data.token))
+      .catch(showTooltip);
   };
 
   return {isLoading, signUp};

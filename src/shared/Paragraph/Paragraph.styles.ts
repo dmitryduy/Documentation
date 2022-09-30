@@ -9,6 +9,6 @@ export const ParagraphStyled = styled.p`
   @media (max-width: 500px) {
     font-size: 15px;
     margin-bottom: 10px;
-    line-height: 20px;
+    line-height: 21px;
   }
 `;

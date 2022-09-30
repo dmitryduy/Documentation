@@ -8,20 +8,18 @@ import { ReactComponent as AddSvg } from '../../assets/images/add.svg';
 
 import { useFetchPost } from './ArticlePage.hook/useFetchPost';
 import { ArticlePageStyled } from './ArticlePage.styles';
-import { useFetchNextPostInfo } from './ArticlePage.hook/useFetchNextPostInfo';
 
 const ArticlePage = () => {
   const {title} = useParams();
-  const post = useAppSelector(state => state.articles.post);
-  const isLoading = useFetchPost(title);
+  const post = useAppSelector(state => state.articles);
+  useFetchPost(title);
 
   useLayoutEffect(() => window.scrollTo(0, 0), [post]);
-  useFetchNextPostInfo();
 
   return (
     <ArticlePageStyled>
       <InfoAside/>
-      <ArticleSide isLoading={isLoading} post={post}/>
+      <ArticleSide/>
       <NavLink className="add-post" to="/create-post">
         <AddSvg/>
       </NavLink>

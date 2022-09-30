@@ -1,10 +1,7 @@
-import { useState } from 'react';
 
-import { useAppDispatch } from '../../../hooks/useAppSelector';
-import { fetchLogin } from '../../../api/fetchLogin';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useAppSelector';
 import { showTooltip } from '../../../utils/showTooltip';
-import { loginUser } from '../../../reducers/authReducer/authReducer';
-import { Errors } from '../../../errors';
+import { signUp } from '../../../reducers/authReducer/authReducer';
 import {
   LOGIN_LENGTH_ERROR,
   LOGIN_REGEX,
@@ -13,10 +10,9 @@ import {
   PASSWORD_REGEX,
   PASSWORD_REGEX_ERROR
 } from '../RegisterPage.constants';
-import { fetchRegister } from '../../../api/fetchRegister';
 
 export const useRegister = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const isLoading = useAppSelector(state => state.auth.loading);
   const dispatch = useAppDispatch();
 
   const register = (login: string, password: string, repeatPassword: string) => {
@@ -48,21 +44,10 @@ export const useRegister = () => {
       showTooltip(PASSWORD_LENGTH_ERROR);
       return;
     }
-    setIsLoading(true);
-    fetchRegister(passwordTrimmed, loginTrimmed)
-      .then(data => {
-        setIsLoading(false);
-        if (data.error) {
-          showTooltip(data.error);
-          return;
-        }
-        dispatch(loginUser(data.login!));
-        window.localStorage.setItem('auth-token', data.token!);
-      }).catch(e => {
-        setIsLoading(false);
-        const error = e.response && e.response.data && e.response.data.error;
-        showTooltip(error || Errors.UNEXPECTED_ERROR);
-      });
+    dispatch(signUp({login: loginTrimmed, password: passwordTrimmed}))
+      .unwrap()
+      .then(data => window.localStorage.setItem('auth-token', data.token))
+      .catch(showTooltip);
   };
 
   return {isLoading, register};

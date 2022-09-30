@@ -54,7 +54,7 @@ export const useMarkdownComponents = ():
     },
     code({children, className}) {
       const match = /language-(\w+)/.exec(className || '');
-      return match ? <Code code={children.toString()} language={match[0]}/> : <CodeText>{children}</CodeText>;
+      return match ? <Code code={children.toString()} language={match[1]}/> : <CodeText>{children}</CodeText>;
     },
 
     ul({children}) {

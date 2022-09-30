@@ -1,26 +1,25 @@
 import { useState } from 'react';
 
 import { useAuth } from '../../../hooks/useAuth';
-import { deletePost } from '../../../api/deletePost';
 import { showTooltip } from '../../../utils/showTooltip';
 import { Errors } from '../../../errors';
+import { useAppDispatch } from '../../../hooks/useAppSelector';
+import { deletePost } from '../../../reducers/articlesReducer/articlesReducer';
 
 export const useDeletePost = () => {
   const {login} = useAuth();
   const [isDeleted, setIsDeleted] = useState(false);
+  const dispatch = useAppDispatch();
   const removePost =  (link: string) => {
-    deletePost(login || '', link)
-      .then(data => {
-        if (data.error) {
-          showTooltip(data.error);
-          return;
-        }
+    dispatch(deletePost({owner: login || '', link}))
+      .unwrap()
+      .then(() => {
         setIsDeleted(true);
-        showTooltip('Статья удалена');
+        showTooltip('Пост удален');
       })
       .catch(e => {
-        const error = e.response && e.response.data && e.response.data.error;
-        showTooltip(error || Errors.UNEXPECTED_ERROR);
+        setIsDeleted(true);
+        showTooltip(e);
       });
   };
 

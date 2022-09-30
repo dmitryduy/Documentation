@@ -10,8 +10,6 @@ import {
   createPost, deletePost, findPosts,
   getAllPosts,
   getPost,
-  getRandomPost,
-  getRandomPostExcludeVisitedLink,
   updatePost
 } from './controllers/PostController';
 import { getArticles } from './controllers/TagController';
@@ -41,11 +39,7 @@ app.put('/update-post', updatePost);
 
 app.get('/posts', getAllPosts);
 
-app.get('/random', getRandomPost);
-
-app.get('/random/:visitedLink', getRandomPostExcludeVisitedLink);
-
-app.get('/post/:link', getPost);
+app.get('/post/', getPost);
 
 app.get('/post-tags', getArticles);
 
@@ -53,7 +47,7 @@ app.post('/register', registerValidation, register);
 
 app.post('/login', loginValidation, loginUser);
 
-app.get('/find-post/:value', findPosts);
+app.get('/find-post', findPosts);
 
 app.delete('/delete-post', deleteValidation, deletePost);
 

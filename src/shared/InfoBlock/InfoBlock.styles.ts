@@ -9,7 +9,6 @@ export const InfoBlockStyled = styled.div`
 
   @media (max-width: 500px) {
     padding: 10px;
-    margin: 5px 0;
   }
   &.alert {
     background-color: ${props => props.theme.colors.alertBg};

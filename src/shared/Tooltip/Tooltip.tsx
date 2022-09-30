@@ -16,7 +16,7 @@ const Tooltip = () => {
   useEmit<{title: string}>(EmitterNames.TOOLTIP_SHOW, ({title}) => {
     setValue(title);
     setActive(true);
-
+    console.log(title);
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }

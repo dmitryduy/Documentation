@@ -7,11 +7,9 @@ import windowExtends from './declare';
 import { useShowTooltipOnNetworkError } from './hooks/useShowTooltipOnNetworkError';
 import { useAuth } from './hooks/useAuth';
 import { routes } from './routes';
-import { authMe } from './api/authMe';
 import { showTooltip } from './utils/showTooltip';
-import { Errors } from './errors';
 import { useAppDispatch } from './hooks/useAppSelector';
-import { loginUser } from './reducers/authReducer/authReducer';
+import { authMe } from './reducers/authReducer/authReducer';
 import Loader from './shared/Loader/Loader';
 import { Wrapper } from './App.styles';
 
@@ -23,19 +21,17 @@ function App() {
   useShowTooltipOnNetworkError();
   const {isLogin} = useAuth();
   const [show, setShow] = useState(false);
+
   useEffect(() => {
-    authMe()
-      .then(data => {
+    dispatch(authMe())
+      .unwrap()
+      .then(() => setShow(true))
+      .catch(e => {
         setShow(true);
-        if (data.auth) {
-          dispatch(loginUser(data.login!));
-        }
-      })
-      .catch(() => {
-        setShow(true);
-        showTooltip(Errors.UNEXPECTED_ERROR);
+        showTooltip(e);
       });
   }, []);
+
   const routesMemo = useMemo(() => (isLogin ? routes.private : routes.common), [isLogin]);
 
   if (!show) return <Wrapper><Loader/></Wrapper>;
@@ -43,7 +39,6 @@ function App() {
   return (
     <>
       <Wrapper>
-        <Tooltip/>
         {isLogin && <Header/>}
         <Routes>
           {routesMemo.map(route =>

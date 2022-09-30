@@ -18,10 +18,12 @@ const Code: React.FC<ICodeProps> = ({code, language}) => {
   return (
     <CodeStyled>
       <SyntaxHighlighter
+        className="scroll"
         children={code.replace(/\n$/, '')}
         style={theme === 'light' ? oneLight : dracula}
         language={language}
         PreTag="div"
+        customStyle={{paddingTop: 22}}
       />
       <CopySvg onClick={() => copyToClipboard(code)} className="copy-icon"/>
     </CodeStyled>

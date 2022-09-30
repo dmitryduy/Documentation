@@ -9,14 +9,14 @@ export const register = async (req: Request, res: Response) => {
   try {
     const errors = customValidationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({error: errors.array()[0].error, login: null});
+      return res.status(400).json({error: errors.array()[0].error});
     }
 
     const {login, password} = req.body;
 
     const foundedUser = await User.findOne({login});
     if (foundedUser) {
-      return res.status(400).json({error: 'Данный логин уже существует.', login: null, token: null});
+      return res.status(400).json({error: 'Данный логин уже существует.'});
     }
 
     const docPost = new User({login, password});
@@ -31,9 +31,9 @@ export const register = async (req: Request, res: Response) => {
       expiresIn: '15d'
     });
 
-    res.status(200).json({error: null, login: user.login, token});
+    res.status(200).json({login: user.login, token});
   } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', login: null, token: null});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
   }
 };
 
@@ -42,13 +42,13 @@ export const loginUser = async (req: Request, res: Response) => {
   try {
     const errors = customValidationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({error: errors.array()[0].error, login: null});
+      return res.status(400).json({error: errors.array()[0].error});
     }
 
     const {login, password} = req.body;
     const foundedUser = await User.findOne({login, password });
     if (!foundedUser) {
-      return res.status(400).json({error: 'Неверный логин или пароль', login: null, token: null});
+      return res.status(400).json({error: 'Неверный логин или пароль'});
     }
 
     const token = jwt.sign({
@@ -59,10 +59,10 @@ export const loginUser = async (req: Request, res: Response) => {
       expiresIn: '15d'
     });
 
-    res.status(200).json({error: null, login: foundedUser.login, token});
+    res.status(200).json({login: foundedUser.login, token});
 
   } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', login: null, token: null});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
   }
 };
 
@@ -76,15 +76,15 @@ export const authMe = async (req: Request, res: Response) => {
       const owner = decoded.login;
       const user = await User.findOne({login: owner});
       if (!user) {
-        return res.status(200).json({error: null, auth: false, login: null, token: null});
+        return res.status(200).json({login: null});
       }
 
-      res.status(200).json({error: null, auth: true, login: user.login});
+      res.status(200).json({login: user.login});
 
     } else {
-      return res.status(200).json({error: null, auth: false, login: null, token: null});
+      return res.status(200).json({login: null});
     }
   } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', auth: false, login: null, token: null});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
   }
 };

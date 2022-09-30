@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import Article from '../Article/Article';
 import { useToggle } from '../../hooks/useToggle';
 import { EmitterNames } from '../../emitterNames';
-import { IPost } from '../../global.typings';
 import Loader from '../../shared/Loader/Loader';
 import { useEmit } from '../../hooks/useEmit';
 import {ReactComponent as EditSvg} from '../../assets/images/edit.svg';
@@ -20,15 +19,11 @@ import ArticleMenu from '../ArticleMenu/ArticleMenu';
 import {ArticleSideStyled, Actions} from './ArticleSide.styles';
 import { useDeletePost } from './ArticleSide.hook/useDeletePost';
 
-interface IArticleSideProps {
-    post: IPost | null;
-    isLoading: boolean;
-}
 
-const ArticleSide: React.FC<IArticleSideProps> = ({post, isLoading}) => {
+const ArticleSide = () => {
   const [content, toggleContent, setContent]  = useToggle(false);
   const phone = useMatchMedia();
-  const nextArticle = useAppSelector(state => state.articles.nextPost);
+  const { nextPost, post, loading} = useAppSelector(state => state.articles);
   const {login} = useAuth();
   const {isDeleted, removePost} = useDeletePost();
   const navigate = useNavigate();
@@ -55,7 +50,7 @@ const ArticleSide: React.FC<IArticleSideProps> = ({post, isLoading}) => {
     }
   }, [isDeleted]);
 
-  if (!isLoading && post) {
+  if (!loading && post) {
     return (
       <ArticleSideStyled className={cn({transform: content})}>
         <Article markdown={post.markdown}/>
@@ -65,7 +60,7 @@ const ArticleSide: React.FC<IArticleSideProps> = ({post, isLoading}) => {
             <DeleteSvg/>Удалить
           </span>
         </Actions>}
-        {nextArticle && <ButtonLink link={nextArticle.link} subtitle="Случайная статья" text={nextArticle.title}/>}
+        {nextPost && <ButtonLink link={nextPost.link} subtitle="Случайная статья" text={nextPost.title}/>}
         {post.menu.length && !phone ?
           <ArticleMenu menu={post.menu}/> :
           null

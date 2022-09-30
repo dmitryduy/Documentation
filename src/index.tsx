@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { store } from './store/store';
 import Theme from './Theme';
+import Tooltip from './shared/Tooltip/Tooltip';
 
 
 const root = ReactDOM.createRoot(
@@ -16,6 +17,7 @@ root.render(
   <Provider store={store}>
     <Theme>
       <HashRouter>
+        <Tooltip/>
         <App/>
       </HashRouter>
     </Theme>

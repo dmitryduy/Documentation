@@ -3,17 +3,19 @@ import { useNavigate } from 'react-router-dom';
 
 import { showTooltip } from '../../../utils/showTooltip';
 import { getTitleFromMarkdown } from '../../../utils/getTitleFromMarkdown';
-import { updatePostBackend } from '../../../api/updatePost';
-import { Errors } from '../../../errors';
 import { IPost } from '../../../global.typings';
 import { useAuth } from '../../../hooks/useAuth';
+import { useAppDispatch } from '../../../hooks/useAppSelector';
+import { updatePost } from '../../../reducers/articlesReducer/articlesReducer';
+import { getMenuFromMarkdown } from '../../../utils/getMenuFromMarkdown';
 
 export const useUpdatePost = (post: IPost | null):[boolean, (markdown: string) => void] => {
   const [isLoading, setIsLoading] = useState(false);
   const {login} = useAuth();
   const nagivate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const updatePost = (markdown: string) => {
+  const validateAndUpdatePost = (markdown: string) => {
     if (markdown === post?.markdown) {
       showTooltip('Отредактируйте пост');
       return;
@@ -24,18 +26,19 @@ export const useUpdatePost = (post: IPost | null):[boolean, (markdown: string) =
       return;
     }
     setIsLoading(true);
-    updatePostBackend(markdown, post.link, login || '')
+    dispatch(updatePost({markdown, menu: getMenuFromMarkdown(markdown), link: post.link, owner: login || ''}))
+      .unwrap()
       .then(() => {
         setIsLoading(false);
         nagivate(`/post/${post.link}`);
+        showTooltip('Пост обновлен');
       })
       .catch(e => {
-        console.log(e);
         setIsLoading(false);
-        showTooltip(Errors.BACKEND_ERROR);
+        showTooltip(e);
       });
   };
 
-  return [isLoading, updatePost];
+  return [isLoading, validateAndUpdatePost];
 
 };

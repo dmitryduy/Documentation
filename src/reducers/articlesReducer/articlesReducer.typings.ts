@@ -8,4 +8,5 @@ export interface PostInfo {
 export interface IArticlesReducerState {
   post: IPost | null;
   nextPost: PostInfo | null;
+  loading: boolean;
 }

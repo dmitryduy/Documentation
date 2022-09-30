@@ -10,7 +10,6 @@ interface IArticleMenuProps {
 }
 
 const ArticleMenu: React.FC<IArticleMenuProps> = ({menu}) => {
-  console.log(menu);
   return (
     <ArticleMenuStyled>
       {getArticleMenu(menu)}
