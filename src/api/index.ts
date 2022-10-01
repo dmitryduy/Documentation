@@ -1,17 +1,18 @@
 import { AxiosResponse } from 'axios';
 
 import axios from '../axios';
+import { QueryParams } from '../global.typings';
 
 type Method = 'post' | 'put' | 'delete';
 
 export type QueryConfig = {
-  params: { [key in string]: string };
+  params: QueryParams;
 };
 
-export const apiFunctionQuery = <Response>(pathName: string) => {
-  return (config?: QueryConfig): Promise<AxiosResponse<Response>> => axios.get<Response>(pathName, config);
+export const apiFunctionQuery = <TRes>(pathName: string) => {
+  return (config?: QueryConfig): Promise<AxiosResponse<TRes>> => axios.get<TRes>(pathName, config);
 };
 
-export const apiFunctionMutation = <Request, Response>(method: Method, pathName: string,) => {
-  return (data: Request): Promise<AxiosResponse<Response>> => axios(pathName, {data, method});
+export const apiFunctionMutation = <TReq, TRes>(method: Method, pathName: string,) => {
+  return (data: TReq): Promise<AxiosResponse<TRes>> => axios(pathName, {data, method});
 };

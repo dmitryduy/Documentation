@@ -6,9 +6,9 @@ import {
   DeletePostRequest,
   DeletePostResponse, FindOnePostResponse, FindPostResponse,
   postApi, UpdatePostRequest, UpdatePostResponse
-} from '../../api/postApi';
+} from '../../api/postApi/postApi';
 import { getAsyncActionMutation, getAsyncActionQuery } from '../getAsyncAction';
-import { GetAllTagsResponse, tagsApi } from '../../api/tagsApi';
+import { GetAllTagsResponse, tagsApi } from '../../api/tagsApi/tagsApi';
 
 import { IArticlesReducerState } from './articlesReducer.typings';
 

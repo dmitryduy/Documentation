@@ -7,7 +7,7 @@ import {
   SignUpRequest,
   SignUpResponse,
   userAPI
-} from '../../api/userAPI';
+} from '../../api/userApi/userAPI';
 import { getAsyncActionMutation, getAsyncActionQuery } from '../getAsyncAction';
 
 import { IAuthReducerState } from './authReducer.typings';

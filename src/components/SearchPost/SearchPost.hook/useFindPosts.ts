@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { showTooltip } from '../../../utils/showTooltip';
 import { useAppDispatch } from '../../../hooks/useAppSelector';
 import { findPosts } from '../../../reducers/articlesReducer/articlesReducer';
-import { FindPostResponse } from '../../../api/postApi';
+import { FindPostResponse } from '../../../api/postApi/postApi';
 import { generateQueryParams } from '../../../utils/generateQueryParams';
 
 export const useFindPosts = (value: string) => {

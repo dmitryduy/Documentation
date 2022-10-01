@@ -1,6 +1,4 @@
-import { IPost, Menu } from '../global.typings';
-
-import { apiFunctionMutation, apiFunctionQuery } from './index';
+import { IPost, Menu } from '../../global.typings';
 
 export interface CreatePostRequest {
   markdown: string;
@@ -52,12 +50,3 @@ export interface NextPostInfoResponse {
   title: string;
   link: string;
 }
-
-export const postApi = {
-  create: apiFunctionMutation<CreatePostRequest, CreatePostResponse>('post', '/create-post'),
-  delete: apiFunctionMutation<DeletePostRequest, DeletePostResponse>('delete', '/delete-post'),
-  update: apiFunctionMutation<UpdatePostRequest, UpdatePostResponse>('put', '/update-post'),
-  find: apiFunctionQuery<FindPostResponse>('/find-post'),
-  findOne: apiFunctionQuery<FindOnePostResponse>('/post'),
-  nextPostInfo: apiFunctionQuery<NextPostInfoResponse>('/next-post-info')
-};
