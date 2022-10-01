@@ -19,13 +19,10 @@ export const useFetchTagsMenu = () => {
     dispatch(getAllTags())
       .unwrap()
       .then(data => {
-        setIsLoading(false);
         setTags(data.tags);
       })
-      .catch(e => {
-        setIsLoading(false);
-        showTooltip(e);
-      });
+      .catch(showTooltip)
+      .finally(() => setIsLoading(false));
   };
   useEffect(() => {
     isOnline && fetchTags();

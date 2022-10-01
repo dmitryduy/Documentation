@@ -1,7 +1,5 @@
 import React from 'react';
 
-import CodeText from '../CodeText/CodeText';
-
 import { TitleStyled } from './Title.styles';
 
 interface ITitleProps {

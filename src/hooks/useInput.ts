@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 
-export const useInput = (defaultValue = '', maxSize = 9999999):
-  [string,
-  (e: string | React.FormEvent<HTMLInputElement>) => void,
-  () => void] => {
+export const useInput = (defaultValue = '', maxSize = Infinity):
+  [string, (e: string | React.FormEvent<HTMLInputElement>) => void, () => void] => {
   const [value, setValue] = useState(defaultValue);
 
   const updateValue = (e: string | React.FormEvent<HTMLInputElement>) => {

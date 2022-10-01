@@ -12,3 +12,5 @@ export const LOGIN_REGEX_ERROR =
   'Логин может состоять только из симолов русского и английского алфавита, а также из чисел';
 export const PASSWORD_REGEX_ERROR =
   'Пароль может состоять только из симолов русского и английского алфавита, а также из чисел и символов: "!?-*$#"';
+export const FIELD_EMPTY_ERROR = 'Все поля должны быть заполнены';
+export const PASSWORD_NOT_EQUALS = 'Пароли не совпадают';

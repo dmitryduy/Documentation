@@ -5,7 +5,7 @@ import {AuthButtonStyled} from './AuthButton.styles';
 interface IAuthButtonProps {
     onClick: () => void;
     children: React.ReactNode;
-    disabled: boolean
+    disabled: boolean;
 }
 
 const AuthButton: React.FC<IAuthButtonProps> = ({onClick, children, disabled}) => {

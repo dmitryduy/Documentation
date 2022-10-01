@@ -3,10 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import Loader from '../../shared/Loader/Loader';
 import EditorWithPreview from '../../shared/EditorWithPreview/EditorWithPreview';
-import { showTooltip } from '../../utils/showTooltip';
-import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
-import { findPost } from '../../reducers/articlesReducer/articlesReducer';
-import { useAuth } from '../../hooks/useAuth';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 import { useUpdatePost } from './EditPostPage.hook/useUpdatePost';
 
@@ -14,25 +11,12 @@ import { useUpdatePost } from './EditPostPage.hook/useUpdatePost';
 const EditPostPage = () => {
   const {title} = useParams();
   const post = useAppSelector(state => state.articles.post);
-  const {login}  = useAuth();
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isLoading, updatePost] = useUpdatePost(post);
 
   useEffect(() => {
-    if (title && title !== post?.title) {
-      dispatch(findPost({
-        params: {
-          link: title
-        }
-      }))
-        .unwrap()
-        .then(data => {
-          if (data.post.owner !== login) {
-            navigate('/Documentation');
-          }
-        })
-        .catch(showTooltip);
+    if (!post || title !== post.link) {
+      navigate('/Documentation');
     }
   }, [title]);
 

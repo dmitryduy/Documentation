@@ -11,8 +11,8 @@ interface AsyncThunkConfig {
   rejectValue: string;
 }
 
-export const getAsyncActionQuery = <Response>(name: string, func: IQueryFunction<Response>) =>
-  createAsyncThunk<Response, QueryConfig | undefined, AsyncThunkConfig>(name, async (config, thunkApi) => {
+export const getAsyncActionQuery = <TRes>(name: string, func: IQueryFunction<TRes>) =>
+  createAsyncThunk<TRes, QueryConfig | undefined, AsyncThunkConfig>(name, async (config, thunkApi) => {
     try {
       const response = await func(config);
       return response.data;
@@ -25,8 +25,8 @@ export const getAsyncActionQuery = <Response>(name: string, func: IQueryFunction
     }
   });
 
-export const getAsyncActionMutation = <Request, Response>(name: string, func: IMutationFunction<Request, Response>) =>
-  createAsyncThunk<Response, Request, AsyncThunkConfig>(name, async (data, thunkApi) => {
+export const getAsyncActionMutation = <TReq, TRes>(name: string, func: IMutationFunction<TReq, TRes>) =>
+  createAsyncThunk<TRes, TReq, AsyncThunkConfig>(name, async (data, thunkApi) => {
     try {
       const response = await func(data);
       return response.data;

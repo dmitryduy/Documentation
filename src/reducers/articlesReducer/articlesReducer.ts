@@ -23,7 +23,6 @@ export const findPosts = getAsyncActionQuery<FindPostResponse>('post/find', post
 
 export const findPost = getAsyncActionQuery<FindOnePostResponse>('post/findOne', postApi.findOne);
 
-
 export const getAllTags = getAsyncActionQuery<GetAllTagsResponse>('post/tags', tagsApi.getAll);
 
 const initialState = {

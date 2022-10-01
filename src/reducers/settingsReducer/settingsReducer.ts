@@ -1,13 +1,15 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+
+import { storage } from '../../utils/storage';
 
 import { ISettingsReducerState } from './settingsReducer.typings';
 
 const initialState = {
-  theme: window.localStorage.getItem('theme') || 'dark',
+  theme: storage('theme').getItem() || 'dark',
 } as ISettingsReducerState;
 
 const settingsSlice = createSlice({
-  name: 'articles',
+  name: 'settings',
   initialState,
   reducers: {
     changeTheme(state) {

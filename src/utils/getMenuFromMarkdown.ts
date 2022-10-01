@@ -1,3 +1,5 @@
+import { Menu } from '../global.typings';
+
 import { unifyMenuLinks } from './unifyMenuLinks';
 
 export const getMenuFromMarkdown = (markdown: string) => {
@@ -19,5 +21,5 @@ export const getMenuFromMarkdown = (markdown: string) => {
       return [...prev, unifyMenuLinks(match, false)];
     }
     return prev;
-  }, [] as (string | string[])[]);
+  }, [] as Menu);
 };

@@ -7,6 +7,7 @@ import { useToggle } from '../../hooks/useToggle';
 import { EmitterNames } from '../../emitterNames';
 import { useHeightAnimate } from '../../hooks/useHeightAnimate';
 import useMatchMedia from '../../hooks/useMatchMedia';
+import {ReactComponent as ArrowSvg} from '../../assets/images/arrow.svg';
 
 import { Header, TagListStyled } from './TagList.styles';
 
@@ -15,10 +16,9 @@ interface ITagListProps {
 }
 
 const TagList: React.FC<ITagListProps> = ({tagInfo}) => {
-  const [active, toggleActive] = useToggle(true);
-  const listRef = useHeightAnimate<HTMLUListElement>(active);
+  const [isActive, toggleIsActive] = useToggle(true);
+  const listRef = useHeightAnimate<HTMLUListElement>(isActive);
   const phone = useMatchMedia();
-
 
   const closeLeftSide = () => {
     phone && window.emitter.emit(EmitterNames.TOGGLE_LEFT_SIDEBAR);
@@ -26,13 +26,11 @@ const TagList: React.FC<ITagListProps> = ({tagInfo}) => {
 
   return (
     <TagListStyled>
-      <Header className={cn({active})} onClick={toggleActive}>
+      <Header className={cn({active: isActive})} onClick={toggleIsActive}>
         <h4 className="tag">{tagInfo.tagName}</h4>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
-        </svg>
+        <ArrowSvg/>
       </Header>
-      <ul ref={listRef} className={cn('article-list', {active})}>
+      <ul ref={listRef} className={cn('article-list', {active: isActive})}>
         {tagInfo.articles.map(article =>
           <li className="article-title" key={article.link}>
             <Link to={`/post/${article.link}`} onClick={closeLeftSide}>

@@ -21,3 +21,5 @@ export interface ITagList {
 }
 
 export type InfoBlockType = 'alert' | 'info' | 'tip' | 'caution';
+
+export type QueryParams = {[key in string]: string};

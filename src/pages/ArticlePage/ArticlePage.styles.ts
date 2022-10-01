@@ -24,11 +24,13 @@ export const ArticlePageStyled = styled.div`
     font-weight: 300;
     box-shadow: 4px 4px 10px 0 rgba(34, 60, 80, 0.2);
     background-color: ${props => props.theme.colors.link};
+
     path {
       fill: ${props => props.theme.colors.link};
     }
-    polygon{
-      fill:  #fff;
+
+    polygon {
+      fill: #fff;
     }
   }
 `;

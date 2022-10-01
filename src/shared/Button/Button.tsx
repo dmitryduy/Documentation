@@ -13,9 +13,10 @@ interface IButtonProps {
 
 const Button: React.FC<IButtonProps> = ({onClick, text, subtitle, isLoading}) => {
   if (isLoading) {
-    return (<ButtonStyled disabled>
-      <Loader/>
-    </ButtonStyled>);
+    return (
+      <ButtonStyled disabled>
+        <Loader/>
+      </ButtonStyled>);
   }
 
   return (

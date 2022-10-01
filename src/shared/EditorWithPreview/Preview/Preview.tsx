@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import cn from 'classnames';
 
 import Article from '../../../components/Article/Article';
 import { useAutoScroll } from '../EditorWithPreview.hook/useAutoScroll';
 import useMatchMedia from '../../../hooks/useMatchMedia';
 
-import { PreviewStyled, PreviewButton } from './Preview.styles';
+import { PreviewStyled, HidePreviewButton } from './Preview.styles';
 
 interface IPreviewProps {
   markdown: string;
-  widePreview: boolean;
+  isShowPreviewOnPhone: boolean;
   defaultMarkdown: string;
-  hidePreview: () => void;
+  hidePreviewOnPhone: () => void;
 }
 
-const Preview: React.FC<IPreviewProps> = ({markdown, widePreview, defaultMarkdown, hidePreview}) => {
+const Preview: React.FC<IPreviewProps> = ({markdown, isShowPreviewOnPhone, defaultMarkdown, hidePreviewOnPhone}) => {
   const previewRef = useAutoScroll(!defaultMarkdown, [markdown]);
   const phone = useMatchMedia();
 
   return (
-    <PreviewStyled className={cn({active: widePreview})}>
-      {phone && <PreviewButton onClick={hidePreview}>&times;</PreviewButton>}
+    <PreviewStyled className={cn({active: isShowPreviewOnPhone})}>
+      {phone && <HidePreviewButton onClick={hidePreviewOnPhone}>&times;</HidePreviewButton>}
       <div ref={previewRef} className="content">
-        {phone && !widePreview ? null : <Article markdown={markdown}/>}
+        {phone && !isShowPreviewOnPhone ? null : <Article markdown={markdown}/>}
       </div>
     </PreviewStyled>
   );

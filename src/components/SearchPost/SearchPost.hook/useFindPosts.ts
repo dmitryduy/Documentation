@@ -1,32 +1,26 @@
 import { useEffect, useState } from 'react';
 
 import { showTooltip } from '../../../utils/showTooltip';
-import { Errors } from '../../../errors';
 import { useAppDispatch } from '../../../hooks/useAppSelector';
 import { findPosts } from '../../../reducers/articlesReducer/articlesReducer';
+import { FindPostResponse } from '../../../api/postApi';
+import { generateQueryParams } from '../../../utils/generateQueryParams';
 
 export const useFindPosts = (value: string) => {
-  const [postsInfo, setPostsInfo] = useState<null | {title: string, link: string, owner: string}[]>(null);
+  const [postsInfo, setPostsInfo] = useState<null | FindPostResponse['foundedPosts']>(null);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (value.trim()) {
       setIsLoading(true);
-      dispatch(findPosts({
-        params: {
-          value: value.trim()
-        }
-      }))
+      dispatch(findPosts(generateQueryParams({value: value.trim()})))
         .unwrap()
         .then(data => {
           setPostsInfo(data.foundedPosts);
-          setIsLoading(false);
         })
-        .catch(e => {
-          setIsLoading(false);
-          showTooltip(e);
-        });
+        .catch(showTooltip)
+        .finally(() => setIsLoading(false));
     } else {
       setPostsInfo(null);
     }

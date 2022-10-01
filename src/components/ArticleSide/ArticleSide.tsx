@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Article from '../Article/Article';
-import { useToggle } from '../../hooks/useToggle';
 import { EmitterNames } from '../../emitterNames';
 import Loader from '../../shared/Loader/Loader';
 import { useEmit } from '../../hooks/useEmit';
@@ -21,16 +20,15 @@ import { useDeletePost } from './ArticleSide.hook/useDeletePost';
 
 
 const ArticleSide = () => {
-  const [content, toggleContent, setContent]  = useToggle(false);
+  const [isHide, setIsHide]  = useState(false);
   const phone = useMatchMedia();
   const { nextPost, post, loading} = useAppSelector(state => state.articles);
   const {login} = useAuth();
-  const {isDeleted, removePost} = useDeletePost();
-  const navigate = useNavigate();
-  useEmit(EmitterNames.TOGGLE_LEFT_SIDEBAR, () => toggleContent());
+  const deletePost = useDeletePost();
+  useEmit(EmitterNames.TOGGLE_LEFT_SIDEBAR, () => setIsHide(prev => !prev));
 
   useEffect(() => {
-    !phone && setContent(false);
+    !phone && setIsHide(false);
   }, [phone]);
 
   const onDeleteClick = () => {
@@ -39,22 +37,15 @@ const ArticleSide = () => {
 
   const onDeleteDoubleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (post) {
-      removePost(post?.link);
-    }
+    post && deletePost(post?.link);
   };
-
-  useEffect(() => {
-    if (isDeleted) {
-      navigate('/');
-    }
-  }, [isDeleted]);
 
   if (!loading && post) {
     return (
-      <ArticleSideStyled className={cn({transform: content})}>
+      <ArticleSideStyled className={cn({transform: isHide})}>
         <Article markdown={post.markdown}/>
-        {post.owner === login && <Actions>
+        {post.owner === login &&
+        <Actions>
           <Link className="edit" to={`/edit-post/${post.link}`}><EditSvg/>Редактировать</Link>
           <span className="delete" onClick={onDeleteClick} onDoubleClick={onDeleteDoubleClick}>
             <DeleteSvg/>Удалить
@@ -69,7 +60,12 @@ const ArticleSide = () => {
     );
   }
 
-  return <ArticleSideStyled><Loader/></ArticleSideStyled>;
+  if (loading) {
+    return <ArticleSideStyled><Loader/></ArticleSideStyled>;
+  }
+
+  return <p>Что то пошло не так.</p>;
+
 };
 
 export default ArticleSide;

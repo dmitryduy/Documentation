@@ -4,7 +4,7 @@ import { contextMenuActions } from '../ContextMenu.constants';
 interface Options {
   selectionStart: number;
   selectionEnd: number;
-  editType: Actions
+  editType: Actions;
 }
 
 

@@ -11,7 +11,7 @@ import { ArticlePageStyled } from './ArticlePage.styles';
 
 const ArticlePage = () => {
   const {title} = useParams();
-  const post = useAppSelector(state => state.articles);
+  const post = useAppSelector(state => state.articles.post);
   useFetchPost(title);
 
   useLayoutEffect(() => window.scrollTo(0, 0), [post]);

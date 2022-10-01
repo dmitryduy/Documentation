@@ -16,6 +16,7 @@ const Link: React.FC<ILinkProps> = ({href, children}) => {
       </HashLink>
     );
   }
+
   return (
     <LinkStyled href={href} target="_blank">{children}</LinkStyled>
   );

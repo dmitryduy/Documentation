@@ -1,20 +1,21 @@
 import { showTooltip } from '../../../utils/showTooltip';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useAppSelector';
 import {  signIn } from '../../../reducers/authReducer/authReducer';
+import { storage } from '../../../utils/storage';
 
-export const useLogin = () => {
+export const useSignUp = () => {
   const isLoading = useAppSelector(state => state.auth.loading);
   const dispatch = useAppDispatch();
 
-  const signUp = (login: string, password: string) => {
-    const loginTrimmed = login.trim();
-    const passwordTrimmed = password.trim();
-    if (!loginTrimmed || !passwordTrimmed) {
+  const signUp = (dirtyLogin: string, dirtyPassword: string) => {
+    const login = dirtyLogin.trim();
+    const password = dirtyPassword.trim();
+    if (!login || !password) {
       return;
     }
-    dispatch(signIn({login: loginTrimmed, password: passwordTrimmed}))
+    dispatch(signIn({login, password}))
       .unwrap()
-      .then(data => window.localStorage.setItem('auth-token', data.token))
+      .then(data => storage('auth-token').setItem(data.token))
       .catch(showTooltip);
   };
 

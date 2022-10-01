@@ -9,9 +9,9 @@ export const LoginPageStyled = styled.div`
   margin: 60px auto 0;
   border-radius: 5px;
   padding: 20px;
-  box-shadow: 0 0 5px 0 rgba(34, 60, 80, 0.2);
+  box-shadow: 0 0 5px 0 rgba(34, 60, 80, .2);
 
-  a {
+  .sign-up {
     align-self: center;
     color: ${props => props.theme.colors.border};
   }

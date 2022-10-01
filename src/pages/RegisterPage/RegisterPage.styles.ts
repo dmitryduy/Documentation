@@ -11,7 +11,7 @@ export const RegisterPageStyled = styled.div`
   padding: 20px;
   box-shadow: 0 0 5px 0 rgba(34, 60, 80, 0.2);
 
-  a {
+  .sign-in {
     align-self: center;
     color: ${props => props.theme.colors.border};
   }

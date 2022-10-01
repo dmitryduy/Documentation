@@ -22,7 +22,6 @@ const Editor: FC<IEditorProps> = ({children, setMarkdown, markdown, tags, setTag
 
   const onInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMarkdown(e.target.value);
-
   };
 
   const updateMarkdown = (editType: Actions) => {
@@ -37,9 +36,7 @@ const Editor: FC<IEditorProps> = ({children, setMarkdown, markdown, tags, setTag
       <ContextMenu updateMarkdown={updateMarkdown}/>
       <Tags tags={tags} setTags={setTags}/>
       <textarea ref={textareaRef} value={markdown} onInput={onInput}/>
-      <div className="buttons">
-        {children}
-      </div>
+      <div className="buttons">{children}</div>
     </EditorStyled>
   );
 };

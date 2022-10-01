@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Header from './components/Header/Header';
-import Tooltip from './shared/Tooltip/Tooltip';
 import windowExtends from './declare';
 import { useShowTooltipOnNetworkError } from './hooks/useShowTooltipOnNetworkError';
 import { useAuth } from './hooks/useAuth';
@@ -25,11 +24,8 @@ function App() {
   useEffect(() => {
     dispatch(authMe())
       .unwrap()
-      .then(() => setShow(true))
-      .catch(e => {
-        setShow(true);
-        showTooltip(e);
-      });
+      .catch(showTooltip)
+      .finally(() => setShow(true));
   }, []);
 
   const routesMemo = useMemo(() => (isLogin ? routes.private : routes.common), [isLogin]);

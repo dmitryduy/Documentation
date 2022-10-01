@@ -12,7 +12,6 @@ interface IContextMenuProps {
 }
 
 const ContextMenu: React.FC<IContextMenuProps> = ({updateMarkdown}) => {
-
   const menuRef = useRef<HTMLDivElement>(null);
 
   const editText = (e: MouseEvent<HTMLDivElement>) => {

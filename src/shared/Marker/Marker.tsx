@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { CodeTextStyled } from './CodeText.styles';
+import { CodeTextStyled } from './Marker.styles';
 
 interface ICodeTextProps {
   children: React.ReactNode;
 }
 
-const CodeText: React.FC<ICodeTextProps> = ({children}) => {
+const Marker: React.FC<ICodeTextProps> = ({children}) => {
   return (
     <CodeTextStyled className="marker">
       {children}
@@ -14,4 +14,4 @@ const CodeText: React.FC<ICodeTextProps> = ({children}) => {
   );
 };
 
-export default CodeText;
+export default Marker;

@@ -7,16 +7,16 @@ import useMatchMedia from '../../hooks/useMatchMedia';
 import SearchPost from '../SearchPost/SearchPost';
 import {ReactComponent as LightThemeSvg} from '../../assets/images/lightTheme.svg';
 import {ReactComponent as DarkThemeSvg} from '../../assets/images/darkTheme.svg';
-import { useAppDispatch, useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch } from '../../hooks/useAppSelector';
 import { logout } from '../../reducers/authReducer/authReducer';
-import { changeTheme } from '../../reducers/settingsReducer/settingsReducer';
+import { useTheme } from '../../hooks/useTheme';
 
 import { HeaderStyled } from './Header.styles';
 
 
 
 const Header = () => {
-  const theme = useAppSelector(state => state.settings.theme);
+  const {theme, toggleTheme} = useTheme();
   const phone = useMatchMedia();
   const dispatch  = useAppDispatch();
   const toggleLeftSide = () => {
@@ -25,10 +25,6 @@ const Header = () => {
 
   const onLogout = () => {
     dispatch(logout());
-  };
-
-  const onChangeTheme = () => {
-    dispatch(changeTheme());
   };
 
   return (
@@ -44,10 +40,8 @@ const Header = () => {
           <li className="search">
             <SearchPost/>
           </li>
-          <li className="theme" onClick={onChangeTheme}>{theme === 'dark' ? <LightThemeSvg/> : <DarkThemeSvg/>}</li>
-          <li className="logout" onClick={onLogout}>
-            Выйти
-          </li>
+          <li className="theme" onClick={toggleTheme}>{theme === 'dark' ? <LightThemeSvg/> : <DarkThemeSvg/>}</li>
+          <li className="logout" onClick={onLogout}>Выйти</li>
         </ul>
       </nav>
     </HeaderStyled>

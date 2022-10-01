@@ -1,5 +1,5 @@
 ---
-to: <%= absPath %>/<%= hook %>.ts
+to: <%= absPath %>/<%= hooks %>.ts
 ---
 
 export const <%= hook %> = () => {

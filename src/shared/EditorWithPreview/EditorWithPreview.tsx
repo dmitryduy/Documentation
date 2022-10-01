@@ -1,15 +1,13 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import cn from 'classnames';
+import React, { useCallback, useState } from 'react';
 
 import Editor from '../../components/Editor/Editor';
 import Button from '../Button/Button';
-import Article from '../../components/Article/Article';
 import useMatchMedia from '../../hooks/useMatchMedia';
 import { useDebounce } from '../../hooks/useDebounce';
 
 import {EditorWithPreviewStyled} from './EditorWithPreview.styles';
-import { useAutoScroll } from './EditorWithPreview.hook/useAutoScroll';
 import Preview from './Preview/Preview';
+import { PREVIEW_UPDATE_DELAY } from './EditorWithPreview.constants';
 
 interface IEditorWithPreviewProps {
     onSubmit: (markdown: string, tags: string[]) => void;
@@ -25,12 +23,12 @@ const EditorWithPreview: React.FC<IEditorWithPreviewProps> = ({
   isLoading
 }) => {
   const [markdown, setMarkdown] = useState(defaultMarkdown);
-  const debouncedMarkdown = useDebounce(markdown, 400);
+  const debouncedMarkdown = useDebounce(markdown, PREVIEW_UPDATE_DELAY);
   const [tags, setTags] = useState<string[]>([]);
   const phone = useMatchMedia();
-  const [widePreview, setWidePreview] = useState(false);
+  const [isShowPreviewOnPhone, setIsShowPreviewOnPhone] = useState(false);
 
-  const hidePreview = useCallback(() => setWidePreview(false), []);
+  const hidePreviewOnPhone = useCallback(() => setIsShowPreviewOnPhone(false), []);
 
   return (
     <EditorWithPreviewStyled>
@@ -41,13 +39,13 @@ const EditorWithPreview: React.FC<IEditorWithPreviewProps> = ({
           subtitle="Статья"
           text={buttonValue}
         />
-        {phone && <Button subtitle="Статья" text="Превью" onClick={() => setWidePreview(true)}/>}
+        {phone && <Button subtitle="Статья" text="Превью" onClick={() => setIsShowPreviewOnPhone(true)}/>}
       </Editor>
       <Preview
-        widePreview={widePreview}
+        isShowPreviewOnPhone={isShowPreviewOnPhone}
         markdown={debouncedMarkdown}
         defaultMarkdown={debouncedMarkdown}
-        hidePreview={hidePreview}
+        hidePreviewOnPhone={hidePreviewOnPhone}
       />
     </EditorWithPreviewStyled>
   );

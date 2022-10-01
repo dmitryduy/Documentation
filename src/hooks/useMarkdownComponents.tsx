@@ -1,8 +1,6 @@
 import { NormalComponents } from 'react-markdown/lib/complex-types';
 import { SpecialComponents } from 'react-markdown/lib/ast-to-react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula,  oneLight} from 'react-syntax-highlighter/dist/esm/styles/prism';
-import React, { ReactElement, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import Title from '../shared/Title/Title';
 import Subtitle from '../shared/Subtitle/Subtitle';
@@ -11,7 +9,7 @@ import { InfoBlockType } from '../global.typings';
 import InfoBlock from '../shared/InfoBlock/InfoBlock';
 import Paragraph from '../shared/Paragraph/Paragraph';
 import Link from '../shared/Link/Link';
-import CodeText from '../shared/CodeText/CodeText';
+import Marker from '../shared/Marker/Marker';
 import List from '../shared/List/List';
 import Image from '../shared/Image/Image';
 import Video from '../shared/Video/Video';
@@ -19,7 +17,6 @@ import Table from '../shared/Table/Table';
 import { unifyMenuLinks } from '../utils/unifyMenuLinks';
 import Code from '../shared/Code/Code';
 import { reactChildrenToString } from '../utils/reactChildrenToString';
-
 
 export const useMarkdownComponents = ():
   Partial<Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents> => {
@@ -54,7 +51,7 @@ export const useMarkdownComponents = ():
     },
     code({children, className}) {
       const match = /language-(\w+)/.exec(className || '');
-      return match ? <Code code={children.toString()} language={match[1]}/> : <CodeText>{children}</CodeText>;
+      return match ? <Code code={children.toString()} language={match[1]}/> : <Marker>{children}</Marker>;
     },
 
     ul({children}) {

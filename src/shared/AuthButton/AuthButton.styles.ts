@@ -9,6 +9,6 @@ export const AuthButtonStyled = styled.button`
   text-transform: uppercase;
   background-color: ${props => props.theme.colors.authButton};
   border-radius: 5px;
-  box-shadow: 0 0 4px 0 ${props => rgba(props.theme.colors.authButton, 0.5)};
+  box-shadow: 0 0 4px 0 ${props => rgba(props.theme.colors.authButton, .5)};
   cursor: pointer;
 `;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { useAppSelector } from './hooks/useAppSelector';
+import { useTheme } from './hooks/useTheme';
 
 const colors = {
   primary: '#64c9c5'
@@ -96,7 +96,7 @@ interface IThemeProps {
 }
 
 const Theme: React.FC<IThemeProps> = ({children}) => {
-  const theme = useAppSelector(state => state.settings.theme);
+  const {theme} = useTheme();
   return (
     <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
       {children}

@@ -51,7 +51,7 @@ export const PreviewStyled = styled.div`
   }
 `;
 
-export const PreviewButton = styled.button`
+export const HidePreviewButton = styled.button`
   position: absolute;
   top: 0;
   outline: none;

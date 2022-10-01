@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React  from 'react';
 
 import { InputStyled, Label } from './Input.styles';
 import { InputContext } from './InputContext';
@@ -9,14 +9,10 @@ interface IInputProps {
   setValue: (value: React.FormEvent<HTMLInputElement> | string) => void;
   placeholder: string;
   label?: string;
-  children?: React.ReactNode;
+  type: 'password' | 'text';
 }
 
-interface IInputComponent {
-  Password: typeof Password;
-}
-
-const Input: React.FC<IInputProps> & IInputComponent = ({label, value, setValue, placeholder, children}) => {
+const Input: React.FC<IInputProps> = ({label, value, setValue, placeholder, type}) => {
   const onInput = (e: React.FormEvent<HTMLInputElement> | string) => {
     if (typeof e === 'string') {
       setValue(e);
@@ -29,12 +25,11 @@ const Input: React.FC<IInputProps> & IInputComponent = ({label, value, setValue,
     <InputContext.Provider value={{value, setValue: onInput, placeholder}}>
       <InputStyled className="input">
         {label && <Label>{label}</Label>}
-        {children || <input type="text" value={value} onInput={onInput} placeholder={placeholder}/>}
+        {type === 'password' && <Password/>}
+        {type === 'text' && <input type="text" value={value} onInput={onInput} placeholder={placeholder}/>}
       </InputStyled>
     </InputContext.Provider>
   );
 };
-
-Input.Password = Password;
 
 export default Input;

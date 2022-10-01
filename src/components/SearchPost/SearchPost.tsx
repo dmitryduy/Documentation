@@ -26,13 +26,13 @@ const SearchPost = () => {
 
   return (
     <SearchPostStyled ref={ref}>
-      <Input value={value} setValue={setValue} placeholder="Поиск"/>
+      <Input value={value} setValue={setValue} placeholder="Поиск" type="text"/>
       {postsInfo && <Results>
         {isLoading ?
           <Loader/> :
-          postsInfo?.length === 0 ?
+          !postsInfo.length ?
             <p>Результатов нет</p> :
-            postsInfo?.map(post =>
+            postsInfo.map(post =>
               <Link onClick={clearSearch} key={post.link} to={`/post/${post.link}`}>
                 {post.title}
                 {post.owner === login && <span className="my-post">моя</span>}

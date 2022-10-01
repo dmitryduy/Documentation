@@ -8,24 +8,22 @@ import AuthButton from '../../shared/AuthButton/AuthButton';
 import Loader from '../../shared/Loader/Loader';
 
 import {LoginPageStyled} from './LoginPage.styles';
-import { useLogin } from './LoginPage.hook/useLogin';
+import { useSignUp } from './LoginPage.hook/useSignUp';
 
 const LoginPage = () => {
   const [login, setLogin] = useInput('');
   const [password, setPassword] = useInput('');
-  const {isLoading, signUp} = useLogin();
+  const {isLoading, signUp} = useSignUp();
 
   return (
     <LoginPageStyled>
       <AuthTitle>Вход</AuthTitle>
-      <Input value={login} setValue={setLogin} placeholder="Логин" label="Логин"/>
-      <Input value={password} setValue={setPassword} placeholder="Пароль" label="Пароль">
-        <Input.Password/>
-      </Input>
+      <Input value={login} setValue={setLogin} placeholder="Логин" label="Логин" type="text"/>
+      <Input value={password} setValue={setPassword} placeholder="Пароль" label="Пароль" type="password"/>
       <AuthButton disabled={isLoading} onClick={() => signUp(login, password)}>
         {isLoading ? <Loader/> : 'Войти'}
       </AuthButton>
-      <Link to="/register">Создать аккаунт</Link>
+      <Link className="sign-up" to="/register">Создать аккаунт</Link>
     </LoginPageStyled>
   );
 };
