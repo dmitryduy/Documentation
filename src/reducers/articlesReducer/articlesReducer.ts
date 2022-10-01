@@ -4,11 +4,16 @@ import {
   CreatePostRequest,
   CreatePostResponse,
   DeletePostRequest,
-  DeletePostResponse, FindOnePostResponse, FindPostResponse,
-  postApi, UpdatePostRequest, UpdatePostResponse
-} from '../../api/postApi/postApi';
+  DeletePostResponse,
+  FindOnePostResponse,
+  FindPostResponse,
+  UpdatePostRequest,
+  UpdatePostResponse
+} from '../../api/postApi/postApi.typings';
 import { getAsyncActionMutation, getAsyncActionQuery } from '../getAsyncAction';
-import { GetAllTagsResponse, tagsApi } from '../../api/tagsApi/tagsApi';
+import { GetAllTagsResponse } from '../../api/tagsApi/tagsApi.typings';
+import { postApi } from '../../api/postApi/postApi';
+import { tagsApi } from '../../api/tagsApi/tagsApi';
 
 import { IArticlesReducerState } from './articlesReducer.typings';
 
@@ -45,8 +50,7 @@ const articleSlice = createSlice({
         state.post = action.payload.post;
         state.nextPost = action.payload.nextPostInfo;
         state.loading = false;
-      }).
-      addCase(findPost.rejected, state => {
+      }).addCase(findPost.rejected, state => {
         state.loading = false;
       });
   }
