@@ -15,7 +15,7 @@ const ArticleInfo: React.FC<IArticleInfoProps> = ({views, author, date}) => {
     <ArticleInfoStyled>
       <Label>Автор: {author}</Label>
       <Label>Просмотров: {views}</Label>
-      <Label>Время модификации: {getDateFromString(date)}</Label>
+      <Label>Опубликовано: {getDateFromString(date)}</Label>
     </ArticleInfoStyled>
   );
 };

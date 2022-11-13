@@ -7,6 +7,7 @@ export const SubtitleStyled = styled.h2`
   margin-bottom: 15px;
   color: ${props => props.theme.colors.paragraph};
   word-break: break-word;
+  pointer-events: none;
   @media (max-width: 500px) {
     font-size: 20px;
     margin-bottom: 5px;
