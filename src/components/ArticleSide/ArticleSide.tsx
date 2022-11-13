@@ -14,6 +14,7 @@ import useMatchMedia from '../../hooks/useMatchMedia';
 import { useAuth } from '../../hooks/useAuth';
 import { showTooltip } from '../../utils/showTooltip';
 import ArticleMenu from '../ArticleMenu/ArticleMenu';
+import ArticleInfo from '../ArticleInfo/ArticleInfo';
 
 import {ArticleSideStyled, Actions} from './ArticleSide.styles';
 import { useDeletePost } from './ArticleSide.hook/useDeletePost';
@@ -43,6 +44,7 @@ const ArticleSide = () => {
   if (!loading && post) {
     return (
       <ArticleSideStyled className={cn({transform: isHide})}>
+        <ArticleInfo author={post.owner} views={post.views} date={post.date}/>
         <Article markdown={post.markdown}/>
         {post.owner === login &&
         <Actions>

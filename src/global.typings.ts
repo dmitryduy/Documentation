@@ -4,7 +4,7 @@ export type Menu = (string | string[])[];
 export interface IPost {
   markdown: string;
   title: string;
-  date: number;
+  date: string;
   views: number;
   tags: string[];
   menu: Menu;
