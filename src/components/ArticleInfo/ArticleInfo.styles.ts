@@ -10,4 +10,5 @@ export const Label = styled.span`
   padding: 10px 5px;
   border-radius: 5px;
   background-color: ${props => props.theme.colors.codeBg};
+  color: ${props => props.theme.colors.paragraph};
 `;

@@ -5,7 +5,7 @@ import NewPostPage from './pages/NewPostPage/NewPostPage';
 import EditPostPage from './pages/EditPostPage/EditPostPage';
 
 export const routes = {
-  common: [ {
+  common: [{
     path: '/register',
     component: RegisterPage
   },
@@ -21,7 +21,14 @@ export const routes = {
     path: '/post/:title',
     component: ArticlePage
   }],
-  private: [ {
+  private: [{
+    path: '/',
+    component: ArticlePage
+  },
+  {
+    path: '/post/:title',
+    component: ArticlePage
+  }, {
     path: '/create-post',
     component: NewPostPage
   }, {

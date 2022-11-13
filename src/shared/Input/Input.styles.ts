@@ -20,6 +20,6 @@ export const Label = styled.label`
   margin-bottom: 10px;
   font-size: 13px;
   text-transform: uppercase;
-  color: ${props => props.theme.colors.border};
+  color: ${props => props.theme.colors.paragraph};
   letter-spacing: 1px;
 `;
