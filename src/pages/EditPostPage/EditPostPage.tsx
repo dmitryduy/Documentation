@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Loader from '../../shared/Loader/Loader';
 import EditorWithPreview from '../../shared/EditorWithPreview/EditorWithPreview';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { withHeader } from '../../hocs/withHeader';
 
 import { useUpdatePost } from './EditPostPage.hook/useUpdatePost';
 
@@ -31,4 +32,4 @@ const EditPostPage = () => {
     <Loader/>;
 };
 
-export default EditPostPage;
+export default withHeader(EditPostPage);

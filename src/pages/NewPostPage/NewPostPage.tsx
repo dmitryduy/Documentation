@@ -1,6 +1,7 @@
 import React from 'react';
 
 import EditorWithPreview from '../../shared/EditorWithPreview/EditorWithPreview';
+import { withHeader } from '../../hocs/withHeader';
 
 import { useCreatePost } from './NewPostPage.hook/useCreatePost';
 
@@ -12,4 +13,4 @@ const NewPostPage = () => {
   );
 };
 
-export default NewPostPage;
+export default withHeader(NewPostPage);

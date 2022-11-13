@@ -4,7 +4,7 @@ import {LoaderStyled} from './Loader.styles';
 
 const Loader = () => {
   return (
-    <LoaderStyled/>
+    <LoaderStyled data-testid="loader"/>
   );
 };
 

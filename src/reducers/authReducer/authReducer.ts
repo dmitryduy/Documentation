@@ -9,6 +9,7 @@ import {
 } from '../../api/userApi/userApi.typings';
 import { getAsyncActionMutation, getAsyncActionQuery } from '../getAsyncAction';
 import { userAPI } from '../../api/userApi/userAPI';
+import { storage } from '../../utils/storage';
 
 import { IAuthReducerState } from './authReducer.typings';
 
@@ -35,7 +36,7 @@ const authSlice = createSlice({
     logout(state) {
       state.isLogin = false;
       state.login = null;
-      window.localStorage.removeItem('auth-token');
+      storage('auth-token').removeItem();
     }
   },
   extraReducers: builder => {
@@ -60,7 +61,7 @@ const authSlice = createSlice({
         state.isLogin = true;
         state.loading = false;
       })
-      .addMatcher(isError, (state, action: PayloadAction<string>) => {
+      .addMatcher(isError, state => {
         state.loading = false;
       });
   }

@@ -5,12 +5,15 @@ import InfoAside from '../../components/InfoAside/InfoAside';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import ArticleSide from '../../components/ArticleSide/ArticleSide';
 import { ReactComponent as AddSvg } from '../../assets/images/add.svg';
+import { withHeader } from '../../hocs/withHeader';
+import { useAuth } from '../../hooks/useAuth';
 
 import { useFetchPost } from './ArticlePage.hook/useFetchPost';
 import { ArticlePageStyled } from './ArticlePage.styles';
 
 const ArticlePage = () => {
   const {title} = useParams();
+  const {isLogin} = useAuth();
   const post = useAppSelector(state => state.articles.post);
   useFetchPost(title);
 
@@ -20,11 +23,12 @@ const ArticlePage = () => {
     <ArticlePageStyled>
       <InfoAside/>
       <ArticleSide/>
+      {isLogin &&
       <NavLink className="add-post" to="/create-post">
         <AddSvg/>
-      </NavLink>
+      </NavLink>}
     </ArticlePageStyled>
   );
 };
 
-export default ArticlePage;
+export default withHeader(ArticlePage);

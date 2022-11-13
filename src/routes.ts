@@ -12,18 +12,20 @@ export const routes = {
   {
     path: '/login',
     component: LoginPage
-  }],
-  private: [{
+  },
+  {
     path: '/',
     component: ArticlePage
-  }, {
+  },
+  {
+    path: '/post/:title',
+    component: ArticlePage
+  }],
+  private: [ {
     path: '/create-post',
     component: NewPostPage
   }, {
     path: '/edit-post/:title',
     component: EditPostPage
-  }, {
-    path: '/post/:title',
-    component: ArticlePage
   }]
 };

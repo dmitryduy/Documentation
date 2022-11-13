@@ -14,7 +14,7 @@ const settingsSlice = createSlice({
   reducers: {
     changeTheme(state) {
       state.theme = state.theme === 'light' ? 'dark' : 'light';
-      window.localStorage.setItem('theme', state.theme);
+      storage('theme').setItem(state.theme);
     }
   }
 });

@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import Header from './components/Header/Header';
 import windowExtends from './declare';
 import { useShowTooltipOnNetworkError } from './hooks/useShowTooltipOnNetworkError';
 import { useAuth } from './hooks/useAuth';
@@ -35,7 +34,6 @@ function App() {
   return (
     <>
       <Wrapper>
-        {isLogin && <Header/>}
         <Routes>
           {routesMemo.map(route =>
             <Route
@@ -43,7 +41,7 @@ function App() {
               path={route.path}
               element={<route.component/>}
             />)}
-          <Route path="*" element={<Navigate to={isLogin ? '/' : '/login'}/>}/>
+          <Route path="*" element={<Navigate to="/"/>}/>
         </Routes>
       </Wrapper>
     </>

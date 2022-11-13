@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { EmitterNames } from '../../emitterNames';
 import {ReactComponent as BurgerSvg} from '../../assets/images/burger.svg';
@@ -10,13 +10,13 @@ import {ReactComponent as DarkThemeSvg} from '../../assets/images/darkTheme.svg'
 import { useAppDispatch } from '../../hooks/useAppSelector';
 import { logout } from '../../reducers/authReducer/authReducer';
 import { useTheme } from '../../hooks/useTheme';
+import { useAuth } from '../../hooks/useAuth';
 
 import { HeaderStyled } from './Header.styles';
 
-
-
 const Header = () => {
   const {theme, toggleTheme} = useTheme();
+  const {isLogin} = useAuth();
   const phone = useMatchMedia();
   const dispatch  = useAppDispatch();
   const toggleLeftSide = () => {
@@ -41,7 +41,8 @@ const Header = () => {
             <SearchPost/>
           </li>
           <li className="theme" onClick={toggleTheme}>{theme === 'dark' ? <LightThemeSvg/> : <DarkThemeSvg/>}</li>
-          <li className="logout" onClick={onLogout}>Выйти</li>
+          {isLogin && <li className="auth" onClick={onLogout}>Выйти</li>}
+          {!isLogin && <Link to="/login" className="auth">Войти</Link>}
         </ul>
       </nav>
     </HeaderStyled>

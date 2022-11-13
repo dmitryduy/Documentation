@@ -37,7 +37,7 @@ export const HeaderStyled = styled.header`
       fill: ${props => props.theme.colors.link};
     }
   }
-  .logout {
+  .auth {
     cursor: pointer;
     svg {
       fill: ${props => props.theme.colors.link};
