@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Documentation/static/css/main.c235a7b4.css",
-    "main.js": "/Documentation/static/js/main.be8ddd11.js",
+    "main.js": "/Documentation/static/js/main.47166df3.js",
     "static/media/lightTheme.svg": "/Documentation/static/media/lightTheme.2ad0a194acac9b29002a871a78174925.svg",
     "static/media/add.svg": "/Documentation/static/media/add.9f376e3f3f4c2d7e4493f3ffa40a8bd4.svg",
     "index.html": "/Documentation/index.html",
@@ -12,10 +12,10 @@
     "static/media/Copy.svg": "/Documentation/static/media/Copy.88224cbd9578bb8344d380ef78e50744.svg",
     "static/media/arrow.svg": "/Documentation/static/media/arrow.e49062347781a932c48b5af89578e6cc.svg",
     "main.c235a7b4.css.map": "/Documentation/static/css/main.c235a7b4.css.map",
-    "main.be8ddd11.js.map": "/Documentation/static/js/main.be8ddd11.js.map"
+    "main.47166df3.js.map": "/Documentation/static/js/main.47166df3.js.map"
   },
   "entrypoints": [
     "static/css/main.c235a7b4.css",
-    "static/js/main.be8ddd11.js"
+    "static/js/main.47166df3.js"
   ]
 }
