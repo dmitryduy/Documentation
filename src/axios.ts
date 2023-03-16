@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://safe-mountain-10143.herokuapp.com';
+const BASE_URL = 'https://documentation-gm10.onrender.com';
 
 const instance = axios.create({
   baseURL: BASE_URL
