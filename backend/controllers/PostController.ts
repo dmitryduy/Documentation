@@ -22,6 +22,7 @@ export const createPost = async (req: Request, res: Response) => {
     }
 
     const {markdown, tags, menu, title, owner} = req.body;
+    console.log(markdown, tags, menu, title, owner);
 
     const link =  title.replaceAll(/[^a-zA-Z0-9 А-Яа-я]/g, '').replaceAll(' ', '-') + Date.now();
 
@@ -31,6 +32,7 @@ export const createPost = async (req: Request, res: Response) => {
 
     res.status(200).json({link: post.link});
   } catch (e) {
+    console.log(e);
     res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', errorText: JSON.stringify(e)});
   }
 };
