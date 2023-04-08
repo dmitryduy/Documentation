@@ -31,7 +31,7 @@ export const createPost = async (req: Request, res: Response) => {
 
     res.status(200).json({link: post.link});
   } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', errorText: JSON.stringify(e)});
   }
 };
 
@@ -40,7 +40,7 @@ export const getAllPosts = async (req: Request, res: Response) => {
     const posts = await PostModel.find();
     res.json({posts});
   } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', errorText: JSON.stringify(e)});
   }
 };
 
@@ -63,7 +63,7 @@ export const updatePost = async (req: Request, res: Response) => {
       });
     res.status(200).json({error: null});
   } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', errorText: JSON.stringify(e)});
   }
 };
 
@@ -78,7 +78,7 @@ export const getRandomPost = async (req: Request, res: Response) => {
     const nextPost = await PostModel.findOne({link: {$ne: post.link}}).skip(random2);
     res.status(200).json({post, nextPostInfo: {title: nextPost.title, link: nextPost.link}});
   } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', errorText: JSON.stringify(e)});
   }
 };
 
@@ -97,13 +97,13 @@ export const getPost = async (req: Request, res: Response) => {
       {returnDocument: 'after'},
       (e, doc) => {
         if (e) {
-          return res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
+          return res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', errorText: JSON.stringify(e)});
         }
         res.json({post: doc || notFoundPost, nextPostInfo: {title: post.title, link: post.link}});
       }
     );
   } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', errorText: JSON.stringify(e)});
   }
 };
 export const findPosts = async (req: Request, res: Response) => {
@@ -115,7 +115,7 @@ export const findPosts = async (req: Request, res: Response) => {
 
     res.status(200).json({foundedPosts});
   } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', errorText: JSON.stringify(e)});
   }
 };
 
@@ -134,6 +134,6 @@ export const deletePost = async (req: Request, res: Response) => {
     await PostModel.deleteOne({link});
     res.status(200).json({error: null});
   } catch (e) {
-    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже'});
+    res.status(500).json({error: 'Ошибка бекенда. Попробуйте позже', errorText: JSON.stringify(e)});
   }
 };
