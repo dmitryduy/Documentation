@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://documentation-gm10.onrender.com';
+const BASE_URL = 'https://crowded-tie-calf.cyclic.app';
 
 const instance = axios.create({
   baseURL: BASE_URL
