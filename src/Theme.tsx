@@ -9,6 +9,7 @@ const colors = {
 
 export const lightTheme = {
   colors: {
+    primary: '#64c9c5',
     headerBg: '#fff',
     background: '#fff',
     codeBg: '#f6f7f8',
@@ -45,7 +46,10 @@ export const lightTheme = {
     searchResultsBg: '#efefef',
     deletion: '#d9534f',
     scrollBar: '#f1f1f1',
-    thumb: '#c0c0c0'
+    thumb: '#c0c0c0',
+    progressBg: '#e9e8ed',
+    progressBar: colors.primary,
+    progressError: '#e13238',
   }
 };
 
@@ -87,7 +91,10 @@ export const darkTheme = {
     searchResultsBg: '#1c1e21',
     deletion: '#d9534f',
     scrollbar: '#444444',
-    thumb: '#686868'
+    thumb: '#686868',
+    progressBg: '#444444',
+    progressBar: colors.primary,
+    progressError: '#e13238',
   }
 };
 

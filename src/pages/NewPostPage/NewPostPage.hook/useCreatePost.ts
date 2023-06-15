@@ -8,6 +8,8 @@ import { useAppDispatch } from '../../../hooks/useAppSelector';
 import { createPost } from '../../../reducers/articlesReducer/articlesReducer';
 import { getMenuFromMarkdown } from '../../../utils/getMenuFromMarkdown';
 import { checkPost } from '../NewPostPage.utils/checkPost';
+import { MAX_ARTICLE_LENGTH } from '../../../constants';
+import { Errors } from '../../../errors';
 
 export const useCreatePost = (): [boolean, (markdown: string, tags: string[]) => void] => {
   const navigate = useNavigate();
@@ -16,6 +18,10 @@ export const useCreatePost = (): [boolean, (markdown: string, tags: string[]) =>
   const dispatch = useAppDispatch();
 
   const checkAndCreatePost = (markdown: string, tags: string[]) => {
+    if (markdown.length > MAX_ARTICLE_LENGTH) {
+      showTooltip(Errors.ARTICLE_LENGTH_ERROR);
+      return;
+    }
     const error = checkPost(markdown, tags);
     if (error) {
       showTooltip(error);

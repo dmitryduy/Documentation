@@ -1,0 +1,1 @@
+export const MAX_ARTICLE_LENGTH = 20000;

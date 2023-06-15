@@ -9,7 +9,11 @@ const NewPostPage = () => {
   const [isLoading, createPost] = useCreatePost();
 
   return (
-    <EditorWithPreview isLoading={isLoading} onSubmit={createPost} buttonValue="Добавить статью"/>
+    <EditorWithPreview
+      defaultMarkdown="# Заголовок"
+      isLoading={isLoading}
+      onSubmit={createPost}
+      buttonValue="Добавить статью"/>
   );
 };
 

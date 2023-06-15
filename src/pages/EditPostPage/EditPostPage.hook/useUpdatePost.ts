@@ -8,6 +8,8 @@ import { useAppDispatch } from '../../../hooks/useAppSelector';
 import { updatePost } from '../../../reducers/articlesReducer/articlesReducer';
 import { getMenuFromMarkdown } from '../../../utils/getMenuFromMarkdown';
 import { checkPost } from '../EditPostPage.utils/checkPost';
+import { MAX_ARTICLE_LENGTH } from '../../../constants';
+import { Errors } from '../../../errors';
 
 export const useUpdatePost = (post: IPost | null):[boolean, (markdown: string) => void] => {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,6 +19,11 @@ export const useUpdatePost = (post: IPost | null):[boolean, (markdown: string) =
 
   const validateAndUpdatePost = (markdown: string) => {
     if (!post) return;
+
+    if (markdown.length > MAX_ARTICLE_LENGTH) {
+      showTooltip(Errors.ARTICLE_LENGTH_ERROR);
+      return;
+    }
 
     const error = checkPost(markdown, post);
 

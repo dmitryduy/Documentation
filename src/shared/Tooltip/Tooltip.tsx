@@ -11,9 +11,10 @@ import { TOOLTIP_SHOW_TIME } from './Tooltip.constants';
 const Tooltip = () => {
   const [active, setActive] = useState(false);
   const [value, setValue] = useState('');
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const timerRef = useRef<NodeJS.Timer | null>(null);
 
   useEmit<{title: string}>(EmitterNames.TOOLTIP_SHOW, ({title}) => {
+    setValue('');
     setValue(title);
     setActive(true);
 
@@ -21,7 +22,9 @@ const Tooltip = () => {
       clearTimeout(timerRef.current);
     }
 
-    timerRef.current = setTimeout(() => setActive(false), TOOLTIP_SHOW_TIME);
+    timerRef.current = setTimeout(() => {
+      setActive(false);
+    }, TOOLTIP_SHOW_TIME);
   });
 
   return (

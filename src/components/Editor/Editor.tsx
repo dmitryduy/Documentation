@@ -4,6 +4,8 @@ import ContextMenu from '../ContextMenu/ContextMenu';
 import { getUpdatedMarkdown } from '../ContextMenu/ContextMenu.utils/getUpdatedMarkdown';
 import { Actions } from '../ContextMenu/ContextMenu.typings';
 import Tags from '../../shared/Tags/Tags';
+import Progress from '../../shared/Progress/Progress';
+import { MAX_ARTICLE_LENGTH } from '../../constants';
 
 import { EditorStyled } from './Editor.styles';
 import { useUpdateCaretPosition } from './Editor.hook/useUpdateCaretPosition';
@@ -36,6 +38,7 @@ const Editor: FC<IEditorProps> = ({children, setMarkdown, markdown, tags, setTag
       <ContextMenu updateMarkdown={updateMarkdown}/>
       <Tags tags={tags} setTags={setTags}/>
       <textarea ref={textareaRef} value={markdown} onInput={onInput}/>
+      <Progress currentProgress={markdown?.length} maxProgress={MAX_ARTICLE_LENGTH}/>
       <div className="buttons">{children}</div>
     </EditorStyled>
   );
