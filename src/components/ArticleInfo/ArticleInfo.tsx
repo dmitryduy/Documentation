@@ -13,9 +13,9 @@ interface IArticleInfoProps {
 const ArticleInfo: React.FC<IArticleInfoProps> = ({views, author, date}) => {
   return (
     <ArticleInfoStyled>
-      <Label>Автор: {author}</Label>
-      <Label>Просмотров: {views}</Label>
-      <Label>Опубликовано: {getDateFromString(date)}</Label>
+      <Label>Автор <span>{author}</span></Label>
+      <Label>Просмотров <span>{views}</span></Label>
+      <Label>Опубликовано <span>{getDateFromString(date)}</span></Label>
     </ArticleInfoStyled>
   );
 };
