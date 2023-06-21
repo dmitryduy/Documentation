@@ -2,17 +2,15 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../../../hooks/useAuth';
 import { showTooltip } from '../../../utils/showTooltip';
-import { useAppDispatch } from '../../../hooks/useAppSelector';
-import { deletePost } from '../../../reducers/articlesReducer/articlesReducer';
+import { createPostManager } from '../../../api/postManager/createPostManager';
 
 export const useDeletePost = () => {
   const {login} = useAuth();
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   return (link: string) => {
-    dispatch(deletePost({owner: login || '', link}))
-      .unwrap()
+    const postManager = createPostManager();
+    postManager.delete({owner: login || '', link})
       .then(() => {
         navigate('/');
         showTooltip('Пост удален');

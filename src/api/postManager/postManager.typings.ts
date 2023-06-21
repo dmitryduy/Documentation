@@ -45,8 +45,3 @@ export interface FindOnePostResponse {
     link: string;
   }
 }
-
-export interface NextPostInfoResponse {
-  title: string;
-  link: string;
-}

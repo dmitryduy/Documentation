@@ -11,7 +11,7 @@ import { useUpdatePost } from './EditPostPage.hook/useUpdatePost';
 
 const EditPostPage = () => {
   const {title} = useParams();
-  const post = useAppSelector(state => state.articles.post);
+  const post = useAppSelector(state => state.posts.post);
   const navigate = useNavigate();
   const [isLoading, updatePost] = useUpdatePost(post);
 

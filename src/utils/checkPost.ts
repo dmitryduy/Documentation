@@ -1,5 +1,6 @@
-import { getTitleFromMarkdown } from '../../../utils/getTitleFromMarkdown';
-import { Errors } from '../../../errors';
+import { Errors } from '../errors';
+
+import { getTitleFromMarkdown } from './getTitleFromMarkdown';
 
 export const checkPost = (markdown: string, tags: string[]) => {
   const title = getTitleFromMarkdown(markdown);

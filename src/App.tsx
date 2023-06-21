@@ -7,9 +7,10 @@ import { useAuth } from './hooks/useAuth';
 import { routes } from './routes';
 import { showTooltip } from './utils/showTooltip';
 import { useAppDispatch } from './hooks/useAppSelector';
-import { authMe } from './reducers/authReducer/authReducer';
 import Loader from './shared/Loader/Loader';
 import { Wrapper } from './App.styles';
+import { createUserManager } from './api/userManager/createUserManager';
+import { setUser } from './reducers/authReducer/authReducer';
 
 
 windowExtends();
@@ -21,8 +22,9 @@ function App() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    dispatch(authMe())
-      .unwrap()
+    const userManager = createUserManager();
+    userManager.authMe()
+      .then(data => dispatch(setUser({login: data.login})))
       .catch(showTooltip)
       .finally(() => setShow(true));
   }, []);

@@ -23,7 +23,7 @@ import { useDeletePost } from './ArticleSide.hook/useDeletePost';
 const ArticleSide = () => {
   const [isHide, setIsHide]  = useState(false);
   const phone = useMatchMedia();
-  const { nextPost, post, loading} = useAppSelector(state => state.articles);
+  const { nextPost, post, loading} = useAppSelector(state => state.posts);
   const {login} = useAuth();
   const deletePost = useDeletePost();
   useEmit(EmitterNames.TOGGLE_LEFT_SIDEBAR, () => setIsHide(prev => !prev));

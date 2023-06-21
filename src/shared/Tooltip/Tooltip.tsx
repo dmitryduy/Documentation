@@ -13,9 +13,9 @@ const Tooltip = () => {
   const [value, setValue] = useState('');
   const timerRef = useRef<NodeJS.Timer | null>(null);
 
-  useEmit<{title: string}>(EmitterNames.TOOLTIP_SHOW, ({title}) => {
+  useEmit<{title: string | Error}>(EmitterNames.TOOLTIP_SHOW, ({title}) => {
     setValue('');
-    setValue(title);
+    setValue(title instanceof Error ? title.message : title);
     setActive(true);
 
     if (timerRef.current) {

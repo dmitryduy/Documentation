@@ -5,7 +5,7 @@ export interface PostInfo {
   title: string
 }
 
-export interface IArticlesReducerState {
+export interface IPostReducerState {
   post: IPost | null;
   nextPost: PostInfo | null;
   loading: boolean;

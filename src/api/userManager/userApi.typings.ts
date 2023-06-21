@@ -12,6 +12,8 @@ export interface SignInResponse {
   token: string;
 }
 
-export type SignUpRequest = SignInRequest;
+export interface SignUpRequest extends SignInRequest {
+  repeatPassword: string;
+}
 
 export type SignUpResponse = SignInResponse;
