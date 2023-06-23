@@ -41,7 +41,7 @@ export class PostManager {
     return await this.clientAPI.get('/find-post', query);
   }
 
-  public async findOne(query: AxiosRequestConfig['params']): Promise<FindOnePostResponse> {
-    return await this.clientAPI.get('/post', query);
+  public async findOne(query: AxiosRequestConfig['params'], signal: AbortSignal): Promise<FindOnePostResponse> {
+    return await this.clientAPI.get('/post', query, signal);
   }
 }

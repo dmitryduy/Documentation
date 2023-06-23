@@ -2,6 +2,8 @@ import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosRequestHeade
 
 import { Errors } from '../../errors';
 
+type methods = 'post' | 'delete' | 'put';
+
 export class ClientAPI {
   constructor(
     private readonly baseUrl: string,
@@ -9,20 +11,20 @@ export class ClientAPI {
     private readonly authToken?: string | null) {
   }
 
-  public async get<TRes>(endpoint: string, params?: AxiosRequestConfig['params']): Promise<TRes> {
+  public async get<TRes>(endpoint: string, params?: AxiosRequestConfig['params'], signal?: AbortSignal): Promise<TRes> {
     try {
       const client = this.createClient(params);
-      const response = await client.get<TRes>(endpoint);
+      const response = await client.get<TRes>(endpoint, {signal});
       return response.data;
     } catch (e) {
       this.handleError(e);
     }
   }
 
-  public async mutate<TReq, TRes>(endpoint: string, data: TReq, method: 'post' | 'delete' | 'put'): Promise<TRes> {
+  public async mutate<TReq, TRes>(endpoint: string, data: TReq, method: methods, signal?: AbortSignal): Promise<TRes> {
     try {
       const client = this.createClient();
-      const response = await client(endpoint, {data, method});
+      const response = await client(endpoint, {data, method, signal});
       return response.data;
     } catch (e) {
       this.handleError(e);
