@@ -1,0 +1,1 @@
+export const removeDuplicate = (array: any[]) => [...new Set(array)];

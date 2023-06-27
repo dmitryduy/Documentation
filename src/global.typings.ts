@@ -20,3 +20,17 @@ export interface ITagList {
 }
 
 export type InfoBlockType = 'alert' | 'info' | 'tip' | 'caution';
+
+export interface IQuizQuestion {
+  id: number;
+  type: 'multiselect' | 'single' | 'text';
+  question: string;
+  code?: string;
+  codeLanguage: string | null;
+  options: {
+    value: string,
+    isCorrect: boolean;
+  }[];
+  position: number;
+  textCorrectAnswer?: string;
+}

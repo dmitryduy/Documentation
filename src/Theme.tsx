@@ -9,6 +9,7 @@ const colors = {
 
 export const lightTheme = {
   colors: {
+    secondary: '#2db37d',
     primary: '#64c9c5',
     headerBg: '#fff',
     background: '#fff',
@@ -50,11 +51,16 @@ export const lightTheme = {
     progressBg: '#e9e8ed',
     progressBar: colors.primary,
     progressError: '#e13238',
+    quizBg: '#f6f7f8',
+    activeQuizAnswer: '#0fd9de',
+    incorrectQuizAnswer: '#e13238',
   }
 };
 
 export const darkTheme = {
   colors: {
+    secondary: '#2db37d',
+    primary: '#64c9c5',
     headerBg: '#242526',
     background: '#1b1b1d',
     codeBg: '#323234',
@@ -95,6 +101,9 @@ export const darkTheme = {
     progressBg: '#444444',
     progressBar: colors.primary,
     progressError: '#e13238',
+    quizBg: '#323234',
+    activeQuizAnswer: '#0fd9de',
+    incorrectQuizAnswer: '#e13238',
   }
 };
 

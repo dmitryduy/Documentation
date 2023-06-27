@@ -11,4 +11,11 @@ export const CodeStyled = styled.div`
     fill: ${props => props.theme.colors.paragraph};
     cursor: pointer;
   }
+  
+  code {
+    user-select: none;
+  }
+  code.canCopy {
+    user-select: auto;
+  }
 `;

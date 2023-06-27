@@ -154,4 +154,13 @@ ${str}
     startSelection: 2,
     endSelection: 11
   },
+  'quiz': {
+    template: `:::quiz
+quiz[Название теста]
+
+:::`,
+    insert: str => str,
+    startSelection: 13,
+    endSelection: 27,
+  }
 };

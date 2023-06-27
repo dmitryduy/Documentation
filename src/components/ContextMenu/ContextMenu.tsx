@@ -1,7 +1,8 @@
-import React, { MouseEvent, useRef } from 'react';
+import React, { MouseEvent, useRef, useState } from 'react';
 
 
 import { EmitterNames } from '../../emitterNames';
+import QuizCreatorPopup from '../QuizCreatorPopup/QuizCreatorPopup';
 
 import { ContextMenuStyled } from './ContextMenu.styles';
 import { Actions } from './ContextMenu.typings';
@@ -13,6 +14,7 @@ interface IContextMenuProps {
 
 const ContextMenu: React.FC<IContextMenuProps> = ({updateMarkdown}) => {
   const menuRef = useRef<HTMLDivElement>(null);
+  const [isQuizConstructor, setIsQuizConstructor] = useState(false);
 
   const editText = (e: MouseEvent<HTMLDivElement>) => {
     const initiator = e.target as HTMLElement;
@@ -24,6 +26,7 @@ const ContextMenu: React.FC<IContextMenuProps> = ({updateMarkdown}) => {
   return (
     <ContextMenuStyled className="scroll" ref={menuRef} onClick={editText}>
       <li onClick={() => window.emitter.emit(EmitterNames.TOGGLE_POST_TAGS)}>теги</li>
+      <li data-action="quiz" onClick={() => setIsQuizConstructor(true)}>квиз</li>
       <li data-action="heading-1">h1</li>
       <li data-action="heading-2">h2</li>
       <li data-action="heading-3">h3</li>
@@ -42,6 +45,7 @@ const ContextMenu: React.FC<IContextMenuProps> = ({updateMarkdown}) => {
       <li data-action="caution">предупреждение</li>
       <li data-action="unordered-list">список</li>
       <li data-action="ordered-list">нумерованный список</li>
+      <QuizCreatorPopup active={isQuizConstructor} close={() => setIsQuizConstructor(false)}/>
     </ContextMenuStyled>
   );
 };

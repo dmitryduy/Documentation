@@ -17,6 +17,9 @@ import Table from '../shared/Table/Table';
 import { unifyMenuLinks } from '../utils/unifyMenuLinks';
 import Code from '../shared/Code/Code';
 import { reactChildrenToString } from '../utils/reactChildrenToString';
+import Quiz from '../shared/Quiz/Quiz';
+import { checkQuiz } from '../utils/checkQuiz';
+import { showTooltip } from '../utils/showTooltip';
 
 export const useMarkdownComponents = ():
   Partial<Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents> => {
@@ -38,6 +41,22 @@ export const useMarkdownComponents = ():
     },
     p(data) {
       const children = data.children;
+      const string = reactChildrenToString(data.children);
+      const quiz = string.match(/^quiz\[(.+)\]\n(.*)/);
+      if (quiz) {
+        try {
+          const questions = JSON.parse(quiz[2].replaceAll('"isCorrect":"true"', '"isCorrect":true')
+            .replaceAll('"isCorrect":"false"', '"isCorrect":false'));
+          const error = checkQuiz(questions);
+          if (error) {
+            showTooltip(error);
+            return null;
+          }
+          return <Quiz questions={questions} title={quiz[1]}/>;
+        } catch {
+          return <Paragraph>Ошибка создания квиза</Paragraph>;
+        }
+      }
 
       for (let i = 0; i < children.length; i++) {
         if (typeof children[i] === 'string') {
@@ -70,7 +89,6 @@ export const useMarkdownComponents = ():
     },
     div(data) {
       const {title, className, children} = data;
-
       if (title) {
         return <InfoBlock type={className as InfoBlockType} title={title || ''}>{children}</InfoBlock>;
       }
