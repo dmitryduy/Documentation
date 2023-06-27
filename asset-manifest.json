@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Documentation/static/css/main.74fd08dc.css",
-    "main.js": "/Documentation/static/js/main.b86e9d3f.js",
+    "main.css": "/Documentation/static/css/main.b1a706b6.css",
+    "main.js": "/Documentation/static/js/main.b87e48de.js",
     "static/media/lightTheme.svg": "/Documentation/static/media/lightTheme.2ad0a194acac9b29002a871a78174925.svg",
     "static/media/add.svg": "/Documentation/static/media/add.9f376e3f3f4c2d7e4493f3ffa40a8bd4.svg",
     "index.html": "/Documentation/index.html",
@@ -11,11 +11,11 @@
     "static/media/burger.svg": "/Documentation/static/media/burger.605b4408d7505abb27820af1e68dfe43.svg",
     "static/media/Copy.svg": "/Documentation/static/media/Copy.88224cbd9578bb8344d380ef78e50744.svg",
     "static/media/arrow.svg": "/Documentation/static/media/arrow.e49062347781a932c48b5af89578e6cc.svg",
-    "main.74fd08dc.css.map": "/Documentation/static/css/main.74fd08dc.css.map",
-    "main.b86e9d3f.js.map": "/Documentation/static/js/main.b86e9d3f.js.map"
+    "main.b1a706b6.css.map": "/Documentation/static/css/main.b1a706b6.css.map",
+    "main.b87e48de.js.map": "/Documentation/static/js/main.b87e48de.js.map"
   },
   "entrypoints": [
-    "static/css/main.74fd08dc.css",
-    "static/js/main.b86e9d3f.js"
+    "static/css/main.b1a706b6.css",
+    "static/js/main.b87e48de.js"
   ]
 }
