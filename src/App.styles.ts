@@ -11,14 +11,14 @@ export const Wrapper = styled.div`
   overflow-x: hidden;
   background-color: ${props => props.theme.colors.background};
 
-  .scroll::-webkit-scrollbar {
+  *::-webkit-scrollbar {
     width: 4px;
     height: 4px;
     background-color: ${props => props.theme.colors.scrollbar};
     border-radius: 2px;
   }
 
-  .scroll::-webkit-scrollbar-thumb {
+  *::-webkit-scrollbar-thumb {
     width: 4px;
     height: 4px;
     background-color: ${props => props.theme.colors.thumb};
@@ -26,17 +26,7 @@ export const Wrapper = styled.div`
   }
 
 
-  .scroll::-webkit-scrollbar-thumb:hover {
+  *::-webkit-scrollbar-thumb:hover {
     background-color: #a7a7a7;
-  }
-
-  .without-scroll::-webkit-scrollbar-thumb {
-    width: 0;
-    height: 0;
-  }
-
-  .without-scroll::-webkit-scrollbar {
-    width: 0;
-    height: 0;
   }
 `;
