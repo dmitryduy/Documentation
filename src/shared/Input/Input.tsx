@@ -1,4 +1,6 @@
-import React  from 'react';
+import React, { forwardRef } from 'react';
+
+import { getInputValue } from '../../hooks/useInput';
 
 import { InputStyled, Label } from './Input.styles';
 import { InputContext } from './InputContext';
@@ -10,26 +12,29 @@ interface IInputProps {
   placeholder: string;
   label?: string;
   type: 'password' | 'text';
+  onEnter?: () => void;
 }
 
-const Input: React.FC<IInputProps> = ({label, value, setValue, placeholder, type}) => {
-  const onInput = (e: React.FormEvent<HTMLInputElement> | string) => {
-    if (typeof e === 'string') {
-      setValue(e);
-      return;
-    }
-    setValue((e.target as HTMLInputElement).value);
-  };
+const Input = forwardRef<HTMLInputElement, IInputProps>(
+  ({label, value, setValue, placeholder, type, onEnter},
+    ref) => {
+    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.code === 'Enter') {
+        onEnter && onEnter();
+      }
+    };
 
-  return (
-    <InputContext.Provider value={{value, setValue: onInput, placeholder}}>
-      <InputStyled className="input">
-        {label && <Label>{label}</Label>}
-        {type === 'password' && <Password/>}
-        {type === 'text' && <input type="text" value={value} onInput={onInput} placeholder={placeholder}/>}
-      </InputStyled>
-    </InputContext.Provider>
-  );
-};
+    return (
+      <InputContext.Provider value={{value, setValue: e => setValue(getInputValue(e)), placeholder}}>
+        <InputStyled className="input">
+          {label && <Label>{label}</Label>}
+          {type === 'password' && <Password/>}
+          {type === 'text' &&
+        <input ref={ref} type="text" value={value} onKeyDown={onKeyDown} onInput={e => setValue(getInputValue(e))}
+          placeholder={placeholder}/>}
+        </InputStyled>
+      </InputContext.Provider>
+    );
+  });
 
 export default Input;

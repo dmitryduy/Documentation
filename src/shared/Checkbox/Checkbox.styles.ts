@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const CheckboxStyled = styled.div`
-   position: relative;
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -12,56 +12,57 @@ export const CheckboxStyled = styled.div`
   cursor: pointer;
   color: ${props => props.theme.colors.paragraph};
   transition: .3s;
-  &:hover, &.isActive {
+
+  &:hover:not(&.isDisabled), &:hover:not(&.isDisabled):after, &.isActive {
+    opacity: 1;
     background-color: ${props => props.theme.colors.activeQuizAnswer};
   }
+
   &:before {
+    flex-shrink: 0;
     width: 25px;
     height: 25px;
     background-color: ${props => props.theme.colors.quizBg};
     box-shadow: 2px 2px 2px 0 rgba(34, 60, 80, 0.2);
   }
-  
-  &:before, &:after{
+
+  &:before, &:after {
     content: '';
     transition: opacity .2s;
   }
-  
+
   &:after {
     position: absolute;
     opacity: 0;
     width: 15px;
     height: 15px;
+    transform: translateX(5px);
   }
-  
-  &.checkbox:before {
+
+  &.checkbox:before, &.checkbox:after {
     border-radius: 5px;
   }
-  
-  
-  &.checkbox.isActive:after, &.radio.isActive:after {
+
+  &.radio:before, &.radio:after {
+    border-radius: 50%;
+  }
+
+
+  &.isActive:after {
     opacity: 1;
-    border-radius: 2px;
-    transform: translateX(5px);
     background-color: ${props => props.theme.colors.activeQuizAnswer};
   }
 
-  &.isError.checkbox.isActive:after, &.mistake.radio.isActive:after {
+  &.isError, &.isError:after {
+    opacity: 1;
     background-color: ${props => props.theme.colors.incorrectQuizAnswer};
-  }
-  
-  &.radio.isActive:after {
-    border-radius: 50%;
   }
 
-  &.radio:before {
-    border-radius: 50%;
+  &.isCorrect, &.isCorrect:after {
+    opacity: 1;
+    background-color: ${props => props.theme.colors.correctQuizAnswer};
   }
-  
-  &.isError {
-    background-color: ${props => props.theme.colors.incorrectQuizAnswer};
-  }
-  
+
   &.isDisabled {
     cursor: auto;
   }

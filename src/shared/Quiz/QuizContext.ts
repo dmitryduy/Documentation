@@ -1,22 +1,24 @@
 import { createContext } from 'react';
 
-import { IQuizQuestion } from '../../global.typings';
+import { IQuizQuestion, QuestionType } from '../../global.typings';
 import { useInput } from '../../hooks/useInput';
 
 interface IQuizContext extends IQuizQuestion {
   inputValue: string;
-  setInputValue: ReturnType<typeof useInput>[1];
+  setInputValue: (ReturnType<typeof useInput>[1]);
   userAnswers: string[];
 }
 
 export const QuizContext = createContext<IQuizContext>({
-  type: 'multiselect',
+  type: QuestionType.MULTI_SELECT,
   codeLanguage: '',
-  question: '',
+  text: '',
   options: [],
   id: 0,
   inputValue: '',
   setInputValue: () => void 0,
   userAnswers: [],
-  position: 0
+  position: 1,
+  textCorrectAnswer: '',
+  code: '',
 });

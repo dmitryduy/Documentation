@@ -62,7 +62,7 @@ ${str}
 :::`,
     startSelection: 14,
     endSelection: 23,
-    multiselect: true
+    MULTI_SELECT: true
   },
   'alert': {
     template: `
@@ -77,7 +77,7 @@ ${str}
 :::`,
     startSelection: 16,
     endSelection: 25,
-    multiselect: true
+    MULTI_SELECT: true
   },
   'tip': {
     template: `
@@ -92,7 +92,7 @@ ${str}
 :::`,
     startSelection: 12,
     endSelection: 21,
-    multiselect: true
+    MULTI_SELECT: true
   },
   'caution': {
     template: `
@@ -107,7 +107,7 @@ ${str}
 :::`,
     startSelection: 20,
     endSelection: 29,
-    multiselect: true
+    MULTI_SELECT: true
   },
   'code': {
     template: `\`\`\`js
@@ -138,7 +138,7 @@ ${str}
     insert: str => `![текст](${str})`,
     startSelection: 2,
     endSelection: 7,
-    multiselect: true
+    MULTI_SELECT: true
   },
   'video': {
     template: '![видео](ссылка)',

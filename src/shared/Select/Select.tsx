@@ -9,10 +9,11 @@ interface ISelectProps {
     options: string[];
     onSelect: (option: string) => void;
     title: string;
+    defaultValue: string;
 }
 
-const Select: React.FC<ISelectProps> = ({options, onSelect, title}) => {
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+const Select: React.FC<ISelectProps> = ({options, onSelect, title, defaultValue}) => {
+  const [selectedOption, setSelectedOption] = useState(defaultValue);
 
   const handleSelectOption = (option: string) => {
     if (option === selectedOption) {

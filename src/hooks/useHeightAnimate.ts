@@ -5,7 +5,7 @@ import { useResize } from './useResize';
 interface IConfig {
   extraHeight?: number,
   deps?: any[],
-  maxHeight?: number
+  maxHeight?: number;
 }
 
 export const useHeightAnimate = <T extends HTMLElement>(isUpdate: boolean, config: IConfig = {}) => {

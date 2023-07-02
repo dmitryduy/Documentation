@@ -1,26 +1,37 @@
 import React from 'react';
 import cn from 'classnames';
 
-import { IQuizQuestion } from '../../global.typings';
+import { CheckboxStyled } from './Checkbox.styles';
 
-import {CheckboxStyled} from './Checkbox.styles';
-
-interface ICheckboxProps {
-    isDisabled: boolean;
-    onClick: () => void;
-    type: IQuizQuestion['type'];
-    value: string;
-    isActive: boolean;
-    isError: boolean;
-    onDelete?: () => void;
+export enum CheckboxState {
+  SELECTED,
+  INCORRECT,
+  CORRECT,
+  NOT_SELECTED
 }
 
-const Checkbox: React.FC<ICheckboxProps> = ({onDelete, isError, onClick, isDisabled, type, value, isActive}) => {
+interface ICheckboxProps {
+  isDisabled: boolean;
+  value: string;
+  onClick: () => void;
+  onDoubleClick?: () => void;
+  type: 'radio' | 'checkbox';
+  state: CheckboxState;
+}
+
+const Checkbox: React.FC<ICheckboxProps> = ({state, onDoubleClick, onClick, isDisabled, type, value}) => {
   return (
     <CheckboxStyled
-      className={cn({isError, isActive, isDisabled, checkbox: type === 'multiselect', radio: type === 'single'})}
-      onClick={onClick}
-      onDoubleClick={onDelete}>
+      className={cn({
+        isError: state === CheckboxState.INCORRECT,
+        isCorrect: state === CheckboxState.CORRECT,
+        isActive: state === CheckboxState.SELECTED,
+        checkbox: type === 'checkbox',
+        radio: type === 'radio',
+        isDisabled
+      })}
+      onClick={!isDisabled ? onClick : () => void 0}
+      onDoubleClick={!isDisabled ? onDoubleClick : () => void 0}>
       {value}
     </CheckboxStyled>
   );

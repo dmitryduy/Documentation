@@ -14,3 +14,10 @@ export const useInput = (defaultValue = '', maxSize = Infinity):
 
   return [value, updateValue, () => setValue('')];
 };
+
+export const getInputValue = (e: Parameters<ReturnType<typeof useInput>[1]>[0]) => {
+  if (typeof e === 'string') {
+    return e;
+  }
+  return (e.target as HTMLInputElement).value;
+};

@@ -16,7 +16,7 @@ const getArticleItem = (itemValue: string) => {
 };
 
 export const getArticleMenu = (menu: Menu) => {
-  const result = [];
+  const result: JSX.Element[] = [];
 
   for (const item of menu) {
     result.push(typeof item === 'string' ? getArticleItem(item) : getArticleMenu(item));

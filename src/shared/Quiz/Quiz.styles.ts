@@ -25,7 +25,8 @@ export const QuizTitle = styled.h2`
 export const QuizButton = styled(ButtonStyled)`
   background-color: ${props => props.theme.colors.background};
   color: ${props => props.theme.colors.link};
-  &:last-child{
+
+  &:last-child {
     align-items: center;
   }
 `;

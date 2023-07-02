@@ -19,6 +19,7 @@ export const Title = styled.div`
   border-radius: 10px;
   padding: 5px;
   transition: .3s;
+  min-height: 30px;
   
   &:before {
     position: absolute;
@@ -56,7 +57,7 @@ export const Title = styled.div`
   }
 `;
 
-export const AddButton = styled(ButtonStyled)`
+export const ConstructorButton = styled(ButtonStyled)`
   margin-top: 10px;
   align-items: center !important;
   color: ${props => props.theme.colors.paragraph};
@@ -102,21 +103,5 @@ export const CodeConstructor = styled.div`
     line-height: 17px;
     color: ${props => props.theme.colors.svg};
     margin-bottom: 10px;
-  }
-`;
-
-export const TextArea = styled.textarea`
-  margin-top: 10px;
-  outline: none;
-  width: 100%;
-  background-color: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors.paragraph};
-  border: 1px solid ${props => props.theme.colors.border};
-  font-size: 16px;
-  resize: vertical;
-  min-height: 50px;
-  padding: 5px;
-  &::-webkit-scrollbar {
-    width: 0;
   }
 `;

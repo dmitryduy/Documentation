@@ -21,16 +21,22 @@ export interface ITagList {
 
 export type InfoBlockType = 'alert' | 'info' | 'tip' | 'caution';
 
+export enum QuestionType {
+  TEXT='text',
+  MULTI_SELECT='multiselect',
+  SINGLE_SELECT='single'
+}
+
 export interface IQuizQuestion {
   id: number;
-  type: 'multiselect' | 'single' | 'text';
-  question: string;
-  code?: string;
-  codeLanguage: string | null;
+  type: QuestionType;
+  text: string;
+  code: string;
+  codeLanguage: string;
   options: {
     value: string,
     isCorrect: boolean;
   }[];
   position: number;
-  textCorrectAnswer?: string;
+  textCorrectAnswer: string;
 }

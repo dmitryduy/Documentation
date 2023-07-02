@@ -40,6 +40,8 @@ export const PopupContent = styled.div`
   & > div {
     flex: 1;
     margin-bottom: 0;
+    width: 50%;
+    overflow: auto;
   }
 `;
 
@@ -51,8 +53,8 @@ export const QuizConstructor = styled.div`
 `;
 
 export const Buttons = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
 
   button {
@@ -63,4 +65,5 @@ export const Buttons = styled.div`
 export const QuizContent = styled.div`
   overflow: auto;
   flex: 1;
+  margin-bottom: 5px;
 `;

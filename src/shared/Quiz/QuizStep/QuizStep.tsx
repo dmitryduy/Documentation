@@ -1,25 +1,70 @@
-import React, { PropsWithChildren, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import { capitalize } from '../../../utils/capitalize';
 import Code from '../../Code/Code';
 import { QuizSubtitle, QuizTitle } from '../Quiz.styles';
 import { QuizContext } from '../QuizContext';
+import Input from '../../Input/Input';
+import { IQuizQuestion, QuestionType } from '../../../global.typings';
+import Checkbox, { CheckboxState } from '../../Checkbox/Checkbox';
 
-import { Answers } from './QuizStep.styles';
+import { AnswersContainer } from './QuizStep.styles';
 
 interface IQuizStepProps {
   questionsCount: number;
+  onAnswerClick: (answer: string) => void;
+  isShowMistake: boolean;
 }
 
-const QuizStep: React.FC<PropsWithChildren<IQuizStepProps>> = ({children, questionsCount}) => {
-  const {question, codeLanguage, code, position} = useContext(QuizContext);
+const QuizStep: React.FC<IQuizStepProps> = ({onAnswerClick, isShowMistake, questionsCount}) => {
+  const {
+    text,
+    codeLanguage,
+    code,
+    position,
+    type,
+    inputValue,
+    setInputValue,
+    options,
+    userAnswers
+  } = useContext(QuizContext);
+
+  const getCheckboxState = (option: IQuizQuestion['options'][0]): CheckboxState => {
+    if (isShowMistake) {
+      if (option.isCorrect) {
+        return CheckboxState.CORRECT;
+      }
+      if (userAnswers.includes(option.value)) {
+        return CheckboxState.INCORRECT;
+      }
+      return CheckboxState.NOT_SELECTED;
+    } else {
+      if (userAnswers.includes(option.value)) {
+        return CheckboxState.SELECTED;
+      }
+
+      return CheckboxState.NOT_SELECTED;
+    }
+  };
 
   return (
     <>
       <QuizSubtitle>Вопрос {position}/{questionsCount}</QuizSubtitle>
-      <QuizTitle>{capitalize(question)}</QuizTitle>
+      <QuizTitle>{capitalize(text)}</QuizTitle>
       {code && <Code code={code} language={codeLanguage} canCopy={false}/>}
-      <Answers>{children}</Answers>
+      <AnswersContainer>
+        {type === QuestionType.TEXT ?
+          <Input value={inputValue} setValue={setInputValue} placeholder="Ответ" type="text"/> :
+          options.map(option =>
+            <Checkbox
+              key={option.value}
+              type={type === QuestionType.SINGLE_SELECT ? 'radio' : 'checkbox'}
+              value={option.value}
+              state={getCheckboxState(option)}
+              isDisabled={isShowMistake}
+              onClick={() => onAnswerClick(option.value)}
+            />)}
+      </AnswersContainer>
     </>
   );
 };

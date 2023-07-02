@@ -53,7 +53,8 @@ export const lightTheme = {
     progressError: '#e13238',
     quizBg: '#f6f7f8',
     activeQuizAnswer: '#0fd9de',
-    incorrectQuizAnswer: '#e13238',
+    incorrectQuizAnswer: '#d9534f',
+    correctQuizAnswer: '#b0d1b0'
   }
 };
 
@@ -103,7 +104,8 @@ export const darkTheme = {
     progressError: '#e13238',
     quizBg: '#323234',
     activeQuizAnswer: '#0fd9de',
-    incorrectQuizAnswer: '#e13238',
+    incorrectQuizAnswer: '#d9534f',
+    correctQuizAnswer: '#b0d1b0'
   }
 };
 

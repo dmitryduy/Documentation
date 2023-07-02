@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Answers = styled.div`
+export const AnswersContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;

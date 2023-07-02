@@ -24,7 +24,7 @@ export const getUpdatedMarkdown = (markdown: string, options: Options) => {
   const insertString = action.insert(markdown.slice(selectionStart, selectionEnd));
   return {
     value: `${markdown.slice(0, selectionStart)}${insertString}${markdown.slice(selectionEnd)}`,
-    posStart: selectionStart + (action.multiselect ? action.startSelection : insertString.length),
-    posEnd: selectionStart + (action.multiselect ? action.endSelection : insertString.length)
+    posStart: selectionStart + (action.MULTI_SELECT ? action.startSelection : insertString.length),
+    posEnd: selectionStart + (action.MULTI_SELECT ? action.endSelection : insertString.length)
   };
 };

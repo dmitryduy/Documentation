@@ -10,6 +10,6 @@ export type IContextMenuAction = {
     insert: (str: string) => string;
     startSelection: number;
     endSelection: number;
-    multiselect?: boolean;
+    MULTI_SELECT?: boolean;
   };
 };
