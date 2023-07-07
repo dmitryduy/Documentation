@@ -1,28 +1,16 @@
 import { useEffect } from 'react';
 
-import { showTooltip } from '../../../utils/showTooltip';
-import { useAppDispatch } from '../../../hooks/useAppSelector';
-import { createPostManager } from '../../../api/postManager/createPostManager';
-import { endFetchPost, setPost, startFetchPost } from '../../../reducers/postReducer/postReducer';
 import { useConnection } from '../../../hooks/useConnection';
+import { useStores } from '../../../hooks/useStores';
 
 export const useFetchPost = (title?: string) => {
-  const dispatch = useAppDispatch();
   const isOnline = useConnection();
+  const {postStore} = useStores();
 
   useEffect(() => {
     const abortController = new AbortController();
-    const postManager = createPostManager();
-    isOnline && dispatch(startFetchPost());
-    postManager.findOne({link: title || ''}, abortController.signal)
-      .then(data => {
-        dispatch(setPost(data));
-      })
-      .catch(showTooltip);
+    isOnline && postStore.findPost(title || '', abortController.signal);
 
-    return () => {
-      dispatch(endFetchPost());
-      abortController.abort();
-    };
+    return () => abortController.abort();
   }, [title, isOnline]);
 };

@@ -5,7 +5,6 @@ import remarkGfm from 'remark-gfm';
 
 import { useMarkdownComponents } from '../../hooks/useMarkdownComponents';
 import { customMarkdownBlocksPlugin } from '../../utils/customMarkdownBlocksPlugin';
-import { useAppSelector } from '../../hooks/useAppSelector';
 
 interface IArticleProps {
     markdown: string;

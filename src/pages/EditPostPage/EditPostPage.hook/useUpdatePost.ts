@@ -1,23 +1,19 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { showTooltip } from '../../../utils/showTooltip';
 import { IPost } from '../../../global.typings';
-import { useAuth } from '../../../hooks/useAuth';
-import { useAppDispatch } from '../../../hooks/useAppSelector';
-import { getMenuFromMarkdown } from '../../../utils/getMenuFromMarkdown';
 import { checkPost } from '../EditPostPage.utils/checkPost';
 import { MAX_ARTICLE_LENGTH } from '../../../constants';
 import { Errors } from '../../../errors';
-import { createPostManager } from '../../../api/postManager/createPostManager';
+import { useStores } from '../../../hooks/useStores';
+import { conditionalExecution } from '../../../utils/conditionalExecution';
 
-export const useUpdatePost = (post: IPost | null):[boolean, (markdown: string) => void] => {
-  const [isLoading, setIsLoading] = useState(false);
-  const {login} = useAuth();
+export const useUpdatePost = (post: IPost | null): [boolean, (markdown: string) => void] => {
+  const {postStore, authStore: {login}} = useStores();
   const navigate = useNavigate();
 
   const validateAndUpdatePost = (markdown: string) => {
-    if (!post) return;
+    if (!post || !login) return;
 
     if (markdown.length > MAX_ARTICLE_LENGTH) {
       showTooltip(Errors.ARTICLE_LENGTH_ERROR);
@@ -26,27 +22,16 @@ export const useUpdatePost = (post: IPost | null):[boolean, (markdown: string) =
 
     const error = checkPost(markdown, post);
 
-    if (error) {
-      showTooltip(error);
-      return;
-    }
-
-    setIsLoading(true);
-
-    const postManager = createPostManager();
-    postManager.update({
-      markdown,
-      menu: getMenuFromMarkdown(markdown),
-      link: post.link,
-      owner: login || ''
-    }).then(() => {
-      navigate(`/post/${post.link}`);
-      showTooltip('Пост обновлен');
-    })
-      .catch(showTooltip)
-      .finally(() => setIsLoading(false));
+    conditionalExecution(!!error,
+      () => showTooltip(error as string),
+      () => {
+        postStore.updatePost(markdown, post.link, login, () => {
+          showTooltip('Пост обновлен');
+          navigate(`/post/${post.link}`);
+        });
+      });
   };
 
-  return [isLoading, validateAndUpdatePost];
+  return [postStore.isLoading, validateAndUpdatePost];
 
 };

@@ -1,90 +1,82 @@
-import { useState } from 'react';
-
 import { IQuizQuestion, QuestionType } from '../../../../global.typings';
 import { quizChecker } from '../../../../utils/checkQuiz';
-import { conditionalExecution } from '../../../../utils/conditionalExecution';
 import { showTooltip } from '../../../../utils/showTooltip';
-import { IQuestionLocalState, updateQuestionLocalStateFunction } from '../../QuizCreatorPopup.typings';
+import { useInput } from '../../../../hooks/useInput';
+import { useStores } from '../../../../hooks/useStores';
+import { conditionalExecution } from '../../../../utils/conditionalExecution';
 
 
 export const useUpdateQuestion = (question: IQuizQuestion) => {
-  const [questionState, setQuestionState] = useState<IQuestionLocalState>({...question, optionValue: ''});
-
-  const updateQuestionState: updateQuestionLocalStateFunction = (key, checkedValue, afterUpdate) => {
-    conditionalExecution(!!checkedValue.error,
-      () => showTooltip(checkedValue.error),
-      () => {
-        setQuestionState(prev => ({...prev, [key]: checkedValue.value}));
-        afterUpdate && afterUpdate();
-      });
-  };
-
+  const [optionValue, setOptionValue] = useInput('');
+  const {quizStore} = useStores();
 
   const updateText = (text: string) => {
     const checkedText = quizChecker.checkText(text, question.position);
-    updateQuestionState('text', checkedText);
+    quizStore.updateQuestion(question.id, 'text', checkedText);
   };
 
   const addOption = () => {
-    const checkedOption =
-      quizChecker.checkOption({value: questionState.optionValue, isCorrect: false}, question.position);
+    const checkedOption = quizChecker.checkOption({value: optionValue, isCorrect: false}, question.position);
 
-    if (checkedOption.error) {
-      return showTooltip(checkedOption.error);
-    }
-
-    const checkedOptions = quizChecker.checkOptionsWithoutType(
-      [...questionState.options, checkedOption.value], question.position
-    );
-
-    updateQuestionState('options', checkedOptions, () => setQuestionState(prev => ({...prev, optionValue: ''})));
+    conditionalExecution(!!checkedOption.error,
+      () => showTooltip(checkedOption.error),
+      () => {
+        const checkedOptions = quizChecker.checkOptionsWithoutType(
+          [...question.options, checkedOption.value], question.position
+        );
+        quizStore.updateQuestion(question.id, 'options', checkedOptions, () => setOptionValue(''));
+      });
   };
 
   const updateType = (type: IQuizQuestion['type']) => {
     if (type === QuestionType.TEXT) {
-      setQuestionState({...questionState, options: [], type});
+      quizStore.updateQuestionWithoutCheck(question.id, 'options', []);
+      quizStore.updateQuestionWithoutCheck(question.id, 'type', type);
     } else {
-      setQuestionState({
-        ...questionState,
-        type,
-        textCorrectAnswer: '',
-        options: [...questionState.options.map(option => ({...option, isCorrect: false}))]
-      });
+      quizStore.updateQuestionWithoutCheck(question.id, 'textCorrectAnswer', '');
+      quizStore.updateQuestionWithoutCheck(question.id, 'type', type);
+      quizStore.updateQuestionWithoutCheck(
+        question.id,
+        'options',
+        question.options.map(option => ({...option, isCorrect: false})));
     }
   };
 
   const updateCode = (code: string) => {
     const checkedCode = quizChecker.checkCode(code, question.position);
-    updateQuestionState('code', checkedCode);
+    quizStore.updateQuestion(question.id, 'code', checkedCode);
   };
 
   const updateCodeLanguage = (language: string) => {
     const checkedLanguage = quizChecker.checkCodeLanguage(language, question.position);
-    updateQuestionState('codeLanguage', checkedLanguage);
+    quizStore.updateQuestion(question.id, 'codeLanguage', checkedLanguage);
   };
 
   const updateTextCorrectAnswer = (text: string) => {
     const checkedText = quizChecker.checkTextCorrectAnswer(text, question.position);
-    updateQuestionState('textCorrectAnswer', checkedText);
-  };
-
-  const updateOptionValue = (text: string) => {
-    setQuestionState({...questionState, optionValue: text});
+    quizStore.updateQuestion(question.id, 'textCorrectAnswer', checkedText);
   };
 
   const setCorrectOption = (text: string) => {
-    if (questionState.type === QuestionType.SINGLE_SELECT) {
-      setQuestionState({...questionState, options: [...questionState.options.map(option =>
-        (option.value === text ? {...option, isCorrect: true} : {...option, isCorrect: false}))]});
+    if (question.type === QuestionType.SINGLE_SELECT) {
+      quizStore.updateQuestionWithoutCheck(
+        question.id,
+        'options',
+        question.options.map(option => ({...option, isCorrect: option.value === text})));
     }
-    if (questionState.type === QuestionType.MULTI_SELECT) {
-      setQuestionState({...questionState, options: [...questionState.options.map(option =>
-        (option.value === text ? {...option, isCorrect: !option.isCorrect} : option))] });
+    if (question.type === QuestionType.MULTI_SELECT) {
+      quizStore.updateQuestionWithoutCheck(
+        question.id,
+        'options',
+        question.options.map(option => (option.value === text ? {...option, isCorrect: !option.isCorrect} : option)));
     }
   };
 
   const deleteOption = (value: string) => {
-    setQuestionState({...questionState, options: [...questionState.options.filter(option => option.value !== value)]});
+    quizStore.updateQuestionWithoutCheck(
+      question.id,
+      'options',
+      [...question.options.filter(option => option.value !== value)]);
   };
 
   return {
@@ -95,10 +87,10 @@ export const useUpdateQuestion = (question: IQuizQuestion) => {
       updateCodeLanguage,
       updateText,
       updateTextCorrectAnswer,
-      updateOptionValue,
       deleteOption,
       setCorrectOption
     },
-    questionState
+    optionValue,
+    setOptionValue
   };
 };

@@ -1,7 +1,8 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
+import { observer } from 'mobx-react-lite';
 
-import { useTheme } from './hooks/useTheme';
+import { useStores } from './hooks/useStores';
 
 const colors = {
   primary: '#64c9c5'
@@ -113,13 +114,13 @@ interface IThemeProps {
   children: React.ReactNode;
 }
 
-const Theme: React.FC<IThemeProps> = ({children}) => {
-  const {theme} = useTheme();
+const Theme: React.FC<IThemeProps> = observer(({children}) => {
+  const {settingsStore: {theme}} = useStores();
   return (
     <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
       {children}
     </ThemeProvider>
   );
-};
+});
 
 export default Theme;

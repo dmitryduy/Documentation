@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 
 import Article from '../Article/Article';
 import { EmitterNames } from '../../emitterNames';
@@ -8,24 +9,22 @@ import Loader from '../../shared/Loader/Loader';
 import { useEmit } from '../../hooks/useEmit';
 import {ReactComponent as EditSvg} from '../../assets/images/edit.svg';
 import {ReactComponent as DeleteSvg} from '../../assets/images/delete.svg';
-import { useAppSelector } from '../../hooks/useAppSelector';
 import ButtonLink from '../../shared/Button/ButtonLink/ButtonLink';
 import useMatchMedia from '../../hooks/useMatchMedia';
-import { useAuth } from '../../hooks/useAuth';
 import { showTooltip } from '../../utils/showTooltip';
 import ArticleMenu from '../ArticleMenu/ArticleMenu';
 import ArticleInfo from '../ArticleInfo/ArticleInfo';
+import { useStores } from '../../hooks/useStores';
+import postStore from '../../stores/postStore';
 
 import {ArticleSideStyled, Actions} from './ArticleSide.styles';
-import { useDeletePost } from './ArticleSide.hook/useDeletePost';
 
 
-const ArticleSide = () => {
+const ArticleSide = observer(() => {
   const [isHide, setIsHide]  = useState(false);
   const phone = useMatchMedia();
-  const { nextPost, post, loading} = useAppSelector(state => state.posts);
-  const {login} = useAuth();
-  const deletePost = useDeletePost();
+  const navigate = useNavigate();
+  const {authStore: {login}, postStore: {nextPost, post, isLoading}} = useStores();
   useEmit(EmitterNames.TOGGLE_LEFT_SIDEBAR, () => setIsHide(prev => !prev));
 
   useEffect(() => {
@@ -38,10 +37,15 @@ const ArticleSide = () => {
 
   const onDeleteDoubleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    post && deletePost(post?.link);
+    if (post && login) {
+      postStore.deletePost(post?.link, login, () => {
+        navigate('/');
+        showTooltip('Пост удален');
+      });
+    }
   };
 
-  if (!loading && post) {
+  if (!isLoading && post) {
     return (
       <ArticleSideStyled className={cn({transform: isHide})}>
         <ArticleInfo author={post.owner} views={post.views} date={post.date}/>
@@ -62,12 +66,12 @@ const ArticleSide = () => {
     );
   }
 
-  if (loading) {
+  if (isLoading) {
     return <ArticleSideStyled><Loader/></ArticleSideStyled>;
   }
 
   return <p>Что то пошло не так.</p>;
 
-};
+});
 
 export default ArticleSide;

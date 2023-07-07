@@ -15,7 +15,7 @@ export const CodeStyled = styled.div`
   code {
     user-select: none;
   }
-  code.canCopy {
+  &.canCopy code {
     user-select: auto;
   }
 `;

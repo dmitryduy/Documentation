@@ -2,10 +2,11 @@ import React from 'react';
 import { dracula, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import cn from 'classnames';
+import { observer } from 'mobx-react-lite';
 
 import {ReactComponent as CopySvg} from '../../assets/images/Copy.svg';
 import { copyToClipboard } from '../../utils/copyToClipboard';
-import { useTheme } from '../../hooks/useTheme';
+import { useStores } from '../../hooks/useStores';
 
 import {CodeStyled} from './Code.styles';
 
@@ -16,12 +17,11 @@ interface ICodeProps {
 }
 
 
-const Code: React.FC<ICodeProps> = ({code, language, canCopy = true}) => {
-  const {theme} = useTheme();
+const Code: React.FC<ICodeProps> = observer(({code, language, canCopy = true}) => {
+  const {settingsStore: {theme}} = useStores();
   return (
-    <CodeStyled>
+    <CodeStyled  className={cn({canCopy})}>
       <SyntaxHighlighter
-        className={cn('scroll', {canCopy})}
         children={code.replace(/\n$/, '')}
         style={theme === 'light' ? oneLight : dracula}
         language={language || 'js'}
@@ -31,6 +31,6 @@ const Code: React.FC<ICodeProps> = ({code, language, canCopy = true}) => {
       {canCopy && <CopySvg onClick={() => copyToClipboard(code)} className="copy-icon"/>}
     </CodeStyled>
   );
-};
+});
 
 export default Code;

@@ -1,53 +1,44 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 
 import windowExtends from './declare';
 import { useShowTooltipOnNetworkError } from './hooks/useShowTooltipOnNetworkError';
-import { useAuth } from './hooks/useAuth';
 import { routes } from './routes';
-import { showTooltip } from './utils/showTooltip';
-import { useAppDispatch } from './hooks/useAppSelector';
 import Loader from './shared/Loader/Loader';
 import { Wrapper } from './App.styles';
-import { createUserManager } from './api/userManager/createUserManager';
-import { setUser } from './reducers/authReducer/authReducer';
+import { useStores } from './hooks/useStores';
 
 
 windowExtends();
 
-function App() {
-  const dispatch = useAppDispatch();
+const App = observer(() => {
   useShowTooltipOnNetworkError();
-  const {isLogin} = useAuth();
-  const [show, setShow] = useState(false);
+  const {authStore} = useStores();
 
   useEffect(() => {
-    const userManager = createUserManager();
-    userManager.authMe()
-      .then(data => dispatch(setUser({login: data.login})))
-      .catch(showTooltip)
-      .finally(() => setShow(true));
+    authStore.authMe();
   }, []);
 
-  const routesMemo = useMemo(() => (isLogin ? routes.private : routes.common), [isLogin]);
+  const routesMemo = useMemo(() => (authStore.login ? routes.private : routes.common), [authStore.login]);
 
-  if (!show) return <Wrapper><Loader/></Wrapper>;
+  if (authStore.isLoading) {
+    return <Wrapper><Loader/></Wrapper>;
+  }
 
   return (
-    <>
-      <Wrapper>
-        <Routes>
-          {routesMemo.map(route =>
-            <Route
-              key={route.path}
-              path={route.path}
-              element={<route.component/>}
-            />)}
-          <Route path="*" element={<Navigate to="/"/>}/>
-        </Routes>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <Routes>
+        {routesMemo.map(route =>
+          <Route
+            key={route.path}
+            path={route.path}
+            element={<route.component/>}
+          />)}
+        <Route path="*" element={<Navigate to="/"/>}/>
+      </Routes>
+    </Wrapper>
   );
-}
+});
 
 export default App;

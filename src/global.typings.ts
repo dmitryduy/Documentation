@@ -16,15 +16,15 @@ export interface ITagList {
   articles: {
     link: string;
     title: string;
-  }[]
+  }[];
 }
 
 export type InfoBlockType = 'alert' | 'info' | 'tip' | 'caution';
 
 export enum QuestionType {
-  TEXT='text',
-  MULTI_SELECT='multiselect',
-  SINGLE_SELECT='single'
+  TEXT = 'text',
+  MULTI_SELECT = 'multiselect',
+  SINGLE_SELECT = 'single'
 }
 
 export interface IQuizQuestion {
@@ -40,3 +40,8 @@ export interface IQuizQuestion {
   position: number;
   textCorrectAnswer: string;
 }
+
+export type FlowReturn<AsyncFunction extends (...args: any[]) => Promise<any>> =
+  Generator<ReturnType<AsyncFunction>,
+    void,
+    Awaited<ReturnType<AsyncFunction>>>
