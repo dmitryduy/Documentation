@@ -155,12 +155,11 @@ ${str}
     endSelection: 11
   },
   'quiz': {
-    template: `:::quiz
-quiz[Название теста]
+    template: `\`\`\`quiz[название квиза]
 
-:::`,
+\`\`\``,
     insert: str => str,
-    startSelection: 13,
-    endSelection: 27,
+    startSelection: 8,
+    endSelection: 22,
   }
 };

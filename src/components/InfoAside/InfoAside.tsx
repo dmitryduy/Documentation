@@ -3,9 +3,8 @@ import cn from 'classnames';
 
 import TagList from '../TagList/TagList';
 import Loader from '../../shared/Loader/Loader';
-import { useEmit } from '../../hooks/useEmit';
-import { EmitterNames } from '../../emitterNames';
 import useMatchMedia from '../../hooks/useMatchMedia';
+import { eventManager, Event } from '../../utils/emitter';
 
 import { InfoAsideStyled } from './InfoAside.styles';
 import { useFetchTagsMenu } from './InfoAside.hook/useFetchTagsMenu';
@@ -21,7 +20,9 @@ const InfoAside = React.memo(() => {
     !phone && setIsActive(false);
   }, [phone]);
 
-  useEmit(EmitterNames.TOGGLE_LEFT_SIDEBAR, () => phoneRef.current && setIsActive(prev => !prev));
+  useEffect(() => {
+    eventManager.on(Event.TOGGLE_LEFT_SIDEBAR, () => phoneRef.current && setIsActive(prev => !prev));
+  }, []);
 
   return (
     <InfoAsideStyled className={cn('scroll', {active: isActive})}>

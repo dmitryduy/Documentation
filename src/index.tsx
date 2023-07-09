@@ -2,7 +2,6 @@ import React from 'react';
 import './index.css';
 import {
   createBrowserRouter,
-  createHashRouter,
   createRoutesFromElements,
   Navigate,
   Route,
@@ -13,7 +12,7 @@ import { spy } from 'mobx';
 
 import App from './App';
 import Theme from './Theme';
-import ToastProvider from './shared/ToastProvider/ToastProvider';
+import Toast from './shared/Toast/Toast';
 import { StoreContext } from './hooks/useStores';
 import { RootStore } from './stores/rootStore';
 import ArticlePage from './pages/ArticlePage/ArticlePage';
@@ -47,9 +46,7 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <StoreContext.Provider value={new RootStore()}>
     <Theme>
-      <ToastProvider>
-        <RouterProvider router={router}/>
-      </ToastProvider>
+      <RouterProvider router={router}/>
     </Theme>
   </StoreContext.Provider>
 );

@@ -1,10 +1,9 @@
-import React, { Dispatch, FC, SetStateAction, useRef } from 'react';
+import React, { Dispatch, FC, SetStateAction, useEffect, useRef } from 'react';
 
-import { EmitterNames } from '../../emitterNames';
-import { useEmit } from '../../hooks/useEmit';
 import { useToggle } from '../../hooks/useToggle';
 import { useHeightAnimate } from '../../hooks/useHeightAnimate';
 import { useInput } from '../../hooks/useInput';
+import { Event, eventManager } from '../../utils/emitter';
 
 import { NewTags, TagsStyled } from './Tags.styles';
 import { useTags } from './Tags.hook/useTags';
@@ -21,7 +20,7 @@ const Tags: FC<ITagsProps> = ({setTags, tags}) => {
   const addTag = useTags(setTags, tags);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEmit(EmitterNames.TOGGLE_POST_TAGS, () => toggleIsActive());
+  useEffect(() => eventManager.on(Event.TOGGLE_POST_TAGS, toggleIsActive), []);
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'Enter') {

@@ -7,7 +7,6 @@ import { observer } from 'mobx-react-lite';
 import {ReactComponent as CopySvg} from '../../assets/images/Copy.svg';
 import { copyToClipboard } from '../../utils/copyToClipboard';
 import { useStores } from '../../hooks/useStores';
-import { useToast } from '../../hooks/useToast';
 
 import {CodeStyled} from './Code.styles';
 
@@ -20,7 +19,7 @@ interface ICodeProps {
 
 const Code: React.FC<ICodeProps> = observer(({code, language, canCopy = true}) => {
   const {settingsStore: {theme}} = useStores();
-  const showToast = useToast();
+
   return (
     <CodeStyled  className={cn({canCopy})}>
       <SyntaxHighlighter
@@ -30,7 +29,7 @@ const Code: React.FC<ICodeProps> = observer(({code, language, canCopy = true}) =
         PreTag="div"
         customStyle={{paddingTop: 22}}
       />
-      {canCopy && <CopySvg onClick={() => copyToClipboard(code, showToast, showToast)} className="copy-icon"/>}
+      {canCopy && <CopySvg onClick={() => copyToClipboard(code)} className="copy-icon"/>}
     </CodeStyled>
   );
 });

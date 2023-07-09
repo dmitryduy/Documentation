@@ -4,6 +4,7 @@ import { storage } from '../utils/storage';
 import { createUserManager } from '../api/userManager/createUserManager';
 import { UserManager } from '../api/userManager/userManager';
 import { FlowReturn } from '../global.typings';
+import { showToast } from '../utils/showToast';
 
 class AuthStore {
   isSignInLoading = false;
@@ -25,8 +26,8 @@ class AuthStore {
     try {
       const data = yield this.userManager.authMe();
       this.login = data.login;
-    } catch {
-      console.log('error');
+    } catch (e) {
+      showToast(e);
     }
   }
 
@@ -35,7 +36,6 @@ class AuthStore {
     password: string,
     repeatPassword: string,
     onSuccess: () => void,
-    onError: (e: unknown) => void
   ): FlowReturn<typeof UserManager.prototype.signUp> {
     try {
       this.isSignUpLoading = true;
@@ -44,18 +44,13 @@ class AuthStore {
       this.login = data.login;
       onSuccess();
     } catch (e) {
-      onError(e);
+      showToast(e);
     } finally {
       this.isSignUpLoading = false;
     }
   }
 
-  *signIn(
-    login: string,
-    password: string,
-    onSuccess: () => void,
-    onError: (e: unknown) => void
-  ): FlowReturn<typeof UserManager.prototype.signIn> {
+  *signIn(login: string, password: string, onSuccess: () => void,): FlowReturn<typeof UserManager.prototype.signIn> {
     try {
       this.isSignInLoading = true;
       const data = yield this.userManager.signIn({login, password});
@@ -63,7 +58,7 @@ class AuthStore {
       this.login = data.login;
       onSuccess();
     } catch (e) {
-      onError(e);
+      showToast(e);
     } finally {
       this.isSignInLoading = false;
     }

@@ -1,5 +1,7 @@
-export const copyToClipboard = (value: string, onSuccess: (text: string) => void, onError: (text: string) => void) => {
+import { showToast } from './showToast';
+
+export const copyToClipboard = (value: string) => {
   navigator.clipboard.writeText(value)
-    .then(() => onSuccess('Скопировано'))
-    .catch(() => onError('Не удалось скопировать'));
+    .then(() => showToast('Скопировано'))
+    .catch(() => showToast('Не удалось скопировать'));
 };

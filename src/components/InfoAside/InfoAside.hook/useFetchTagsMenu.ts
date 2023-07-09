@@ -3,13 +3,12 @@ import { useEffect, useMemo, useState } from 'react';
 import { ITagList } from '../../../global.typings';
 import { useConnection } from '../../../hooks/useConnection';
 import { createTagsManager } from '../../../api/tagsManager/createTagsManager';
-import { useToast } from '../../../hooks/useToast';
+import { showToast } from '../../../utils/showToast';
 
 export const useFetchTagsMenu = () => {
   const [tags, setTags] = useState<ITagList[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const isOnline = useConnection();
-  const showToast = useToast();
 
   const tagsMemo = useMemo(() => tags, [tags]);
 

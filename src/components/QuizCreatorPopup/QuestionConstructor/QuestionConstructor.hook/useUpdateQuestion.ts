@@ -3,17 +3,15 @@ import { quizChecker } from '../../../../utils/checkQuiz';
 import { useInput } from '../../../../hooks/useInput';
 import { useStores } from '../../../../hooks/useStores';
 import { conditionalExecution } from '../../../../utils/conditionalExecution';
-import { useToast } from '../../../../hooks/useToast';
-
+import { showToast } from '../../../../utils/showToast';
 
 export const useUpdateQuestion = (question: IQuizQuestion) => {
   const [optionValue, setOptionValue] = useInput('');
   const {quizStore} = useStores();
-  const showToast = useToast();
 
   const updateText = (text: string) => {
     const checkedText = quizChecker.checkText(text, question.position);
-    quizStore.updateQuestion(question.id, 'text', checkedText, showToast);
+    quizStore.updateQuestion(question.id, 'text', checkedText);
   };
 
   const addOption = () => {
@@ -45,17 +43,17 @@ export const useUpdateQuestion = (question: IQuizQuestion) => {
 
   const updateCode = (code: string) => {
     const checkedCode = quizChecker.checkCode(code, question.position);
-    quizStore.updateQuestion(question.id, 'code', checkedCode, showToast);
+    quizStore.updateQuestion(question.id, 'code', checkedCode);
   };
 
   const updateCodeLanguage = (language: string) => {
     const checkedLanguage = quizChecker.checkCodeLanguage(language, question.position);
-    quizStore.updateQuestion(question.id, 'codeLanguage', checkedLanguage, showToast);
+    quizStore.updateQuestion(question.id, 'codeLanguage', checkedLanguage);
   };
 
   const updateTextCorrectAnswer = (text: string) => {
     const checkedText = quizChecker.checkTextCorrectAnswer(text, question.position);
-    quizStore.updateQuestion(question.id, 'textCorrectAnswer', checkedText, showToast);
+    quizStore.updateQuestion(question.id, 'textCorrectAnswer', checkedText);
   };
 
   const setCorrectOption = (text: string) => {

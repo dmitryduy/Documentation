@@ -4,6 +4,7 @@ import { IQuizQuestion } from '../global.typings';
 import { getTemplateQuestion } from '../components/QuizCreatorPopup/QuizCreatorPopup.utils';
 import { conditionalExecution } from '../utils/conditionalExecution';
 import { checkerFunction } from '../utils/checkQuiz';
+import { showToast } from '../utils/showToast';
 
 class QuizConstructorStore {
   activeQuestionId: IQuizQuestion['id'] = 0;
@@ -35,7 +36,7 @@ class QuizConstructorStore {
     this.updatePositions();
   }
 
-  deleteQuestion(questionId: IQuizQuestion['id'], showToast: (value: string) => void) {
+  deleteQuestion(questionId: IQuizQuestion['id']) {
     conditionalExecution(this.questions.length <= 1,
       () => showToast('Должет быть хотя бы 1 вопрос'),
       () => {
@@ -60,7 +61,6 @@ class QuizConstructorStore {
     questionId: IQuizQuestion['id'],
     key: K,
     checkedValue: ReturnType<checkerFunction<IQuizQuestion[K]>>,
-    showToast: (value: string) => void,
     afterUpdate?: () => void
   ) {
     const updatingQuestion = this.questions.find(question => question.id === questionId);

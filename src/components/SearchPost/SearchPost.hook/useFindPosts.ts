@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react';
 
 import { FindPostResponse } from '../../../api/postManager/postManager.typings';
 import { createPostManager } from '../../../api/postManager/createPostManager';
-import { useToast } from '../../../hooks/useToast';
+import { showToast } from '../../../utils/showToast';
 
 export const useFindPosts = (value: string) => {
   const [postsInfo, setPostsInfo] = useState<null | FindPostResponse['foundedPosts']>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const showToast = useToast();
 
   useEffect(() => {
     if (value.trim()) {

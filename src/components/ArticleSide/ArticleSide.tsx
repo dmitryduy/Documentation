@@ -4,9 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 
 import Article from '../Article/Article';
-import { EmitterNames } from '../../emitterNames';
 import Loader from '../../shared/Loader/Loader';
-import { useEmit } from '../../hooks/useEmit';
 import {ReactComponent as EditSvg} from '../../assets/images/edit.svg';
 import {ReactComponent as DeleteSvg} from '../../assets/images/delete.svg';
 import ButtonLink from '../../shared/Button/ButtonLink/ButtonLink';
@@ -15,7 +13,8 @@ import ArticleMenu from '../ArticleMenu/ArticleMenu';
 import ArticleInfo from '../ArticleInfo/ArticleInfo';
 import { useStores } from '../../hooks/useStores';
 import postStore from '../../stores/postStore';
-import { useToast } from '../../hooks/useToast';
+import { eventManager, Event } from '../../utils/emitter';
+import { showToast } from '../../utils/showToast';
 
 import {ArticleSideStyled, Actions} from './ArticleSide.styles';
 
@@ -24,9 +23,8 @@ const ArticleSide = observer(() => {
   const phone = useMatchMedia();
   const navigate = useNavigate();
   const {authStore: {login}, postStore: {nextPost, post, isLoading}} = useStores();
-  const showToast = useToast();
 
-  useEmit(EmitterNames.TOGGLE_LEFT_SIDEBAR, () => setIsHide(prev => !prev));
+  useEffect(() => eventManager.on(Event.TOGGLE_LEFT_SIDEBAR, () => setIsHide(prev => !prev)), []);
 
   useEffect(() => {
     !phone && setIsHide(false);
@@ -39,14 +37,10 @@ const ArticleSide = observer(() => {
   const onDeleteDoubleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (post && login) {
-      postStore.deletePost(
-        post?.link,
-        login,
-        () => {
-          navigate('/article');
-          showToast('Пост удален');
-        },
-        showToast);
+      postStore.deletePost(post?.link, login, () => {
+        navigate('/article');
+        showToast('Пост удален');
+      });
     }
   };
 

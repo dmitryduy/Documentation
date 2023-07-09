@@ -1,14 +1,14 @@
-import React from 'react';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 
-import { EmitterNames } from '../../emitterNames';
 import {ReactComponent as BurgerSvg} from '../../assets/images/burger.svg';
 import useMatchMedia from '../../hooks/useMatchMedia';
 import SearchPost from '../SearchPost/SearchPost';
 import {ReactComponent as LightThemeSvg} from '../../assets/images/lightTheme.svg';
 import {ReactComponent as DarkThemeSvg} from '../../assets/images/darkTheme.svg';
 import { useStores } from '../../hooks/useStores';
+import { Event, eventManager } from '../../utils/emitter';
 
 import { HeaderStyled } from './Header.styles';
 
@@ -17,8 +17,9 @@ const Header = observer(() => {
   const phone = useMatchMedia();
   const navigate = useNavigate();
   const location = useLocation();
+
   const toggleLeftSide = () => {
-    phone && window.emitter.emit(EmitterNames.TOGGLE_LEFT_SIDEBAR);
+    phone && eventManager.emit(Event.TOGGLE_LEFT_SIDEBAR);
   };
 
   const navigateToLogin = () => {

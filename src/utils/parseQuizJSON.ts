@@ -1,12 +1,11 @@
 import { IQuizQuestion } from '../global.typings';
 
 import { quizChecker } from './checkQuiz';
+import { showToast } from './showToast';
 
-export const parseQuizJSON = (string: string, onError: (error: string) => void) => {
+export const parseQuizJSON = (string: string) => {
   try {
-    const questions: IQuizQuestion[] = JSON.parse(string
-      .replaceAll('"isCorrect":"true"', '"isCorrect":true')
-      .replaceAll('"isCorrect":"false"', '"isCorrect":false'));
+    const questions: IQuizQuestion[] = JSON.parse(string);
 
     for (const question of questions) {
       if (!question.textCorrectAnswer) question.textCorrectAnswer = '';
@@ -14,21 +13,13 @@ export const parseQuizJSON = (string: string, onError: (error: string) => void) 
 
     const checkedQuiz = quizChecker.checkQuiz(questions, 0);
     if (checkedQuiz.error) {
-      onError(checkedQuiz.error);
+      showToast(checkedQuiz.error);
       return null;
     }
 
     return questions;
   } catch (e) {
-    onError('Некорректный квиз');
+    showToast('Некорректный квиз');
     return null;
   }
-};
-
-export const stringifyQuizJSON = (quiz: IQuizQuestion[]) => {
-  return JSON.stringify(quiz, (key, value) => {
-    if (key === 'isCorrect') return value.toString();
-    if (typeof value === 'string') return value.replaceAll('"', '\'');
-    return value;
-  });
 };

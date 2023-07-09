@@ -1,10 +1,9 @@
 import { Dispatch, SetStateAction } from 'react';
 
 import { Errors } from '../../../errors';
-import { useToast } from '../../../hooks/useToast';
+import { showToast } from '../../../utils/showToast';
 
 export const useTags = (setTags: Dispatch<SetStateAction<string[]>>, tags: string[]) => {
-  const showToast = useToast();
 
   return (tag: string) => {
     const cleanValue = tag.trim().toLowerCase();

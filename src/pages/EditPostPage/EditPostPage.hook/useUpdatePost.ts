@@ -6,12 +6,11 @@ import { MAX_ARTICLE_LENGTH } from '../../../constants';
 import { Errors } from '../../../errors';
 import { useStores } from '../../../hooks/useStores';
 import { conditionalExecution } from '../../../utils/conditionalExecution';
-import { useToast } from '../../../hooks/useToast';
+import { showToast } from '../../../utils/showToast';
 
 export const useUpdatePost = (post: IPost | null): [boolean, (markdown: string) => void] => {
   const {postStore, authStore: {login}} = useStores();
   const navigate = useNavigate();
-  const showToast = useToast();
 
   const validateAndUpdatePost = (markdown: string) => {
     if (!post || !login) return;
@@ -26,15 +25,10 @@ export const useUpdatePost = (post: IPost | null): [boolean, (markdown: string) 
     conditionalExecution(!!error,
       () => showToast(error),
       () => {
-        postStore.updatePost(
-          markdown,
-          post.link,
-          login,
-          () => {
-            showToast('Пост обновлен');
-            navigate(`/article/${post.link}`);
-          },
-          showToast);
+        postStore.updatePost(markdown, post.link, login, () => {
+          showToast('Пост обновлен');
+          navigate(`/article/${post.link}`);
+        });
       });
   };
 

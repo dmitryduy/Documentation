@@ -8,7 +8,6 @@ import AuthButton from '../../shared/AuthButton/AuthButton';
 import Loader from '../../shared/Loader/Loader';
 import { useInput } from '../../hooks/useInput';
 import { useStores } from '../../hooks/useStores';
-import { useToast } from '../../hooks/useToast';
 
 import {RegisterPageStyled} from './RegisterPage.styles';
 import { MAX_LOGIN_LENGTH, MAX_PASSWORD_LENGTH } from './RegisterPage.constants';
@@ -17,7 +16,6 @@ const RegisterPage = observer(() => {
   const [login, setLogin] = useInput('', MAX_LOGIN_LENGTH);
   const [password, setPassword] = useInput('', MAX_PASSWORD_LENGTH);
   const [repeatPassword, setRepeatPassword] = useInput('', MAX_PASSWORD_LENGTH);
-  const showToast = useToast();
   const {authStore} = useStores();
   const location = useLocation();
   const navigate = useNavigate();
@@ -26,7 +24,7 @@ const RegisterPage = observer(() => {
 
 
   const signUp = () => {
-    authStore.signUp(login, password, repeatPassword, () => navigate(from), showToast);
+    authStore.signUp(login, password, repeatPassword, () => navigate(from));
   };
 
   return (

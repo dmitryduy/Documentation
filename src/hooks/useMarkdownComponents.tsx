@@ -20,12 +20,8 @@ import { reactChildrenToString } from '../utils/reactChildrenToString';
 import Quiz from '../shared/Quiz/Quiz';
 import { parseQuizJSON } from '../utils/parseQuizJSON';
 
-import { useToast } from './useToast';
-
 export const useMarkdownComponents = ():
   Partial<Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents> => {
-  const showToast = useToast();
-
   return useMemo(() => ({
     h1({children}) {
       return <Title>{children}</Title>;
@@ -42,14 +38,18 @@ export const useMarkdownComponents = ():
         <SecondTitle id={id}>{children}</SecondTitle>
       );
     },
-    p(data) {
-      const children = data.children;
-      const string = reactChildrenToString(data.children);
-      const quizData = string.match(/^quiz\[(.+)\]\n(.*)/);
-      if (quizData) {
-        const quiz = parseQuizJSON(quizData[2], showToast);
+    p({children}) {
+      return <Paragraph>{children}</Paragraph>;
+    },
+    a({children, href}) {
+      return <Link href={href || '#'}>{children}</Link>;
+    },
+    code({children, className}) {
+      const quizMatch = (className || '').match(/language-quiz\[(.*)\]/);
+      if (quizMatch) {
+        const quiz = parseQuizJSON(reactChildrenToString(children));
         return quiz ?
-          <Quiz questions={quiz} title={quizData[1]}/> :
+          <Quiz questions={quiz} title={quizMatch[1].replaceAll('-', ' ')}/> :
           <Paragraph>Ошибка создания квиза</Paragraph>;
       }
 
@@ -58,12 +58,7 @@ export const useMarkdownComponents = ():
           children[i] = (children[i] as string).replaceAll(':::', '');
         }
       }
-      return <Paragraph>{children}</Paragraph>;
-    },
-    a({children, href}) {
-      return <Link href={href || '#'}>{children}</Link>;
-    },
-    code({children, className}) {
+
       const match = /language-(\w+)/.exec(className || '');
       return match ? <Code code={children.toString()} language={match[1]}/> : <Marker>{children}</Marker>;
     },

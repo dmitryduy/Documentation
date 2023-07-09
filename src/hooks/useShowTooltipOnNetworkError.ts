@@ -1,14 +1,13 @@
 import { useEffect, useRef } from 'react';
 
 import { Errors } from '../errors';
+import { showToast } from '../utils/showToast';
 
 import { useConnection } from './useConnection';
-import { useToast } from './useToast';
 
 export const useShowTooltipOnNetworkError = () => {
   const isOnline = useConnection();
   const isMountRef = useRef(true);
-  const showToast = useToast();
 
   useEffect(() => {
     if (!isOnline) {

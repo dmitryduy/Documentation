@@ -1,8 +1,7 @@
 import React, { MouseEvent, useRef, useState } from 'react';
 
-
-import { EmitterNames } from '../../emitterNames';
 import QuizCreatorPopup from '../QuizCreatorPopup/QuizCreatorPopup';
+import { eventManager, Event } from '../../utils/emitter';
 
 import { ContextMenuStyled } from './ContextMenu.styles';
 import { Actions } from './ContextMenu.typings';
@@ -25,7 +24,7 @@ const ContextMenu: React.FC<IContextMenuProps> = ({updateMarkdown}) => {
 
   return (
     <ContextMenuStyled className="scroll" ref={menuRef} onClick={editText}>
-      <li onClick={() => window.emitter.emit(EmitterNames.TOGGLE_POST_TAGS)}>теги</li>
+      <li onClick={() => eventManager.emit(Event.TOGGLE_POST_TAGS)}>теги</li>
       <li data-action="quiz" onClick={() => setIsQuizConstructor(true)}>квиз</li>
       <li data-action="heading-1">h1</li>
       <li data-action="heading-2">h2</li>

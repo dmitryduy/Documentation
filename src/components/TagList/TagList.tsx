@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 import { ITagList } from '../../global.typings';
 import { useToggle } from '../../hooks/useToggle';
-import { EmitterNames } from '../../emitterNames';
 import { useHeightAnimate } from '../../hooks/useHeightAnimate';
 import useMatchMedia from '../../hooks/useMatchMedia';
 import {ReactComponent as ArrowSvg} from '../../assets/images/arrow.svg';
+import { eventManager, Event } from '../../utils/emitter';
 
 import { Header, TagListStyled } from './TagList.styles';
 
@@ -21,7 +21,7 @@ const TagList: React.FC<ITagListProps> = ({tagInfo}) => {
   const phone = useMatchMedia();
 
   const closeLeftSide = () => {
-    phone && window.emitter.emit(EmitterNames.TOGGLE_LEFT_SIDEBAR);
+    phone && eventManager.emit(Event.TOGGLE_LEFT_SIDEBAR);
   };
 
   return (

@@ -1,6 +1,7 @@
+import { showToast } from './showToast';
 
-export const getFromClipboard = (success: (text: string) => void, onError: (error: string) => void) => {
+export const getFromClipboard = (fn: (text: string) => void) => {
   navigator.clipboard.readText()
-    .then(success)
-    .catch(() => onError('Не удалось взять скопированные данные'));
+    .then(text => fn(text))
+    .catch(() => showToast('Не удалось взять скопированные данные'));
 };

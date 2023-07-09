@@ -11,7 +11,7 @@ interface ILinkProps {
 const Link: React.FC<ILinkProps> = ({href, children}) => {
   if (href.startsWith('#')) {
     return (
-      <HashLink to={href.slice(1)}>
+      <HashLink to={href.replace(/^#\/post/, '/article')}>
         <LinkStyled as="span">{children}</LinkStyled>
       </HashLink>
     );

@@ -8,14 +8,12 @@ import { useInput } from '../../hooks/useInput';
 import AuthButton from '../../shared/AuthButton/AuthButton';
 import Loader from '../../shared/Loader/Loader';
 import { useStores } from '../../hooks/useStores';
-import { useToast } from '../../hooks/useToast';
 
 import {LoginPageStyled} from './LoginPage.styles';
 
 const LoginPage = observer(() => {
   const [login, setLogin] = useInput('');
   const [password, setPassword] = useInput('');
-  const showToast = useToast();
   const {authStore} = useStores();
   const location = useLocation();
   const navigate = useNavigate();
@@ -23,7 +21,7 @@ const LoginPage = observer(() => {
   const from = location.state?.from ?? '/article';
 
   const signIn = () => {
-    authStore.signIn(login, password, () => navigate(from), showToast);
+    authStore.signIn(login, password, () => navigate(from));
   };
 
   return (

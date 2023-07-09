@@ -6,6 +6,7 @@ import { createPostManager } from '../api/postManager/createPostManager';
 import { getTitleFromMarkdown } from '../utils/getTitleFromMarkdown';
 import { getMenuFromMarkdown } from '../utils/getMenuFromMarkdown';
 import { CreatePostResponse } from '../api/postManager/postManager.typings';
+import { showToast } from '../utils/showToast';
 
 export interface PostInfo {
   link: string;
@@ -23,14 +24,12 @@ class PostStore {
     this.postManager = createPostManager();
   }
 
-  * createPost(
+  *createPost(
     markdown: string,
     tags: string[],
     login: string,
-    onSuccess: (data: CreatePostResponse) => void,
-    onError: (error: any) => void
-  )
-    : FlowReturn<typeof PostManager.prototype.create> {
+    onSuccess: (data: CreatePostResponse) => void
+  ): FlowReturn<typeof PostManager.prototype.create> {
     try {
       this.isLoading = true;
       const data = yield this.postManager.create({
@@ -42,53 +41,45 @@ class PostStore {
       });
       onSuccess(data);
     } catch (e) {
-      onError(e);
+      showToast(e);
     } finally {
       this.isLoading = false;
     }
   }
 
-  * updatePost(markdown: string, link: string, login: string, onSuccess: () => void, onError: (error: any) => void)
+  * updatePost(markdown: string, link: string, login: string, onSuccess: () => void)
     : FlowReturn<typeof PostManager.prototype.update> {
     try {
       this.isLoading = true;
       yield this.postManager.update({markdown, menu: getMenuFromMarkdown(markdown), link, owner: login});
       onSuccess();
     } catch (e) {
-      onError(e);
+      showToast(e);
     } finally {
       this.isLoading = false;
     }
   }
 
-  *findPost(
-    link: string,
-    signal: AbortSignal,
-    onError: (error: any) => void
-  ): FlowReturn<typeof PostManager.prototype.findOne> {
+  *findPost(link: string, signal: AbortSignal): FlowReturn<typeof PostManager.prototype.findOne> {
     try {
       this.isLoading = true;
       const data = yield this.postManager.findOne({link}, signal);
       this.post = data.post;
       this.nextPost = data.nextPostInfo;
     } catch (e) {
-      onError(e);
+      showToast(e);
     } finally {
       this.isLoading = false;
     }
   }
 
-  * deletePost(link: string,
-    login: string,
-    onSuccess: () => void,
-    onError: (error: any) => void
-  ): FlowReturn<typeof PostManager.prototype.delete> {
+  *deletePost(link: string, login: string, onSuccess: () => void): FlowReturn<typeof PostManager.prototype.delete> {
     try {
       this.isLoading = true;
       yield this.postManager.delete({link, owner: login});
       onSuccess();
     } catch (e) {
-      onError(e);
+      showToast(e);
     } finally {
       this.isLoading = false;
     }

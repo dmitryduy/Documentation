@@ -1,4 +1,0 @@
-export enum EmitterNames {
-  TOGGLE_LEFT_SIDEBAR = 'TOGGLE_LEFT_SIDEBAR',
-  TOGGLE_POST_TAGS = 'TOGGLE_POST_TAGS'
-}
