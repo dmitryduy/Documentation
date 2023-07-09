@@ -1,9 +1,8 @@
 import { IQuizQuestion } from '../global.typings';
 
 import { quizChecker } from './checkQuiz';
-import { showTooltip } from './showTooltip';
 
-export const parseQuizJSON = (string: string) => {
+export const parseQuizJSON = (string: string, onError: (error: string) => void) => {
   try {
     const questions: IQuizQuestion[] = JSON.parse(string
       .replaceAll('"isCorrect":"true"', '"isCorrect":true')
@@ -15,13 +14,13 @@ export const parseQuizJSON = (string: string) => {
 
     const checkedQuiz = quizChecker.checkQuiz(questions, 0);
     if (checkedQuiz.error) {
-      showTooltip(checkedQuiz.error);
+      onError(checkedQuiz.error);
       return null;
     }
 
     return questions;
   } catch (e) {
-    showTooltip('Некорректный квиз');
+    onError('Некорректный квиз');
     return null;
   }
 };

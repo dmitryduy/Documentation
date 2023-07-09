@@ -1,1 +1,0 @@
-export const TOOLTIP_SHOW_TIME = 2000;

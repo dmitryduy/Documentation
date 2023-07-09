@@ -1,20 +1,21 @@
 import { useEffect, useRef } from 'react';
 
-import { showTooltip } from '../utils/showTooltip';
 import { Errors } from '../errors';
 
 import { useConnection } from './useConnection';
+import { useToast } from './useToast';
 
 export const useShowTooltipOnNetworkError = () => {
   const isOnline = useConnection();
   const isMountRef = useRef(true);
+  const showToast = useToast();
 
   useEffect(() => {
     if (!isOnline) {
-      showTooltip(Errors.NO_CONNECTION);
+      showToast(Errors.NO_CONNECTION);
     }
     if (isOnline && !isMountRef.current) {
-      showTooltip('Соединение восстановлено.');
+      showToast('Соединение восстановлено.');
     }
   }, [isOnline]);
 

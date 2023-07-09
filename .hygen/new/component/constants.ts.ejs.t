@@ -1,5 +1,5 @@
 ---
-to: "<%= isConstant ? `${absPath}/${componentName}.constants.ts` : null %>"
+to: "<%= isConstant ? `${absPath}/${componentName}ToastProvider.constants.ts` : null %>"
 ---
 
 export const <%= h.upper(componentName) %> = '';

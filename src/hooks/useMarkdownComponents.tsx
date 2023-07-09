@@ -20,8 +20,12 @@ import { reactChildrenToString } from '../utils/reactChildrenToString';
 import Quiz from '../shared/Quiz/Quiz';
 import { parseQuizJSON } from '../utils/parseQuizJSON';
 
+import { useToast } from './useToast';
+
 export const useMarkdownComponents = ():
   Partial<Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents> => {
+  const showToast = useToast();
+
   return useMemo(() => ({
     h1({children}) {
       return <Title>{children}</Title>;
@@ -43,7 +47,7 @@ export const useMarkdownComponents = ():
       const string = reactChildrenToString(data.children);
       const quizData = string.match(/^quiz\[(.+)\]\n(.*)/);
       if (quizData) {
-        const quiz = parseQuizJSON(quizData[2]);
+        const quiz = parseQuizJSON(quizData[2], showToast);
         return quiz ?
           <Quiz questions={quiz} title={quizData[1]}/> :
           <Paragraph>Ошибка создания квиза</Paragraph>;

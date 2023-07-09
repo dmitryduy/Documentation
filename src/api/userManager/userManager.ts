@@ -27,8 +27,9 @@ export class UserManager {
     const repeatPassword = data.repeatPassword.trim();
 
     const error = checkRegisterData(login, password, repeatPassword);
-
+    console.log(error);
     if (error) {
+      console.log(error);
       throw new Error(error);
     }
 

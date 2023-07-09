@@ -12,6 +12,7 @@ import { useHeightAnimate } from '../../../hooks/useHeightAnimate';
 import { capitalize } from '../../../utils/capitalize';
 import Textarea from '../../../shared/Textarea/Textarea';
 import { useStores } from '../../../hooks/useStores';
+import { useToast } from '../../../hooks/useToast';
 
 import { useUpdateQuestion } from './QuestionConstructor.hook/useUpdateQuestion';
 import {
@@ -28,6 +29,7 @@ const QuestionConstructor: React.FC<IQuestionConstructorProps> = observer(({ques
   const [isCode, setIsCode] = useState(!!question.code);
   const {methods, optionValue, setOptionValue} = useUpdateQuestion(question);
   const contentRef = useHeightAnimate<HTMLDivElement>(isActive, {deps: [question.options, question.type, isCode]});
+  const showToast = useToast();
 
   const questionTextInputRef = useRef<HTMLInputElement>(null);
 
@@ -41,7 +43,7 @@ const QuestionConstructor: React.FC<IQuestionConstructorProps> = observer(({ques
     <QuestionConstructorStyled style={{overflow: isActive ? 'auto' : 'hidden'}}>
       <Title className={cn({active: isActive})}
         onClick={() => quizStore.changeActiveQuestion(question.id)}
-        onDoubleClick={() => quizStore.deleteQuestion(question.id)}>
+        onDoubleClick={() => quizStore.deleteQuestion(question.id, showToast)}>
         <p>{capitalize(question.text)}</p>
       </Title>
       <div ref={contentRef} style={{transition: '.3s'}}>

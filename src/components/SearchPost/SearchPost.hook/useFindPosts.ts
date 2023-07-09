@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 
-import { showTooltip } from '../../../utils/showTooltip';
 import { FindPostResponse } from '../../../api/postManager/postManager.typings';
 import { createPostManager } from '../../../api/postManager/createPostManager';
+import { useToast } from '../../../hooks/useToast';
 
 export const useFindPosts = (value: string) => {
   const [postsInfo, setPostsInfo] = useState<null | FindPostResponse['foundedPosts']>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const showToast = useToast();
 
   useEffect(() => {
     if (value.trim()) {
@@ -15,7 +16,7 @@ export const useFindPosts = (value: string) => {
 
       postManager.findPostsByName({value: value.trim()})
         .then(data => setPostsInfo(data.foundedPosts))
-        .catch(showTooltip)
+        .catch(showToast)
         .finally(() => setIsLoading(false));
     } else {
       setPostsInfo(null);

@@ -2,7 +2,6 @@ import { makeAutoObservable } from 'mobx';
 
 import { IQuizQuestion } from '../global.typings';
 import { getTemplateQuestion } from '../components/QuizCreatorPopup/QuizCreatorPopup.utils';
-import { showTooltip } from '../utils/showTooltip';
 import { conditionalExecution } from '../utils/conditionalExecution';
 import { checkerFunction } from '../utils/checkQuiz';
 
@@ -21,7 +20,7 @@ class QuizConstructorStore {
 
   updatePositions() {
     this.questions.forEach((question, idx) => {
-      question.position = idx;
+      question.position = idx + 1;
     });
   }
 
@@ -36,9 +35,9 @@ class QuizConstructorStore {
     this.updatePositions();
   }
 
-  deleteQuestion(questionId: IQuizQuestion['id']) {
+  deleteQuestion(questionId: IQuizQuestion['id'], showToast: (value: string) => void) {
     conditionalExecution(this.questions.length <= 1,
-      () => showTooltip('Должет быть хотя бы 1 вопрос'),
+      () => showToast('Должет быть хотя бы 1 вопрос'),
       () => {
         const deletingIndex = this.questions.findIndex(question => question.id === questionId);
         this.questions.splice(deletingIndex, 1);
@@ -61,13 +60,14 @@ class QuizConstructorStore {
     questionId: IQuizQuestion['id'],
     key: K,
     checkedValue: ReturnType<checkerFunction<IQuizQuestion[K]>>,
+    showToast: (value: string) => void,
     afterUpdate?: () => void
   ) {
     const updatingQuestion = this.questions.find(question => question.id === questionId);
     if (!updatingQuestion) return;
 
     conditionalExecution(!!checkedValue.error,
-      () => showTooltip(checkedValue.error),
+      () => showToast(checkedValue.error),
       () => {
         updatingQuestion[key] = checkedValue.value;
         afterUpdate && afterUpdate();

@@ -3,12 +3,11 @@ import { makeAutoObservable } from 'mobx';
 import { storage } from '../utils/storage';
 import { createUserManager } from '../api/userManager/createUserManager';
 import { UserManager } from '../api/userManager/userManager';
-import { showTooltip } from '../utils/showTooltip';
 import { FlowReturn } from '../global.typings';
-import { Errors } from '../errors';
 
 class AuthStore {
-  isLoading = false;
+  isSignInLoading = false;
+  isSignUpLoading = false;
   login: string | null = null;
   private userManager: UserManager;
 
@@ -24,39 +23,49 @@ class AuthStore {
 
   *authMe(): FlowReturn<typeof UserManager.prototype.authMe> {
     try {
-      this.isLoading = true;
       const data = yield this.userManager.authMe();
       this.login = data.login;
-    } catch (e) {
-      showTooltip(typeof e === 'string' || e instanceof Error ? e : Errors.UNEXPECTED_ERROR);
-    } finally {
-      this.isLoading = false;
+    } catch {
+      console.log('error');
     }
   }
 
-  *signUp(login: string, password: string, repeatPassword: string): FlowReturn<typeof UserManager.prototype.signUp> {
+  *signUp(
+    login: string,
+    password: string,
+    repeatPassword: string,
+    onSuccess: () => void,
+    onError: (e: unknown) => void
+  ): FlowReturn<typeof UserManager.prototype.signUp> {
     try {
-      this.isLoading = true;
+      this.isSignUpLoading = true;
       const data = yield this.userManager.signUp({login, password, repeatPassword});
       storage('auth-token').setItem(data.token);
       this.login = data.login;
+      onSuccess();
     } catch (e) {
-      showTooltip(typeof e === 'string' || e instanceof Error ? e : Errors.UNEXPECTED_ERROR);
+      onError(e);
     } finally {
-      this.isLoading = false;
+      this.isSignUpLoading = false;
     }
   }
 
-  *signIn(login: string, password: string): FlowReturn<typeof UserManager.prototype.signIn> {
+  *signIn(
+    login: string,
+    password: string,
+    onSuccess: () => void,
+    onError: (e: unknown) => void
+  ): FlowReturn<typeof UserManager.prototype.signIn> {
     try {
-      this.isLoading = true;
+      this.isSignInLoading = true;
       const data = yield this.userManager.signIn({login, password});
       storage('auth-token').setItem(data.token);
       this.login = data.login;
+      onSuccess();
     } catch (e) {
-      showTooltip(typeof e === 'string' || e instanceof Error ? e : Errors.UNEXPECTED_ERROR);
+      onError(e);
     } finally {
-      this.isLoading = false;
+      this.isSignInLoading = false;
     }
   }
 }

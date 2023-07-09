@@ -1,7 +1,6 @@
-import { showTooltip } from './showTooltip';
 
-export const getFromClipboard = (fn: (text: string) => void) => {
+export const getFromClipboard = (success: (text: string) => void, onError: (error: string) => void) => {
   navigator.clipboard.readText()
-    .then(text => fn(text))
-    .catch(() => showTooltip('Не удалось взять скопированные данные'));
+    .then(success)
+    .catch(() => onError('Не удалось взять скопированные данные'));
 };

@@ -6,6 +6,7 @@ import Loader from '../../shared/Loader/Loader';
 import EditorWithPreview from '../../shared/EditorWithPreview/EditorWithPreview';
 import { withHeader } from '../../hocs/withHeader';
 import { useStores } from '../../hooks/useStores';
+import { withAuth } from '../../hocs/withAuth';
 
 import { useUpdatePost } from './EditPostPage.hook/useUpdatePost';
 
@@ -18,7 +19,7 @@ const EditPostPage = observer(() => {
 
   useEffect(() => {
     if (!post || title !== post.link) {
-      navigate('/Documentation');
+      navigate('/article');
     }
   }, [title]);
 
@@ -33,4 +34,4 @@ const EditPostPage = observer(() => {
     <Loader/>;
 });
 
-export default withHeader(EditPostPage);
+export default withAuth(withHeader(EditPostPage));

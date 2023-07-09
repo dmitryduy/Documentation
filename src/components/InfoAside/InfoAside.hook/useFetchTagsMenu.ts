@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { showTooltip } from '../../../utils/showTooltip';
 import { ITagList } from '../../../global.typings';
 import { useConnection } from '../../../hooks/useConnection';
 import { createTagsManager } from '../../../api/tagsManager/createTagsManager';
+import { useToast } from '../../../hooks/useToast';
 
 export const useFetchTagsMenu = () => {
   const [tags, setTags] = useState<ITagList[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const isOnline = useConnection();
+  const showToast = useToast();
 
   const tagsMemo = useMemo(() => tags, [tags]);
 
@@ -19,7 +20,7 @@ export const useFetchTagsMenu = () => {
       .then(data => {
         setTags(data.tags);
       })
-      .catch(showTooltip)
+      .catch(showToast)
       .finally(() => setIsLoading(false));
   };
   useEffect(() => {

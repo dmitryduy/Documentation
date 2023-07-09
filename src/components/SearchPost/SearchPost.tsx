@@ -34,7 +34,7 @@ const SearchPost = observer(() => {
           !postsInfo.length ?
             <p>Результатов нет</p> :
             postsInfo.map(post =>
-              <Link onClick={clearSearch} key={post.link} to={`/post/${post.link}`}>
+              <Link onClick={clearSearch} key={post.link} to={`/article/${post.link}`}>
                 {post.title}
                 {post.owner === login && <span className="my-post">моя</span>}
               </Link>)}

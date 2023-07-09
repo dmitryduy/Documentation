@@ -7,14 +7,13 @@ import { QuizContext } from '../../shared/Quiz/QuizContext';
 import QuizStep from '../../shared/Quiz/QuizStep/QuizStep';
 import { QuizStyled } from '../../shared/Quiz/Quiz.styles';
 import Button from '../../shared/Button/Button';
-import { IQuizQuestion } from '../../global.typings';
 import { getFromClipboard } from '../../utils/getFromClipboard';
 import { parseQuizJSON, stringifyQuizJSON } from '../../utils/parseQuizJSON';
 import { quizChecker } from '../../utils/checkQuiz';
 import { conditionalExecution } from '../../utils/conditionalExecution';
-import { showTooltip } from '../../utils/showTooltip';
 import { copyToClipboard } from '../../utils/copyToClipboard';
 import { useStores } from '../../hooks/useStores';
+import { useToast } from '../../hooks/useToast';
 
 import { Background, Buttons, PopupContent, QuizConstructor, QuizContent } from './QuizCreatorPopup.styles';
 import QuestionConstructor from './QuestionConstructor/QuestionConstructor';
@@ -26,25 +25,28 @@ interface IQuizCreatorPopupProps {
 
 const QuizCreatorPopup: React.FC<IQuizCreatorPopupProps> = observer(({close, active}) => {
   const {quizStore} = useStores();
+  const showToast = useToast();
+
   const createQuiz = () => {
     const checkedQuiz = quizChecker.checkQuiz(quizStore.questions, 0);
 
     conditionalExecution(!!checkedQuiz.error,
-      () => showTooltip(checkedQuiz.error),
+      () => showToast(checkedQuiz.error),
       () => {
-        copyToClipboard(stringifyQuizJSON(checkedQuiz.value));
+        copyToClipboard(stringifyQuizJSON(checkedQuiz.value), showToast, showToast);
         quizStore.resetQuestions();
       });
   };
 
   const setQuizFromClipboard = () => {
     getFromClipboard(text => {
-      const quiz = parseQuizJSON(text);
+      const quiz = parseQuizJSON(text, showToast);
       if (quiz) {
         quizStore.setQuestions(quiz);
         quizStore.changeActiveQuestion(quiz[0].id);
       }
-    });
+    },
+    showToast);
   };
 
   return createPortal(

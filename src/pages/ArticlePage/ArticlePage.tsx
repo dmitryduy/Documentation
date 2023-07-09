@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 
 import InfoAside from '../../components/InfoAside/InfoAside';
@@ -23,7 +23,7 @@ const ArticlePage = observer(() => {
       <InfoAside/>
       <ArticleSide/>
       {login &&
-      <NavLink className="add-post" to="/create-post">
+      <NavLink className="add-post" to="/article/create">
         <AddSvg/>
       </NavLink>}
     </ArticlePageStyled>
