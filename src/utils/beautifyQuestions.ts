@@ -42,6 +42,7 @@ export const questionBeautifier: IQuestionBeautifier = {
       codeLanguage: this.beautifyCodeLanguage(question.codeLanguage),
       text: this.beautifyText(question.text),
       id: question.id,
+      isShuffleOptions: question.isShuffleOptions,
       textCorrectAnswer: this.beautifyTextCorrectAnswer(question.textCorrectAnswer),
       position: question.position
     };

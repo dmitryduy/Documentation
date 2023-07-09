@@ -12,27 +12,19 @@ export const getAnswerScore = (correctAnswers: string[], answers: string[]) => {
     }
   }
 
-  return Math.max(score, 0);
+  return Math.max(+(score / correctAnswers.length).toFixed(1), 0);
 };
 
 export const getMaxScore = (questions: IQuizQuestion[]) => {
-  let maxScore = 0;
-  for (const question of questions) {
-    if (question.type === QuestionType.TEXT) {
-      maxScore++;
-    } else {
-      maxScore += question.options.filter(option => option.isCorrect).length;
-    }
-  }
-
-  return maxScore;
+  return questions.length;
 };
 
 export const getInitialQuestion = (question: IQuizQuestion): IQuizQuestion & { userAnswers: string[] } => {
   const beautifyQuestion = questionBeautifier.beautifyQuiz([question])[0];
+  console.log(beautifyQuestion.isShuffleOptions);
   return {
     ...beautifyQuestion,
-    options: shuffle(beautifyQuestion.options),
+    options: beautifyQuestion.isShuffleOptions ? shuffle(beautifyQuestion.options) : beautifyQuestion.options,
     userAnswers: []
   };
 };

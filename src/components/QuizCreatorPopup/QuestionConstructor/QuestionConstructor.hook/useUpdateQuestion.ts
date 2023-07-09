@@ -51,6 +51,10 @@ export const useUpdateQuestion = (question: IQuizQuestion) => {
     quizStore.updateQuestion(question.id, 'codeLanguage', checkedLanguage);
   };
 
+  const updateIsShuffleOptions = () => {
+    quizStore.updateQuestionWithoutCheck(question.id, 'isShuffleOptions', !question.isShuffleOptions);
+  };
+
   const updateTextCorrectAnswer = (text: string) => {
     const checkedText = quizChecker.checkTextCorrectAnswer(text, question.position);
     quizStore.updateQuestion(question.id, 'textCorrectAnswer', checkedText);
@@ -87,7 +91,8 @@ export const useUpdateQuestion = (question: IQuizQuestion) => {
       updateText,
       updateTextCorrectAnswer,
       deleteOption,
-      setCorrectOption
+      setCorrectOption,
+      updateIsShuffleOptions
     },
     optionValue,
     setOptionValue

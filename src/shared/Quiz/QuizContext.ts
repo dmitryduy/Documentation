@@ -21,4 +21,5 @@ export const QuizContext = createContext<IQuizContext>({
   position: 1,
   textCorrectAnswer: '',
   code: '',
+  isShuffleOptions: true,
 });

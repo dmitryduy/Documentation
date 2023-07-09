@@ -43,7 +43,7 @@ export const quizChecker: IChecker = {
   checkOptionsWithoutType(options, position) {
     const getError = getCheckFunctionResult(options);
 
-    if (options.length >= MAX_OPTIONS_COUNT) {
+    if (options.length >= MAX_OPTIONS_COUNT + 1) {
       return getError(`Превышен лимит вариантов ответов на вопрос ${position}`);
     }
 

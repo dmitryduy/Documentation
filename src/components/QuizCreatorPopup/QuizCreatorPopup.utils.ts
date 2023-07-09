@@ -10,6 +10,7 @@ export const getTemplateQuestion = (initial: Partial<IQuizQuestion> = {}): IQuiz
     code: '',
     position: 1,
     textCorrectAnswer: '',
+    isShuffleOptions: true,
     ...initial
   }
 );

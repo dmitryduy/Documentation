@@ -10,6 +10,8 @@ export const CheckboxStyled = styled.div`
   padding: 20px;
   font-size: 20px;
   cursor: pointer;
+  min-width: 300px;
+  flex: 1;
   color: ${props => props.theme.colors.paragraph};
   transition: .3s;
 

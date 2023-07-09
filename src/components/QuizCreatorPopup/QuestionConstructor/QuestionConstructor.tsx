@@ -65,6 +65,11 @@ const QuestionConstructor: React.FC<IQuestionConstructorProps> = observer(({ques
             setValue={e => methods.updateTextCorrectAnswer(getInputValue(e))}
             placeholder="Ответ на вопрос" type="text"/> :
           <Variants>
+            <Switcher
+              title="Перемешивать варианты?"
+              isActive={question.isShuffleOptions}
+              toggle={methods.updateIsShuffleOptions}
+            />
             <Options>
               <h3>
                 {question.options.length ?
@@ -92,8 +97,7 @@ const QuestionConstructor: React.FC<IQuestionConstructorProps> = observer(({ques
             </AddVariant>
           </Variants>}
         <CodeConstructor>
-          <p>Записать код в вопрос?</p>
-          <Switcher isActive={isCode} toggle={() => setIsCode(prev => !prev)}/>
+          <Switcher title="Записать код в вопрос?" isActive={isCode} toggle={() => setIsCode(prev => !prev)}/>
           {isCode && <Input
             value={question.codeLanguage}
             setValue={e => methods.updateCodeLanguage(getInputValue(e))}

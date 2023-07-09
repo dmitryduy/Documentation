@@ -55,7 +55,7 @@ export const lightTheme = {
     quizBg: '#f6f7f8',
     activeQuizAnswer: '#0fd9de',
     incorrectQuizAnswer: '#d9534f',
-    correctQuizAnswer: '#b0d1b0'
+    correctQuizAnswer: '#50a14f'
   }
 };
 
@@ -106,7 +106,7 @@ export const darkTheme = {
     quizBg: '#323234',
     activeQuizAnswer: '#0fd9de',
     incorrectQuizAnswer: '#d9534f',
-    correctQuizAnswer: '#b0d1b0'
+    correctQuizAnswer: '#50a14f'
   }
 };
 

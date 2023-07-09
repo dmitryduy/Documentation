@@ -98,10 +98,4 @@ export const CodeConstructor = styled.div`
   .input {
     margin-top: 20px;
   }
-  p {
-    font-size: 14px;
-    line-height: 17px;
-    color: ${props => props.theme.colors.svg};
-    margin-bottom: 10px;
-  }
 `;

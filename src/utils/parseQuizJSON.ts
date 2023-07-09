@@ -8,7 +8,7 @@ export const parseQuizJSON = (string: string) => {
     const questions: IQuizQuestion[] = JSON.parse(string);
 
     for (const question of questions) {
-      if (!question.textCorrectAnswer) question.textCorrectAnswer = '';
+      if (question.isShuffleOptions === undefined) question.isShuffleOptions = true;
     }
 
     const checkedQuiz = quizChecker.checkQuiz(questions, 0);
@@ -20,6 +20,7 @@ export const parseQuizJSON = (string: string) => {
     return questions;
   } catch (e) {
     showToast('Некорректный квиз');
+    console.log(e);
     return null;
   }
 };

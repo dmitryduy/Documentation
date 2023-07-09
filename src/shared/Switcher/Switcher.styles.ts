@@ -32,3 +32,12 @@ export const SwitcherStyled = styled.div`
     }
   }
 `;
+
+export const SwitcherContainer = styled.div`
+  p {
+    font-size: 14px;
+    line-height: 17px;
+    color: ${props => props.theme.colors.svg};
+    margin-bottom: 10px;
+  }
+`;

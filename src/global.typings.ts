@@ -33,6 +33,7 @@ export interface IQuizQuestion {
   text: string;
   code: string;
   codeLanguage: string;
+  isShuffleOptions: boolean;
   options: {
     value: string,
     isCorrect: boolean;
