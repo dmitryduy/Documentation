@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
 
-import { Errors } from '../../errors';
+import { Errors } from '@/errors';
 
 type methods = 'post' | 'delete' | 'put';
 

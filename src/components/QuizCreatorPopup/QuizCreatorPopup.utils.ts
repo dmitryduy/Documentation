@@ -1,4 +1,4 @@
-import { IQuizQuestion, QuestionType } from '../../global.typings';
+import { IQuizQuestion, QuestionType } from '@/global.typings';
 
 export const getTemplateQuestion = (initial: Partial<IQuizQuestion> = {}): IQuizQuestion => (
   {

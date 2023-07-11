@@ -1,4 +1,4 @@
-import { IPost, Menu } from '../../global.typings';
+import { IPost, Menu } from '@/global.typings';
 
 export interface CreatePostRequest {
   markdown: string;

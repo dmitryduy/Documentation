@@ -1,12 +1,12 @@
 import { makeAutoObservable } from 'mobx';
+import { PostManager } from '@api/postManager/postManager';
+import { createPostManager } from '@api/postManager/createPostManager';
+import { getTitleFromMarkdown } from '@utils/getTitleFromMarkdown';
+import { getMenuFromMarkdown } from '@utils/getMenuFromMarkdown';
+import { CreatePostResponse } from '@api/postManager/postManager.typings';
+import { showToast } from '@utils/showToast';
 
-import { FlowReturn, IPost } from '../global.typings';
-import { PostManager } from '../api/postManager/postManager';
-import { createPostManager } from '../api/postManager/createPostManager';
-import { getTitleFromMarkdown } from '../utils/getTitleFromMarkdown';
-import { getMenuFromMarkdown } from '../utils/getMenuFromMarkdown';
-import { CreatePostResponse } from '../api/postManager/postManager.typings';
-import { showToast } from '../utils/showToast';
+import { FlowReturn, IPost } from '@/global.typings';
 
 export interface PostInfo {
   link: string;

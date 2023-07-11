@@ -1,10 +1,9 @@
 import React, { useCallback, useState } from 'react';
+import { useDebounce } from '@hooks/useDebounce';
+import Editor from '@components/Editor/Editor';
+import useMatchMedia from '@hooks/useMatchMedia';
 
-import Editor from '../../components/Editor/Editor';
 import Button from '../Button/Button';
-import useMatchMedia from '../../hooks/useMatchMedia';
-import { useDebounce } from '../../hooks/useDebounce';
-import Progress from '../Progress/Progress';
 
 import {EditorWithPreviewStyled} from './EditorWithPreview.styles';
 import Preview from './Preview/Preview';

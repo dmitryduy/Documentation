@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
+import Loader from '@shared/Loader/Loader';
+import useMatchMedia from '@hooks/useMatchMedia';
+import { eventManager, Event } from '@utils/emitter';
 
 import TagList from '../TagList/TagList';
-import Loader from '../../shared/Loader/Loader';
-import useMatchMedia from '../../hooks/useMatchMedia';
-import { eventManager, Event } from '../../utils/emitter';
 
 import { InfoAsideStyled } from './InfoAside.styles';
 import { useFetchTagsMenu } from './InfoAside.hook/useFetchTagsMenu';

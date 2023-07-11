@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
+import { capitalize } from '@utils/capitalize';
+import Input from '@shared/Input/Input';
+import Checkbox, { CheckboxState } from '@shared/Checkbox/Checkbox';
+import Code from '@shared/Code/Code';
 
-import { capitalize } from '../../../utils/capitalize';
-import Code from '../../Code/Code';
 import { QuizSubtitle, QuizTitle } from '../Quiz.styles';
 import { QuizContext } from '../QuizContext';
-import Input from '../../Input/Input';
-import { IQuizQuestion, QuestionType } from '../../../global.typings';
-import Checkbox, { CheckboxState } from '../../Checkbox/Checkbox';
 
 import { AnswersContainer } from './QuizStep.styles';
+
+import { IQuizQuestion, QuestionType } from '@/global.typings';
 
 interface IQuizStepProps {
   questionsCount: number;

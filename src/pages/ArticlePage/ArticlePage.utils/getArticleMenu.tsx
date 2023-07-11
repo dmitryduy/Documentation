@@ -1,9 +1,9 @@
 import React from 'react';
 import { HashLink } from 'react-router-hash-link';
+import Article from '@components/Article/Article';
+import { unifyMenuLinks } from '@utils/unifyMenuLinks';
 
-import { Menu } from '../../../global.typings';
-import Article from '../../../components/Article/Article';
-import { unifyMenuLinks } from '../../../utils/unifyMenuLinks';
+import { Menu } from '@/global.typings';
 
 const getArticleItem = (itemValue: string) => {
   return (

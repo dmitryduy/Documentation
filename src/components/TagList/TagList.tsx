@@ -1,15 +1,15 @@
 import React from 'react';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
-
-import { ITagList } from '../../global.typings';
-import { useToggle } from '../../hooks/useToggle';
-import { useHeightAnimate } from '../../hooks/useHeightAnimate';
-import useMatchMedia from '../../hooks/useMatchMedia';
-import {ReactComponent as ArrowSvg} from '../../assets/images/arrow.svg';
-import { eventManager, Event } from '../../utils/emitter';
+import { useToggle } from '@hooks/useToggle';
+import { useHeightAnimate } from '@hooks/useHeightAnimate';
+import useMatchMedia from '@hooks/useMatchMedia';
+import {ReactComponent as ArrowSvg} from '@assets/images/arrow.svg';
+import { eventManager, Event } from '@utils/emitter';
 
 import { Header, TagListStyled } from './TagList.styles';
+
+import { ITagList } from '@/global.typings';
 
 interface ITagListProps {
   tagInfo: ITagList;

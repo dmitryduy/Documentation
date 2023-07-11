@@ -1,9 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { observer } from 'mobx-react-lite';
-
-import { Errors } from '../../errors';
-import { Event, eventManager } from '../../utils/emitter';
+import { Event, eventManager } from '@utils/emitter';
 
 import { TooltipStyled } from './Toast.styles';
 
@@ -31,7 +29,6 @@ const Toast = observer(() => {
     eventManager.on(Event.SHOW_TOAST, showToast);
 
   }, []);
-  console.log(7);
   return (
     <TooltipStyled className={cn({active})}>
       {value}

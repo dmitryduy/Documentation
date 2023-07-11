@@ -1,7 +1,7 @@
 import { createContext } from 'react';
+import { useInput } from '@hooks/useInput';
 
-import { IQuizQuestion, QuestionType } from '../../global.typings';
-import { useInput } from '../../hooks/useInput';
+import { IQuizQuestion, QuestionType } from '@/global.typings';
 
 interface IQuizContext extends IQuizQuestion {
   inputValue: string;

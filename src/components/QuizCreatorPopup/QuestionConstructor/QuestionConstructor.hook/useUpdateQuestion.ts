@@ -1,9 +1,10 @@
-import { IQuizQuestion, QuestionType } from '../../../../global.typings';
-import { quizChecker } from '../../../../utils/checkQuiz';
-import { useInput } from '../../../../hooks/useInput';
-import { useStores } from '../../../../hooks/useStores';
-import { conditionalExecution } from '../../../../utils/conditionalExecution';
-import { showToast } from '../../../../utils/showToast';
+import { quizChecker } from '@utils/checkQuiz';
+import { useInput } from '@hooks/useInput';
+import { useStores } from '@hooks/useStores';
+import { conditionalExecution } from '@utils/conditionalExecution';
+import { showToast } from '@utils/showToast';
+
+import { IQuizQuestion, QuestionType } from '@/global.typings';
 
 export const useUpdateQuestion = (question: IQuizQuestion) => {
   const [optionValue, setOptionValue] = useInput('');

@@ -1,15 +1,16 @@
 import React from 'react';
+import { useInput } from '@hooks/useInput';
+import { quizChecker } from '@utils/checkQuiz';
 
-import { IQuizQuestion, QuestionType } from '../../global.typings';
-import { useInput } from '../../hooks/useInput';
 import Paragraph from '../Paragraph/Paragraph';
-import { quizChecker } from '../../utils/checkQuiz';
 
 import QuizStep from './QuizStep/QuizStep';
 import { QuizButton, QuizStyled, QuizTitle } from './Quiz.styles';
 import { QuizContext } from './QuizContext';
 import { QuizState, useQuiz } from './Quiz.hooks';
 import { getGradeByScore } from './Quiz.utils';
+
+import { IQuizQuestion, QuestionType } from '@/global.typings';
 
 interface IQuizProps {
   questions: IQuizQuestion[];

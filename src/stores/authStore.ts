@@ -1,10 +1,10 @@
 import { makeAutoObservable } from 'mobx';
+import { storage } from '@utils/storage';
+import { createUserManager } from '@api/userManager/createUserManager';
+import { UserManager } from '@api/userManager/userManager';
+import { showToast } from '@utils/showToast';
 
-import { storage } from '../utils/storage';
-import { createUserManager } from '../api/userManager/createUserManager';
-import { UserManager } from '../api/userManager/userManager';
-import { FlowReturn } from '../global.typings';
-import { showToast } from '../utils/showToast';
+import { FlowReturn } from '@/global.typings';
 
 class AuthStore {
   isSignInLoading = false;

@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
-
-import { useConnection } from '../../../hooks/useConnection';
-import { useStores } from '../../../hooks/useStores';
+import { useConnection } from '@hooks/useConnection';
+import { useStores } from '@hooks/useStores';
 
 export const useFetchPost = (title?: string) => {
   const isOnline = useConnection();

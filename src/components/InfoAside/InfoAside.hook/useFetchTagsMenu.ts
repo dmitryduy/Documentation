@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useConnection } from '@hooks/useConnection';
+import { createTagsManager } from '@api/tagsManager/createTagsManager';
+import { showToast } from '@utils/showToast';
 
-import { ITagList } from '../../../global.typings';
-import { useConnection } from '../../../hooks/useConnection';
-import { createTagsManager } from '../../../api/tagsManager/createTagsManager';
-import { showToast } from '../../../utils/showToast';
+import { ITagList } from '@/global.typings';
 
 export const useFetchTagsMenu = () => {
   const [tags, setTags] = useState<ITagList[] | null>(null);

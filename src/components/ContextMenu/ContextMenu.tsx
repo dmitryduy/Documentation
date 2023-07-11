@@ -1,7 +1,7 @@
 import React, { MouseEvent, useRef, useState } from 'react';
+import { eventManager, Event } from '@utils/emitter';
 
 import QuizCreatorPopup from '../QuizCreatorPopup/QuizCreatorPopup';
-import { eventManager, Event } from '../../utils/emitter';
 
 import { ContextMenuStyled } from './ContextMenu.styles';
 import { Actions } from './ContextMenu.typings';

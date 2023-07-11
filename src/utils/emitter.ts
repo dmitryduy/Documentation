@@ -27,7 +27,6 @@ export const eventManager: EventManager = {
       this.list.set(event, []);
     }
     this.list.get(event).push(callback);
-    console.log(this.list.get(event));
   },
   emit(event, data) {
     if (this.list.has(event)) {

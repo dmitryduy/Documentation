@@ -1,6 +1,7 @@
-import { Menu } from '../global.typings';
-
 import { unifyMenuLinks } from './unifyMenuLinks';
+
+import { Menu } from '@/global.typings';
+
 
 export const getMenuFromMarkdown = (markdown: string) => {
 

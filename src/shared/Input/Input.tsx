@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
-
-import { getInputValue } from '../../hooks/useInput';
+import { getInputValue } from '@hooks/useInput';
 
 import { InputStyled, Label } from './Input.styles';
 import { InputContext } from './InputContext';

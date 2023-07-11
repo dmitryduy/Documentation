@@ -1,9 +1,9 @@
 import React  from 'react';
 import cn from 'classnames';
+import Article from '@components/Article/Article';
+import useMatchMedia from '@hooks/useMatchMedia';
 
-import Article from '../../../components/Article/Article';
 import { useAutoScroll } from '../EditorWithPreview.hook/useAutoScroll';
-import useMatchMedia from '../../../hooks/useMatchMedia';
 
 import { PreviewStyled, HidePreviewButton } from './Preview.styles';
 

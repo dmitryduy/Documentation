@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
+import {ReactComponent as BurgerSvg} from '@assets/images/burger.svg';
+import useMatchMedia from '@hooks/useMatchMedia';
+import {ReactComponent as LightThemeSvg} from '@assets/images/lightTheme.svg';
+import {ReactComponent as DarkThemeSvg} from '@assets/images/darkTheme.svg';
+import { useStores } from '@hooks/useStores';
+import { Event, eventManager } from '@utils/emitter';
 
-import {ReactComponent as BurgerSvg} from '../../assets/images/burger.svg';
-import useMatchMedia from '../../hooks/useMatchMedia';
 import SearchPost from '../SearchPost/SearchPost';
-import {ReactComponent as LightThemeSvg} from '../../assets/images/lightTheme.svg';
-import {ReactComponent as DarkThemeSvg} from '../../assets/images/darkTheme.svg';
-import { useStores } from '../../hooks/useStores';
-import { Event, eventManager } from '../../utils/emitter';
 
 import { HeaderStyled } from './Header.styles';
 

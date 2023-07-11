@@ -1,7 +1,7 @@
-import { IQuizQuestion, QuestionType } from '../global.typings';
-
 import { removeDuplicate } from './removeDuplicate';
 import { questionBeautifier } from './beautifyQuestions';
+
+import { IQuizQuestion, QuestionType } from '@/global.typings';
 
 export const MAX_QUESTION_TEXT_LENGTH = 100;
 export const MAX_QUIZ_QUESTIONS = 50;

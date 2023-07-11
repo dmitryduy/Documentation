@@ -1,6 +1,8 @@
-import { getTitleFromMarkdown } from '../../../utils/getTitleFromMarkdown';
-import { IPost } from '../../../global.typings';
+import { getTitleFromMarkdown } from '@utils/getTitleFromMarkdown';
+
 import { POST_TITLE_ERROR, UNCHANGED_POST } from '../EditPostPage.constants';
+
+import { IPost } from '@/global.typings';
 
 export const checkPost = (newMarkdown: string, post: IPost | null) => {
   if (newMarkdown === post?.markdown) {

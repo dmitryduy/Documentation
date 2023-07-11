@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { InfoBlockType } from '../../global.typings';
-import { icons } from '../../icons';
-
 import { InfoBlockStyled, Header } from './InfoBlock.styles';
+
+import { InfoBlockType } from '@/global.typings';
+import { icons } from '@/icons';
+
 
 interface IInfoBlockProps {
   type: InfoBlockType;

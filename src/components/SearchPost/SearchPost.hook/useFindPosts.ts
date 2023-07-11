@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-
-import { FindPostResponse } from '../../../api/postManager/postManager.typings';
-import { createPostManager } from '../../../api/postManager/createPostManager';
-import { showToast } from '../../../utils/showToast';
+import { FindPostResponse } from '@api/postManager/postManager.typings';
+import { createPostManager } from '@api/postManager/createPostManager';
+import { showToast } from '@utils/showToast';
 
 export const useFindPosts = (value: string) => {
   const [postsInfo, setPostsInfo] = useState<null | FindPostResponse['foundedPosts']>(null);

@@ -1,7 +1,6 @@
 import React, { ComponentType } from 'react';
 import { Navigate } from 'react-router-dom';
-
-import { useStores } from '../hooks/useStores';
+import { useStores } from '@hooks/useStores';
 
 export function withAuth<T>(Component: ComponentType<T >): React.FC<T> {
   return (hocProps: T) => {

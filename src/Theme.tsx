@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { observer } from 'mobx-react-lite';
 
-import { useStores } from './hooks/useStores';
+import { useStores } from '@/hooks/useStores';
 
 const colors = {
   primary: '#64c9c5'

@@ -1,9 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
+import { checkPost } from '@utils/checkPost';
 
 import { ClientAPI } from '../clientAPI/clientAPI';
-import { MAX_ARTICLE_LENGTH } from '../../constants';
-import { Errors } from '../../errors';
-import { checkPost } from '../../utils/checkPost';
 
 import {
   CreatePostRequest,
@@ -12,6 +10,10 @@ import {
   DeletePostResponse, FindOnePostResponse, FindPostResponse,
   UpdatePostRequest, UpdatePostResponse
 } from './postManager.typings';
+
+import { MAX_ARTICLE_LENGTH } from '@/constants';
+import { Errors } from '@/errors';
+
 
 export class PostManager {
   constructor(private readonly clientAPI: ClientAPI) {}

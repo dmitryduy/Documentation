@@ -1,22 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { observer } from 'mobx-react-lite';
-
-import { IQuizQuestion, QuestionType } from '../../../global.typings';
-import { getInputValue } from '../../../hooks/useInput';
-import Select from '../../../shared/Select/Select';
-import Input from '../../../shared/Input/Input';
-import Checkbox, { CheckboxState } from '../../../shared/Checkbox/Checkbox';
-import Switcher from '../../../shared/Switcher/Switcher';
-import { useHeightAnimate } from '../../../hooks/useHeightAnimate';
-import { capitalize } from '../../../utils/capitalize';
-import Textarea from '../../../shared/Textarea/Textarea';
-import { useStores } from '../../../hooks/useStores';
+import { getInputValue } from '@hooks/useInput';
+import Select from '@shared/Select/Select';
+import Input from '@shared/Input/Input';
+import Checkbox, { CheckboxState } from '@shared/Checkbox/Checkbox';
+import Switcher from '@shared/Switcher/Switcher';
+import { useHeightAnimate } from '@hooks/useHeightAnimate';
+import { capitalize } from '@utils/capitalize';
+import Textarea from '@shared/Textarea/Textarea';
+import { useStores } from '@hooks/useStores';
 
 import { useUpdateQuestion } from './QuestionConstructor.hook/useUpdateQuestion';
 import {
   ConstructorButton, AddVariant, CodeConstructor, Options, QuestionConstructorStyled, Variants, Title
 } from './QuestionConstructor.styles';
+
+import { IQuizQuestion, QuestionType } from '@/global.typings';
 
 interface IQuestionConstructorProps {
   question: IQuizQuestion;

@@ -1,10 +1,10 @@
 import { makeAutoObservable } from 'mobx';
+import { getTemplateQuestion } from '@components/QuizCreatorPopup/QuizCreatorPopup.utils';
+import { conditionalExecution } from '@utils/conditionalExecution';
+import { checkerFunction } from '@utils/checkQuiz';
+import { showToast } from '@utils/showToast';
 
-import { IQuizQuestion } from '../global.typings';
-import { getTemplateQuestion } from '../components/QuizCreatorPopup/QuizCreatorPopup.utils';
-import { conditionalExecution } from '../utils/conditionalExecution';
-import { checkerFunction } from '../utils/checkQuiz';
-import { showToast } from '../utils/showToast';
+import { IQuizQuestion } from '@/global.typings';
 
 class QuizConstructorStore {
   activeQuestionId: IQuizQuestion['id'] = 0;

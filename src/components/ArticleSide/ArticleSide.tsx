@@ -2,19 +2,19 @@ import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 import { Link, useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
+import Loader from '@shared/Loader/Loader';
+import {ReactComponent as EditSvg} from '@assets/images/edit.svg';
+import {ReactComponent as DeleteSvg} from '@assets/images/delete.svg';
+import ButtonLink from '@shared/Button/ButtonLink/ButtonLink';
+import useMatchMedia from '@hooks/useMatchMedia';
+import { useStores } from '@hooks/useStores';
+import postStore from '@stores/postStore';
+import { eventManager, Event } from '@utils/emitter';
+import { showToast } from '@utils/showToast';
 
-import Article from '../Article/Article';
-import Loader from '../../shared/Loader/Loader';
-import {ReactComponent as EditSvg} from '../../assets/images/edit.svg';
-import {ReactComponent as DeleteSvg} from '../../assets/images/delete.svg';
-import ButtonLink from '../../shared/Button/ButtonLink/ButtonLink';
-import useMatchMedia from '../../hooks/useMatchMedia';
-import ArticleMenu from '../ArticleMenu/ArticleMenu';
 import ArticleInfo from '../ArticleInfo/ArticleInfo';
-import { useStores } from '../../hooks/useStores';
-import postStore from '../../stores/postStore';
-import { eventManager, Event } from '../../utils/emitter';
-import { showToast } from '../../utils/showToast';
+import ArticleMenu from '../ArticleMenu/ArticleMenu';
+import Article from '../Article/Article';
 
 import {ArticleSideStyled, Actions} from './ArticleSide.styles';
 

@@ -1,6 +1,5 @@
 import React, { ComponentType } from 'react';
-
-import Header from '../components/Header/Header';
+import Header from '@components/Header/Header';
 
 export function withHeader<T>(Component: ComponentType<T>) {
   return (hocProps: T) => (

@@ -3,10 +3,10 @@ import { dracula, oneLight } from 'react-syntax-highlighter/dist/esm/styles/pris
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import cn from 'classnames';
 import { observer } from 'mobx-react-lite';
+import {ReactComponent as CopySvg} from '@assets/images/Copy.svg';
+import { copyToClipboard } from '@utils/copyToClipboard';
+import { useStores } from '@hooks/useStores';
 
-import {ReactComponent as CopySvg} from '../../assets/images/Copy.svg';
-import { copyToClipboard } from '../../utils/copyToClipboard';
-import { useStores } from '../../hooks/useStores';
 
 import {CodeStyled} from './Code.styles';
 
@@ -23,12 +23,12 @@ const Code: React.FC<ICodeProps> = observer(({code, language, canCopy = true}) =
   return (
     <CodeStyled  className={cn({canCopy})}>
       <SyntaxHighlighter
-        children={code.replace(/\n$/, '')}
         style={theme === 'light' ? oneLight : dracula}
         language={language || 'js'}
         PreTag="div"
         customStyle={{paddingTop: 22}}
-      />
+      >{code.replace(/\n$/, '')}
+      </SyntaxHighlighter>
       {canCopy && <CopySvg onClick={() => copyToClipboard(code)} className="copy-icon"/>}
     </CodeStyled>
   );

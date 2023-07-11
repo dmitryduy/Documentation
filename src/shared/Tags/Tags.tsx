@@ -1,9 +1,8 @@
 import React, { Dispatch, FC, SetStateAction, useEffect, useRef } from 'react';
-
-import { useToggle } from '../../hooks/useToggle';
-import { useHeightAnimate } from '../../hooks/useHeightAnimate';
-import { useInput } from '../../hooks/useInput';
-import { Event, eventManager } from '../../utils/emitter';
+import { useToggle } from '@hooks/useToggle';
+import { useHeightAnimate } from '@hooks/useHeightAnimate';
+import { useInput } from '@hooks/useInput';
+import { Event, eventManager } from '@utils/emitter';
 
 import { NewTags, TagsStyled } from './Tags.styles';
 import { useTags } from './Tags.hook/useTags';

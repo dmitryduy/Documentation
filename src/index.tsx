@@ -9,17 +9,16 @@ import {
 } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import { spy } from 'mobx';
+import { StoreContext } from '@hooks/useStores';
+import { RootStore } from '@stores/rootStore';
+import ArticlePage from '@pages/ArticlePage/ArticlePage';
+import RegisterPage from '@pages/RegisterPage/RegisterPage';
+import LoginPage from '@pages/LoginPage/LoginPage';
+import NewPostPage from '@pages/NewPostPage/NewPostPage';
+import EditPostPage from '@pages/EditPostPage/EditPostPage';
 
-import App from './App';
 import Theme from './Theme';
-import Toast from './shared/Toast/Toast';
-import { StoreContext } from './hooks/useStores';
-import { RootStore } from './stores/rootStore';
-import ArticlePage from './pages/ArticlePage/ArticlePage';
-import RegisterPage from './pages/RegisterPage/RegisterPage';
-import LoginPage from './pages/LoginPage/LoginPage';
-import NewPostPage from './pages/NewPostPage/NewPostPage';
-import EditPostPage from './pages/EditPostPage/EditPostPage';
+import App from './App';
 
 spy(ev => {
   if (ev.type === 'action') {

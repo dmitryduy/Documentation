@@ -1,6 +1,7 @@
-import { Errors } from '../errors';
-
 import { getTitleFromMarkdown } from './getTitleFromMarkdown';
+
+import { Errors } from '@/errors';
+
 
 export const checkPost = (markdown: string, tags: string[]) => {
   const title = getTitleFromMarkdown(markdown);

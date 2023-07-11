@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
-
-import { capitalize } from '../../utils/capitalize';
+import { capitalize } from '@utils/capitalize';
 
 import {SelectStyled, Title, Options} from './Select.styles';
 

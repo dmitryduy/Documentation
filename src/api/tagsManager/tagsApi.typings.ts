@@ -1,4 +1,4 @@
-import { ITagList } from '../../global.typings';
+import { ITagList } from '@/global.typings';
 
 export interface GetAllTagsResponse {
   tags: ITagList[]

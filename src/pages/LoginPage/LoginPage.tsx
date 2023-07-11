@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-
-import AuthTitle from '../../shared/AuthTitle/AuthTitle';
-import Input from '../../shared/Input/Input';
-import { useInput } from '../../hooks/useInput';
-import AuthButton from '../../shared/AuthButton/AuthButton';
-import Loader from '../../shared/Loader/Loader';
-import { useStores } from '../../hooks/useStores';
+import AuthTitle from '@shared/AuthTitle/AuthTitle';
+import Input from '@shared/Input/Input';
+import { useInput } from '@hooks/useInput';
+import AuthButton from '@shared/AuthButton/AuthButton';
+import Loader from '@shared/Loader/Loader';
+import { useStores } from '@hooks/useStores';
 
 import {LoginPageStyled} from './LoginPage.styles';
 

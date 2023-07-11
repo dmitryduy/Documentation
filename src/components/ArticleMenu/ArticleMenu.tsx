@@ -1,9 +1,9 @@
 import React from 'react';
-
-import { Menu } from '../../global.typings';
-import { getArticleMenu } from '../../pages/ArticlePage/ArticlePage.utils/getArticleMenu';
+import { getArticleMenu } from '@pages/ArticlePage/ArticlePage.utils/getArticleMenu';
 
 import {ArticleMenuStyled} from './ArticleMenu.styles';
+
+import { Menu } from '@/global.typings';
 
 interface IArticleMenuProps {
     menu: Menu;

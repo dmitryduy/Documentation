@@ -1,8 +1,10 @@
+import { checkRegisterData } from '@pages/RegisterPage/RegisterPage.utils/checkRegisterData';
+
 import { ClientAPI } from '../clientAPI/clientAPI';
-import { checkRegisterData } from '../../pages/RegisterPage/RegisterPage.utils/checkRegisterData';
-import { Errors } from '../../errors';
 
 import { AuthMeResponse, SignInRequest, SignInResponse, SignUpRequest, SignUpResponse } from './userApi.typings';
+
+import { Errors } from '@/errors';
 
 export class UserManager {
   constructor(private readonly clientAPI: ClientAPI) {}
@@ -27,9 +29,7 @@ export class UserManager {
     const repeatPassword = data.repeatPassword.trim();
 
     const error = checkRegisterData(login, password, repeatPassword);
-    console.log(error);
     if (error) {
-      console.log(error);
       throw new Error(error);
     }
 

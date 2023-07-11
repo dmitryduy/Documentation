@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
-
-import { Errors } from '../errors';
-import { showToast } from '../utils/showToast';
+import { showToast } from '@utils/showToast';
 
 import { useConnection } from './useConnection';
+
+import { Errors } from '@/errors';
 
 export const useShowTooltipOnNetworkError = () => {
   const isOnline = useConnection();

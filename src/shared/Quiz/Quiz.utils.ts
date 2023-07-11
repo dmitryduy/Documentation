@@ -1,6 +1,7 @@
-import { IQuizQuestion, QuestionType } from '../../global.typings';
-import { shuffle } from '../../utils/shuffle';
-import { questionBeautifier } from '../../utils/beautifyQuestions';
+import { shuffle } from '@utils/shuffle';
+import { questionBeautifier } from '@utils/beautifyQuestions';
+
+import { IQuizQuestion } from '@/global.typings';
 
 export const getAnswerScore = (correctAnswers: string[], answers: string[]) => {
   let score = 0;
@@ -21,7 +22,6 @@ export const getMaxScore = (questions: IQuizQuestion[]) => {
 
 export const getInitialQuestion = (question: IQuizQuestion): IQuizQuestion & { userAnswers: string[] } => {
   const beautifyQuestion = questionBeautifier.beautifyQuiz([question])[0];
-  console.log(beautifyQuestion.isShuffleOptions);
   return {
     ...beautifyQuestion,
     options: beautifyQuestion.isShuffleOptions ? shuffle(beautifyQuestion.options) : beautifyQuestion.options,

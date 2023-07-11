@@ -1,6 +1,7 @@
-import { Errors } from '../errors';
-
 import { Event, eventManager } from './emitter';
+
+import { Errors } from '@/errors';
+
 
 export const showToast = (value: any) => {
   if (typeof value === 'string') {

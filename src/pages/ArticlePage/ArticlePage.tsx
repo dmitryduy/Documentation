@@ -1,12 +1,11 @@
 import React, { useLayoutEffect } from 'react';
-import { NavLink, useLocation, useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-
-import InfoAside from '../../components/InfoAside/InfoAside';
-import ArticleSide from '../../components/ArticleSide/ArticleSide';
-import { ReactComponent as AddSvg } from '../../assets/images/add.svg';
-import { withHeader } from '../../hocs/withHeader';
-import { useStores } from '../../hooks/useStores';
+import InfoAside from '@components/InfoAside/InfoAside';
+import ArticleSide from '@components/ArticleSide/ArticleSide';
+import { ReactComponent as AddSvg } from '@assets/images/add.svg';
+import { withHeader } from '@hocs/withHeader';
+import { useStores } from '@hooks/useStores';
 
 import { useFetchPost } from './ArticlePage.hook/useFetchPost';
 import { ArticlePageStyled } from './ArticlePage.styles';

@@ -1,14 +1,16 @@
 import React, { FC } from 'react';
+import Tags from '@shared/Tags/Tags';
+import Progress from '@shared/Progress/Progress';
 
 import ContextMenu from '../ContextMenu/ContextMenu';
 import { getUpdatedMarkdown } from '../ContextMenu/ContextMenu.utils/getUpdatedMarkdown';
 import { Actions } from '../ContextMenu/ContextMenu.typings';
-import Tags from '../../shared/Tags/Tags';
-import Progress from '../../shared/Progress/Progress';
-import { MAX_ARTICLE_LENGTH } from '../../constants';
 
 import { EditorStyled } from './Editor.styles';
 import { useUpdateCaretPosition } from './Editor.hook/useUpdateCaretPosition';
+
+import { MAX_ARTICLE_LENGTH } from '@/constants';
+
 
 interface IEditorProps {
   children: React.ReactNode;

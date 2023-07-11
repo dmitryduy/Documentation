@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-
-import { IQuizQuestion, QuestionType } from '../../global.typings';
-import { useInput } from '../../hooks/useInput';
+import { useInput } from '@hooks/useInput';
 
 import { getAnswerScore, getInitialQuestion, getMaxScore } from './Quiz.utils';
+
+import { IQuizQuestion, QuestionType } from '@/global.typings';
 
 export enum QuizState {
   NOT_STARTED,

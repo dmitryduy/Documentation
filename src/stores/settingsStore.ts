@@ -1,6 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-
-import { storage } from '../utils/storage';
+import { storage } from '@utils/storage';
 
 class SettingsStore {
   theme = storage('theme').getItem() || 'dark';

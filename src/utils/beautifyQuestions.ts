@@ -1,6 +1,7 @@
-import { IQuizQuestion } from '../global.typings';
-
 import { removeDuplicate } from './removeDuplicate';
+
+import { IQuizQuestion } from '@/global.typings';
+
 
 type beautifierMethod<T> = (value: T) => T;
 
