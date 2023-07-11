@@ -4,7 +4,7 @@ export const CodeStyled = styled.div`
   position: relative;
   .copy-icon {
     position: absolute;
-    top: 5px;
+    top: 15px;
     right: 5px;
     width: 20px;
     height: 20px;

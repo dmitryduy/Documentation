@@ -16,7 +16,7 @@ interface ITagListProps {
 }
 
 const TagList: React.FC<ITagListProps> = ({tagInfo}) => {
-  const [isActive, toggleIsActive] = useToggle(true);
+  const [isActive, toggleIsActive] = useToggle(false);
   const listRef = useHeightAnimate<HTMLUListElement>(isActive);
   const phone = useMatchMedia();
 

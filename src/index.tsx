@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 import {
-  createBrowserRouter,
+  createHashRouter,
   createRoutesFromElements,
   Navigate,
   Route,
@@ -26,7 +26,7 @@ spy(ev => {
   }
 });
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   createRoutesFromElements(
     <Route path="/" element={<App/>}>
       <Route path="register" element={<RegisterPage/>}/>
