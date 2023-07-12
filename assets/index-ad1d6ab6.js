@@ -2135,7 +2135,7 @@ guard ^\\s*
      if (color === 'red' || color === 'green') {
        div.innerHTML+= \`<div style="font-size: 20px;color:\${color}">\${text.slice(1).reduce((prev, elem) => \`\${prev} \${JSON.stringify(elem)}\`, '')}</div>\`;
      } else {
-     div.innerHTML+= \`<div style="color:white">\${text.reduce((prev, elem) => \`\${prev} \${JSON.stringify(elem)}\`, '')}</div>\`;
+     div.innerHTML+= \`<div style="font-size: 20px;color:white">\${text.reduce((prev, elem) => \`\${prev} \${JSON.stringify(elem)}\`, '')}</div>\`;
      }   
     }
     try{
