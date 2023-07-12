@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx';
 import { storage } from '@utils/storage';
 
 class SettingsStore {
-  theme = storage('theme').getItem() || 'dark';
+  theme: 'dark' | 'light' = storage('theme').getItem() as 'dark' | 'light' || 'dark';
 
   constructor() {
     makeAutoObservable(this);

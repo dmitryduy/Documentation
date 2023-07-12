@@ -19,6 +19,7 @@
     "mobx-react-lite": "^3.4.3",
     "polished": "^4.2.2",
     "react": "^18.2.0",
+    "react-ace": "^10.1.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.3",
     "react-router-dom": "^6.14.1",
@@ -40,7 +41,7 @@
     "new:hook": "hygen new hook",
     "new:i18n": "hygen new i18n",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "browserslist": {
     "production": [

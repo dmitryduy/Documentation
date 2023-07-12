@@ -1,5 +1,5 @@
 import { NormalComponents } from 'react-markdown/lib/complex-types';
-import {  SpecialComponents } from 'react-markdown/lib/ast-to-react';
+import { SpecialComponents } from 'react-markdown/lib/ast-to-react';
 import React, { useMemo } from 'react';
 import Title from '@shared/Title/Title';
 import Subtitle from '@shared/Subtitle/Subtitle';
@@ -17,8 +17,10 @@ import Code from '@shared/Code/Code';
 import { reactChildrenToString } from '@utils/reactChildrenToString';
 import Quiz from '@shared/Quiz/Quiz';
 import { parseQuizJSON } from '@utils/parseQuizJSON';
+import TaskEditor from '@shared/TaskEditor/TaskEditor';
+import { showToast } from '@utils/showToast';
 
-import { InfoBlockType } from '@/global.typings';
+import { InfoBlockType, ITask } from '@/global.typings';
 
 export const useMarkdownComponents = ():
   Partial<Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents> => {
@@ -45,6 +47,17 @@ export const useMarkdownComponents = ():
       return <Link href={href || '#'}>{children}</Link>;
     },
     code({children, className}) {
+      const taskMatch = (className || '').match(/language-task/);
+      console.log(reactChildrenToString(children));
+      if (taskMatch) {
+        try {
+          const task: ITask = JSON.parse(reactChildrenToString(children));
+          return <TaskEditor {...task}/>;
+        } catch (e) {
+          showToast(e);
+          return <Paragraph>Ошибка создания задания</Paragraph>;
+        }
+      }
       const quizMatch = (className || '').match(/language-quiz\[(.*)\]/);
       if (quizMatch) {
         const quiz = parseQuizJSON(reactChildrenToString(children));

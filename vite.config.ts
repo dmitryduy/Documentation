@@ -9,6 +9,7 @@ import eslint from 'vite-plugin-eslint';
 
 
 export default defineConfig({
+  base: '/Documentation',
   plugins: [react(), viteTsconfigPaths(), svgrPlugin(), Terminal(), eslint()],
   resolve: {
     alias: {

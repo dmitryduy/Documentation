@@ -42,6 +42,12 @@ export interface IQuizQuestion {
   textCorrectAnswer: string;
 }
 
+export interface ITask {
+  taskText: string;
+  hiddenCode: string;
+  initialCode: string;
+}
+
 export type FlowReturn<AsyncFunction extends (...args: any[]) => Promise<any>> =
   Generator<ReturnType<AsyncFunction>,
     void,
