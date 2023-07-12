@@ -16,6 +16,11 @@ import "ace-builds/src-noconflict/ext-language_tools";
 const TaskEditor: React.FC<ITask> = ({taskText, initialCode, hiddenCode=''}) => {
   const [isStart, setIsStart] = useState(false);
   const [code, setCode] = useInput('\n' + initialCode);
+  const [isCheckCode, setIsCheckCode] = useState(false);
+
+  useEffect(() => {
+    isCheckCode && setIsCheckCode(false);
+  }, [code]);
 
   const doc = useMemo(() => `<!DOCTYPE html>
 <html lang="en">
@@ -55,14 +60,14 @@ const TaskEditor: React.FC<ITask> = ({taskText, initialCode, hiddenCode=''}) => 
     console.log = function(...text) {
       const color = text[0];
      if (color === 'red' || color === 'green') {
-       div.innerHTML+= \`<div style="color:\${color}">\${text.slice(1).reduce((prev, elem) => \`\${prev} \${elem}\`)}</div>\`;
+       div.innerHTML+= \`<div style="font-size: 20px;color:\${color}">\${text.slice(1).reduce((prev, elem) => \`\${prev} \${elem}\`)}</div>\`;
      } else {
      div.innerHTML+= \`<div style="color:white">\${text.reduce((prev, elem) => \`\${prev} \${elem}\`)}</div>\`;
      }   
     }
     try{
     ${code}
-    ${hiddenCode}
+    ${isCheckCode? hiddenCode: ''}
     }catch(e) {
       console.log('red', e);
     } finally{
@@ -70,7 +75,7 @@ const TaskEditor: React.FC<ITask> = ({taskText, initialCode, hiddenCode=''}) => 
     }
     </script>
   </body>
-</html>`, [code, hiddenCode]);
+</html>`, [code, hiddenCode, isCheckCode]);
 
   useEffect(() => setIsStart(false), [taskText, initialCode, hiddenCode]);
   return (
@@ -78,12 +83,13 @@ const TaskEditor: React.FC<ITask> = ({taskText, initialCode, hiddenCode=''}) => 
       <Article markdown={taskText}/>
       {!isStart && <Button text='Начать решать' onClick={() => setIsStart(true)}/>}
       {isStart && <Editor>
+        {hiddenCode !== '' && !isCheckCode && <Button text='Проверить на тестах' onClick={() => setIsCheckCode(true)}/>}
         <AceEditor
         mode="javascript"
         theme="terminal"
         name="js"
         onChange={setCode}
-        fontSize={14}
+        fontSize={20}
         width='100%'
         maxLines={20}
         minLines={20}
