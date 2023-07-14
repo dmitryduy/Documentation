@@ -2132,17 +2132,17 @@ guard ^\\s*
     const prevConsole = console.log;
     console.log = function(...text) {
       const color = text[0];
-     if (color === 'red' || color === 'green') {
-       div.innerHTML+= \`<div style="font-size: 20px;color:\${color}">\${text.slice(1).reduce((prev, elem) => \`\${prev} \${elem}\`)}</div>\`;
+     if (color === 'red' || color === 'green' || color=== 'tomato') {
+       div.innerHTML+= \`<div style="font-size: 20px;color:\${color}">\${text.slice(1).reduce((prev, elem) => \`\${prev} \${JSON.stringify(elem)}\`, '')}</div>\`;
      } else {
-     div.innerHTML+= \`<div style="color:white">\${text.reduce((prev, elem) => \`\${prev} \${elem}\`)}</div>\`;
+     div.innerHTML+= \`<div style="font-size: 20px;color:white">\${text.reduce((prev, elem) => \`\${prev} \${JSON.stringify(elem)}\`, '')}</div>\`;
      }   
     }
     try{
     ${i}
     ${c?n:""}
     }catch(e) {
-      console.log('red', e);
+      console.log('tomato', e.message);
     } finally{
     console.log = prevConsole;
     }

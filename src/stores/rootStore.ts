@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx';
+import compilerStore from '@stores/compilerStore';
 
 import authStore from './authStore';
 import postStore from './postStore';
@@ -10,6 +11,7 @@ export class RootStore {
   postStore = postStore;
   settingsStore = settingsStore;
   quizStore = quizConstructorStore;
+  compilerStore = compilerStore;
 
   constructor() {
     makeAutoObservable(this);

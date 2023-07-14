@@ -16,6 +16,7 @@ import RegisterPage from '@pages/RegisterPage/RegisterPage';
 import LoginPage from '@pages/LoginPage/LoginPage';
 import NewPostPage from '@pages/NewPostPage/NewPostPage';
 import EditPostPage from '@pages/EditPostPage/EditPostPage';
+import CompilerPage from '@pages/CompilerPage/CompilerPage';
 
 import Theme from './Theme';
 import App from './App';
@@ -31,6 +32,7 @@ const router = createHashRouter(
     <Route path="/" element={<App/>}>
       <Route path="register" element={<RegisterPage/>}/>
       <Route path="login" element={<LoginPage/>}/>
+      <Route path="compiler" element={<CompilerPage/>}/>
       <Route path="article">
         <Route path=":title" element={<ArticlePage/>}/>
         <Route index element={<ArticlePage/>}/>
